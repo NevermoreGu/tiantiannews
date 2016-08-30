@@ -14,36 +14,25 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class GlideImageLoaderProvider implements BaseImageLoaderProvider {
+
     @Override
     public void loadImage(Context ctx, ImageLoader img) {
 
-        boolean flag = false;
+        boolean flag;
         if (BaseApplication.CheckWifi) {
             if (TDevice.isWifiOpen()) {
                 flag = true;
+            } else {
+                flag = false;
             }
+        } else {
+            flag = true;
         }
-        //如果不是在wifi下加载图片，直接加载
-        if (!flag) {
+        if (flag) {
             loadNormal(ctx, img);
-            return;
+        } else {
+            loadCache(ctx, img);
         }
-
-        int strategy =img.wifiStrategy();
-        if(strategy == ImageLoaderUtil.LOAD_STRATEGY_ONLY_WIFI){
-//            int netType = AppUtils.getNetWorkType(AbsApplication.app());
-//            //如果是在wifi下才加载图片，并且当前网络是wifi,直接加载
-//            if(netType == AppUtils.NETWORKTYPE_WIFI) {
-//                loadNormal(ctx, img);
-//            } else {
-//                //如果是在wifi下才加载图片，并且当前网络不是wifi，加载缓存
-//                loadCache(ctx, img);
-//            }
-        }else{
-            //如果不是在wifi下才加载图片
-            loadNormal(ctx,img);
-        }
-
     }
 
 

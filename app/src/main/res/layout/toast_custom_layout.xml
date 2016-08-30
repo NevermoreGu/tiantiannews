@@ -11,10 +11,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_weight="1"
-        android:minWidth="@dimen/space_100"
+        android:minWidth="@dimen/offset_100"
         android:shadowColor="#BB000000"
         android:shadowRadius="2.75"
         android:textColor="@color/white"
-        android:textSize="@dimen/text_size_16" />
+        android:textSize="@dimen/font_size_16" />
 
 </LinearLayout>

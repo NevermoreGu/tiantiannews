@@ -48,7 +48,12 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
     }
 
     @Override
-    public void initView() {
+    public void initVariables() {
+
+    }
+
+    @Override
+    public void initViews() {
 
         etLoginName.addTextChangedListener(this);
         etLoginPass.addTextChangedListener(this);
@@ -60,7 +65,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
     }
 
     @Override
-    public void initData() {
+    public void loadData() {
 
     }
 

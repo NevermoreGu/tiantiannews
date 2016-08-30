@@ -9,7 +9,6 @@ public abstract class ImageLoader {
 
     abstract int type();
     abstract int placeHolder();
-    abstract int wifiStrategy();
     abstract String url();
     abstract ImageView imgView();
 
@@ -22,7 +21,6 @@ public abstract class ImageLoader {
 
         abstract Builder type(int value);
         abstract Builder placeHolder(int value);
-        abstract Builder wifiStrategy(int value);
         abstract Builder url(String value);
         abstract Builder imgView(ImageView value);
 

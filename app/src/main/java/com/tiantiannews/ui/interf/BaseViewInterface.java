@@ -1,9 +1,20 @@
 package com.tiantiannews.ui.interf;
 
 public interface BaseViewInterface {
-	
-	 void initView();
-	
-	 void initData();
-	
+
+    /**
+     * 初始化变量
+     */
+    void initVariables();
+
+    /**
+     * 初始化view
+     */
+    void initViews();
+
+    /**
+     * 加载数据
+     */
+    void loadData();
+
 }

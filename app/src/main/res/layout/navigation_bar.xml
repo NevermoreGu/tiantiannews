@@ -13,15 +13,15 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:gravity="center"
-            android:paddingLeft="@dimen/space_10"
-            android:paddingRight="@dimen/space_10">
+            android:paddingLeft="@dimen/offset_8"
+            android:paddingRight="@dimen/offset_8">
 
             <ImageView
-                android:contentDescription="@string/image"
                 android:id="@+id/img_navigation_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
+                android:contentDescription="@string/image"
                 android:src="@drawable/back" />
         </RelativeLayout>
 
@@ -30,7 +30,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:textSize="@dimen/text_size_18" />
+            android:textSize="@dimen/font_size_18" />
 
         <RelativeLayout
             android:id="@+id/rl_navigation_right"
@@ -39,22 +39,22 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:gravity="center"
-            android:paddingLeft="@dimen/space_10"
-            android:paddingRight="@dimen/space_10">
+            android:paddingLeft="@dimen/offset_8"
+            android:paddingRight="@dimen/offset_8">
 
             <ImageView
-                android:contentDescription="@string/image"
                 android:id="@+id/img_navigation_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true" />
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/image" />
 
             <TextView
                 android:id="@+id/tv_navigation_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:textSize="@dimen/text_size_16" />
+                android:textSize="@dimen/offset_16" />
         </RelativeLayout>
     </RelativeLayout>
 

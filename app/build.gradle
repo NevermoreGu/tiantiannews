@@ -16,17 +16,17 @@ android {
     signingConfigs {
 
         debug {
-            storeFile file("f://guqian.jks")
-            storePassword "101014"
-            keyAlias "guqian"
-            keyPassword "101014"
+            storeFile file(STORE_FILE)
+            storePassword STORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
         }
 
         release {
-            storeFile file("f://guqian.jks")
-            storePassword "101014"
-            keyAlias "guqian"
-            keyPassword "101014"
+            storeFile file(STORE_FILE)
+            storePassword STORE_PASSWORD
+            keyAlias KEY_ALIAS
+            keyPassword KEY_PASSWORD
         }
     }
 
@@ -67,11 +67,13 @@ android {
         exclude 'META-INF/dependencies.txt'
         exclude 'META-INF/LGPL2.1'
         exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
 
+    dataBinding {
+        enabled = true
     }
 }
 
-def SUPPORT_VERSION = "23.3.0"
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
@@ -88,7 +90,9 @@ dependencies {
     compile 'de.greenrobot:eventbus:2.4.0'
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'io.reactivex:rxandroid:1.0.1'
+
     compile 'in.srain.cube:ultra-ptr:1.0.11'
+
     compile 'com.github.bumptech.glide:glide:3.6.1'
 
     compile 'com.squareup.retrofit2:retrofit:2.0.2'
