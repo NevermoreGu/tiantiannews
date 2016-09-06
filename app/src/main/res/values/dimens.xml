@@ -13,8 +13,9 @@
     <dimen name="offset_90">90.0dp</dimen>
     <dimen name="offset_80">80.0dp</dimen>
     <dimen name="offset_60">60.0dp</dimen>
+    <dimen name="offset_48">48.0dp</dimen>
     <dimen name="offset_40">40.0dp</dimen>
-    <dimen name="offset_35">35.0dp</dimen>
+    <dimen name="offset_36">36.0dp</dimen>
     <dimen name="offset_32">32.0dp</dimen>
     <dimen name="offset_28">28.0dp</dimen>
     <dimen name="offset_24">24.0dp</dimen>
@@ -29,6 +30,6 @@
     <dimen name="offset_0">0dp</dimen>
     <dimen name="offset_1_px">1px</dimen>
 
-    <dimen name="navigation_bar_height">45dp</dimen>
-    <dimen name="navigation_bar_width">45dp</dimen>
+    <dimen name="navigation_bar_height">48.0dp</dimen>
+    <dimen name="navigation_bar_width">48.0dp</dimen>
 </resources>

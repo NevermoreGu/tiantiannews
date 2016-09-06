@@ -20,7 +20,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected LayoutInflater mInflater;
 
-    protected void onBeforeSetContentLayout() {}
+    protected void onBeforeSetContentLayout() {
+    }
 
     protected abstract int getLayoutId();
 
@@ -31,7 +32,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     /**
      * 处理从上一个界面接收的intent,或singleTop,singleTask,singleInstance onNewIntent中intent
      */
-    protected void handlerIntent() {}
+    protected void handlerIntent() {
+    }
 
     protected List<ImageView> imageViews = new ArrayList<>();
 
@@ -71,6 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     /**
      * 将imageView添加到imageView集合中
+     *
      * @param imageView
      */
     protected void addImageView(ImageView imageView) {
@@ -92,5 +95,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 imageView.setBackgroundDrawable(null);
             }
         }
+        imageViews.clear();
+        imageViews = null;
     }
 }

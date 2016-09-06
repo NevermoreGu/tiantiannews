@@ -18,6 +18,9 @@ public class GlideImageLoaderProvider implements BaseImageLoaderProvider {
     @Override
     public void loadImage(Context ctx, ImageLoader img) {
 
+        /**
+         * 检查 wifi下下载图片是否开启，如果开启检查是否wifi状态下
+         */
         boolean flag;
         if (BaseApplication.CheckWifi) {
             if (TDevice.isWifiOpen()) {

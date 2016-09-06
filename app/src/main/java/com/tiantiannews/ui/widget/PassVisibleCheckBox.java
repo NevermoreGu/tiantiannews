@@ -28,6 +28,7 @@ public class PassVisibleCheckBox extends CheckBox {
     }
 
     private void initView() {
+        editText.setTransformationMethod(PasswordTransformationMethod.getInstance());
         setOnCheckedChangeListener(new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
