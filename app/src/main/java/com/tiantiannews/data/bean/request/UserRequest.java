@@ -1,4 +1,4 @@
-package com.tiantiannews.data.bean;
+package com.tiantiannews.data.bean.request;
 
 public class UserRequest {
 

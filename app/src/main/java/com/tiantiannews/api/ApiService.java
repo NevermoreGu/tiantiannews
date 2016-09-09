@@ -1,8 +1,8 @@
 package com.tiantiannews.api;
 
 import com.tiantiannews.base.BaseModel;
-import com.tiantiannews.data.bean.UserRequest;
-import com.tiantiannews.data.bean.UserResult;
+import com.tiantiannews.data.bean.request.UserRequest;
+import com.tiantiannews.data.bean.result.UserResult;
 
 import retrofit2.Call;
 import retrofit2.http.Body;

@@ -1,6 +1,6 @@
 package com.tiantiannews.api;
 
-import com.tiantiannews.data.bean.UserRequest;
+import com.tiantiannews.data.bean.request.UserRequest;
 
 public class ApiParams {
 
