@@ -17,7 +17,6 @@ public class ViewUtils {
                     view.setBackgroundColor(BaseApplication.getInstance().getResources().getColor(
                             downColor));
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
-                    v.performClick();
                     view.setBackgroundColor(BaseApplication.getInstance().getResources().getColor(
                             upColor));
                 }

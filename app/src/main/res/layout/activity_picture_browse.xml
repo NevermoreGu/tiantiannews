@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <com.tiantiannews.ui.widget.NavigationView
+        android:id="@+id/navigation"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/navigation_bar_height"
+        android:background="@color/white"></com.tiantiannews.ui.widget.NavigationView>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/offset_1_px"
+        android:background="@color/line_divider"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/offset_48"
+        android:layout_marginTop="@dimen/offset_48">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_picture_browse"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/ll_check"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="@dimen/offset_8">
+
+            <CheckBox
+                android:id="@+id/checkmark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:button="@drawable/camerasdk_selector_checkbox"
+                android:checked="false"
+                android:clickable="false"
+                android:focusable="false"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

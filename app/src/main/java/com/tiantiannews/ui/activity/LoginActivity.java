@@ -16,6 +16,7 @@ import com.tiantiannews.data.bean.request.UserRequest;
 import com.tiantiannews.data.bean.result.UserResult;
 import com.tiantiannews.ui.widget.DeleteEditText;
 import com.tiantiannews.ui.widget.PassVisibleCheckBox;
+import com.tiantiannews.utils.ActivityUtils;
 import com.tiantiannews.utils.StringUtils;
 import com.tiantiannews.utils.ToastUtils;
 import com.tiantiannews.utils.ViewUtils;
@@ -81,10 +82,12 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
         if (!TextUtils.isEmpty(userName) && !TextUtils.isEmpty(userPass)) {
             btnLogin.setBackgroundColor(getResources().getColor(
                     R.color.colorPrimary));
+            btnLogin.setTextColor(getResources().getColor(R.color.white));
             btnLogin.setEnabled(true);
         } else {
             btnLogin.setBackgroundColor(getResources().getColor(
                     R.color.white));
+            btnLogin.setTextColor(getResources().getColor(R.color.gray));
             btnLogin.setEnabled(false);
         }
     }
@@ -98,6 +101,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login_forget_pass:
+                ToastUtils.makeText(mContext, "1", Toast.LENGTH_LONG);
                 break;
             case R.id.btn_login:
                 String name = etLoginName.getText().toString().trim();
@@ -112,12 +116,13 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
 
                     @Override
                     public void onResponse(BaseModel<UserResult> response) {
-                        Toast.makeText(LoginActivity.this, response.resultNote, Toast.LENGTH_LONG).show();
+                        ToastUtils.makeLongText(mContext, response.detail.userName);
+                        ActivityUtils.openActivity(LoginActivity.this, SelectPicturesActivity.class);
                     }
 
                     @Override
                     public void onErrorResponse(String error) {
-                        ToastUtils.makeText(mContext, "哈哈哈利的路上反馈", Toast.LENGTH_LONG);
+                        ToastUtils.makeLongText(mContext, error);
                     }
                 }).build();
                 RetrofitNet retrofitNet = new RetrofitNet(netBuilder);

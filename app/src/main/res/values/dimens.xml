@@ -1,12 +1,12 @@
 <resources>
     <!-- font-size-->
-    <dimen name="font_size_24">24.0sp</dimen>
-    <dimen name="font_size_22">22.0sp</dimen>
-    <dimen name="font_size_20">20.0sp</dimen>
-    <dimen name="font_size_18">18.0sp</dimen>
-    <dimen name="font_size_16">16.0sp</dimen>
-    <dimen name="font_size_14">14.0sp</dimen>
-    <dimen name="font_size_12">12.0sp</dimen>
+    <dimen name="font_size_24">24sp</dimen>
+    <dimen name="font_size_22">22sp</dimen>
+    <dimen name="font_size_20">20sp</dimen>
+    <dimen name="font_size_18">18sp</dimen>
+    <dimen name="font_size_16">16sp</dimen>
+    <dimen name="font_size_14">14sp</dimen>
+    <dimen name="font_size_12">12sp</dimen>
 
     <!-- offset-size-->
     <dimen name="offset_100">100.0dp</dimen>

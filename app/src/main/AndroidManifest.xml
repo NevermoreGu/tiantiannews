@@ -25,6 +25,7 @@
     <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.CAMERA" />
 
     <application
         android:name=".base.BaseApplication"
@@ -43,6 +44,12 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name=".ui.activity.PicturesBrowseActivity">
+
+        </activity>
+        <activity android:name=".ui.activity.SelectPicturesActivity">
+
         </activity>
     </application>
 

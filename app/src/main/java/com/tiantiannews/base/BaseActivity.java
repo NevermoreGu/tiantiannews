@@ -89,8 +89,9 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (imageViews != null && imageViews.size() > 0) {
             for (ImageView imageView : imageViews) {
                 Drawable d = imageView.getDrawable();
-                if (d != null)
+                if (d != null) {
                     d.setCallback(null);
+                }
                 imageView.setImageDrawable(null);
                 imageView.setBackgroundDrawable(null);
             }

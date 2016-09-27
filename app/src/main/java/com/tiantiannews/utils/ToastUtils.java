@@ -39,4 +39,7 @@ public class ToastUtils {
         result.show();
     }
 
+    public static void makeLongText(Context context, CharSequence text) {
+        makeText(context, text, Toast.LENGTH_LONG);
+    }
 }
