@@ -85,8 +85,26 @@ public class SelectPicturesActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initExtra();
         getSupportLoaderManager().restartLoader(LOADER_ALL, null, mLoaderCallback);
+    }
+
+    @Override
+    protected void handlerIntent() {
+        super.handlerIntent();
+        Intent intent = getIntent();
+        if (intent != null) {
+            try {
+                mSelectPicturesInfo = (SelectPicturesInfo) intent.getSerializableExtra(SelectPicturesInfo.EXTRA_PARAMETER);
+                resultList = mSelectPicturesInfo.getImage_list();
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
+    @Override
+    public void initVariables() {
+
     }
 
     @Override
@@ -102,12 +120,6 @@ public class SelectPicturesActivity extends BaseActivity {
         Drawable drawable = getResources().getDrawable(R.drawable.message_popover_arrow);
         drawable.setBounds(10, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
         tvToolBarTitle.setCompoundDrawables(null, null, drawable, null);
-        tvToolBarLeft.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
         mImageAdapter = new ImageGridAdapter(this, mSelectPicturesInfo.isShow_camera());
         mGridView.setAdapter(mImageAdapter);
         mFolderAdapter = new FolderAdapter(this);
@@ -194,20 +206,6 @@ public class SelectPicturesActivity extends BaseActivity {
                 selectImageFromGrid(imageInfo);
             }
         });
-    }
-
-
-    //获取传过来的参数
-    private void initExtra() {
-
-        Intent intent = getIntent();
-        try {
-            mSelectPicturesInfo = (SelectPicturesInfo) intent.getSerializableExtra(SelectPicturesInfo.EXTRA_PARAMETER);
-            resultList = mSelectPicturesInfo.getImage_list();
-        } catch (Exception e) {
-
-        }
-
     }
 
     /**
@@ -468,11 +466,6 @@ public class SelectPicturesActivity extends BaseActivity {
         intent.putExtras(b);
         setResult(RESULT_OK, intent);
         finish();
-    }
-
-    @Override
-    public void initVariables() {
-
     }
 
 }

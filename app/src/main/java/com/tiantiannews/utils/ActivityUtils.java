@@ -6,7 +6,12 @@ import android.os.Bundle;
 
 public class ActivityUtils {
 
-    //通过包名类名启动activity
+    /**
+     * 通过包名类名启动activity
+     *
+     * @param activity
+     * @param activityClass
+     */
     public static void openActivity(Activity activity, Class<?> activityClass) {
         openActivity(activity, activityClass, null);
     }
@@ -26,7 +31,12 @@ public class ActivityUtils {
         activity.startActivityForResult(intent, requestCode);
     }
 
-    //通过action启动activity
+    /**
+     * 通过action启动activity
+     *
+     * @param activity
+     * @param action
+     */
     public static void openActivity(Activity activity, String action) {
         openActivity(activity, action, null);
     }

@@ -8,6 +8,12 @@ import com.tiantiannews.base.BaseApplication;
 
 public class ViewUtils {
 
+    /**
+     * touch前后view的颜色改变
+     * @param view
+     * @param downColor
+     * @param upColor
+     */
     public static void addTouchColor(final View view, final int downColor, final int upColor) {
 
         view.setOnTouchListener(new View.OnTouchListener() {

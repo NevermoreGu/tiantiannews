@@ -10,6 +10,11 @@ import com.tiantiannews.R;
 
 public class ToastUtils {
 
+    /**
+     * 系统toast
+     * @param context
+     * @param message
+     */
     public static void showShortToast(Context context, String message) {
         Toast.makeText(context.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
@@ -26,6 +31,12 @@ public class ToastUtils {
         Toast.makeText(context.getApplicationContext(), context.getString(messageId), Toast.LENGTH_LONG).show();
     }
 
+    /**
+     * 自定义toast
+     * @param context
+     * @param text
+     * @param duration
+     */
     public static void makeText(Context context, CharSequence text, int duration) {
         Toast result = new Toast(context);
 
