@@ -19,12 +19,12 @@ public abstract class ImageLoader {
     @AutoValue.Builder
     public abstract static class Builder {
 
-        abstract Builder type(int value);
-        abstract Builder placeHolder(int value);
-        abstract Builder url(String value);
-        abstract Builder imgView(ImageView value);
+        public abstract Builder type(int value);
+        public abstract Builder placeHolder(int value);
+        public abstract Builder url(String value);
+        public abstract Builder imgView(ImageView value);
 
-        abstract ImageLoader build();
+        public abstract ImageLoader build();
     }
 
 //    private int type;  //类型 (大图，中图，小图)

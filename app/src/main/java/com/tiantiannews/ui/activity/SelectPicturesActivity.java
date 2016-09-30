@@ -88,7 +88,7 @@ public class SelectPicturesActivity extends BaseActivity {
             try {
                 mSelectPicturesInfo = (SelectPicturesInfo) intent.getSerializableExtra(SelectPicturesInfo.EXTRA_PARAMETER);
                 if (mSelectPicturesInfo == null) {
-                    mSelectPicturesInfo =new SelectPicturesInfo();
+                    mSelectPicturesInfo = new SelectPicturesInfo();
                 } else {
                     resultList = mSelectPicturesInfo.getImage_list();
                 }
@@ -484,8 +484,9 @@ public class SelectPicturesActivity extends BaseActivity {
                 imageView.setImageDrawable(null);
                 imageView.setBackgroundDrawable(null);
             }
+            imageViews.clear();
+            imageViews = null;
         }
-        imageViews.clear();
-        imageViews = null;
+
     }
 }

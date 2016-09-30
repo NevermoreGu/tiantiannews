@@ -12,9 +12,10 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.bumptech.glide.Glide;
 import com.tiantiannews.R;
 import com.tiantiannews.data.bean.ImageInfo;
+import com.tiantiannews.utils.image.ImageLoader;
+import com.tiantiannews.utils.image.ImageLoaderUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -259,13 +260,15 @@ public class ImageGridAdapter extends BaseAdapter {
 
                     if (mItemSize > 0) {
 //                image.setImageURI(Uri.parse("file://" + data.path));
-//                        ImageLoader.builder();
-                        Glide.with(mContext)
-                                .load(data.path)
-                                .centerCrop()
-                                .placeholder(R.drawable.default_img_bg)
-                                .crossFade()
-                                .into(holder.image);
+                        ImageLoaderUtil imageLoaderUtil = ImageLoaderUtil.getInstance();
+                        ImageLoader imageLoader = ImageLoader.builder().url(data.path).imgView(holder.image).placeHolder(R.drawable.default_img_bg).type(1).build();
+                        imageLoaderUtil.loadImage(mContext, imageLoader);
+//                        Glide.with(mContext)
+//                                .load(data.path)
+//                                .centerCrop()
+//                                .placeholder(R.drawable.default_img_bg)
+//                                .crossFade()
+//                                .into();
                     }
                 }
             }

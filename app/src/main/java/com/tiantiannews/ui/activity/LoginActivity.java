@@ -18,6 +18,7 @@ import com.tiantiannews.data.bean.request.UserRequest;
 import com.tiantiannews.data.bean.result.UserResult;
 import com.tiantiannews.ui.widget.DeleteEditText;
 import com.tiantiannews.ui.widget.PassVisibleCheckBox;
+import com.tiantiannews.utils.ActivityUtils;
 import com.tiantiannews.utils.StringUtils;
 import com.tiantiannews.utils.ToastUtils;
 import com.tiantiannews.utils.ViewUtils;
@@ -128,7 +129,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
                     @Override
                     public void onResponse(BaseModel<UserResult> response) {
                         ToastUtils.makeLongText(mContext, response.detail.userName);
-//                        ActivityUtils.openActivity(LoginActivity.this, SelectPicturesActivity.class);
+                        ActivityUtils.openActivity(LoginActivity.this, SelectPicturesActivity.class);
                     }
 
                     @Override
