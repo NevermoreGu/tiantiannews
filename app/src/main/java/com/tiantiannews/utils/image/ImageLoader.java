@@ -12,12 +12,12 @@ public abstract class ImageLoader {
     abstract String url();
     abstract ImageView imgView();
 
-    static Builder builder() {
+    public static Builder builder() {
         return new AutoValue_ImageLoader.Builder();
     }
 
     @AutoValue.Builder
-    abstract static class Builder {
+    public abstract static class Builder {
 
         abstract Builder type(int value);
         abstract Builder placeHolder(int value);

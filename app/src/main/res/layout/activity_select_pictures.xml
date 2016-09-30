@@ -4,11 +4,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.tiantiannews.ui.widget.NavigationView
-        android:id="@+id/navigation"
+    <com.tiantiannews.ui.widget.AppBar
+        android:id="@+id/app_bar"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/navigation_bar_height"
-        android:background="@color/white"></com.tiantiannews.ui.widget.NavigationView>
+        android:layout_height="@dimen/app_bar_height"
+        android:background="@color/white"></com.tiantiannews.ui.widget.AppBar>
 
     <View
         android:layout_width="match_parent"
@@ -21,11 +21,11 @@
         android:layout_height="match_parent"
         android:layout_marginTop="@dimen/offset_8"
         android:background="@color/white"
-        android:horizontalSpacing="@dimen/offset_2"
+        android:horizontalSpacing="@dimen/offset_8"
         android:listSelector="@color/transparent"
         android:numColumns="3"
         android:scrollbars="none"
-        android:verticalSpacing="@dimen/offset_2" />
+        android:verticalSpacing="@dimen/offset_8" />
 
 </LinearLayout>
 

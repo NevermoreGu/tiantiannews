@@ -38,6 +38,8 @@ public class ImageGridAdapter extends BaseAdapter {
     private int mItemSize;
     private GridView.LayoutParams mItemLayoutParams;
 
+    private int selectPosition;
+
     public interface OnCheckListener {
         void check(ImageInfo imageInfo);
     }
@@ -206,7 +208,7 @@ public class ImageGridAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, ViewGroup viewGroup) {
 
         int type = getItemViewType(position);
         if (type == TYPE_CAMERA) {
@@ -233,27 +235,21 @@ public class ImageGridAdapter extends BaseAdapter {
                         @Override
                         public void onClick(View v) {
                             if (listener != null) {
+                                selectPosition = position;
                                 listener.check(data);
                             }
                         }
                     });
                     //多选状态
                     holder.checkBox.setVisibility(View.VISIBLE);
-//                    holder.checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-//                        @Override
-//                        public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                            if (isChecked) {
-//                                addOne(data);
-//                            } else {
-//                                removeOne(data);
-//                            }
-//                        }
-//                    });
                     if (mSelectedImages.contains(data)) {
                         // 设置选中状态
                         //indicator.setImageResource(R.drawable.camerasdk_checkbox_checked);
                         holder.checkBox.setChecked(true);
                         holder.mask.setVisibility(View.VISIBLE);
+                        if (selectPosition == position) {
+                            addAnimation(holder.checkBox);
+                        }
                     } else {
                         // 未选择
                         //indicator.setImageResource(R.drawable.camerasdk_checkbox_normal);
@@ -263,6 +259,7 @@ public class ImageGridAdapter extends BaseAdapter {
 
                     if (mItemSize > 0) {
 //                image.setImageURI(Uri.parse("file://" + data.path));
+//                        ImageLoader.builder();
                         Glide.with(mContext)
                                 .load(data.path)
                                 .centerCrop()

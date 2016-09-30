@@ -32,8 +32,8 @@ public class ImageLoaderUtil {
     }
 
 
-    public void loadImage(Context context, ImageLoader img) {
-        mStrategy.loadImage(context, img);
+    public void loadImage(Context context, ImageLoader imageLoader) {
+        mStrategy.loadImage(context, imageLoader);
     }
 
     public void setLoadImgStrategy(BaseImageLoaderProvider strategy) {

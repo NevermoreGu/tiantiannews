@@ -1,5 +1,7 @@
 package com.tiantiannews.ui.activity;
 
+import android.annotation.TargetApi;
+import android.os.Build;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -16,7 +18,6 @@ import com.tiantiannews.data.bean.request.UserRequest;
 import com.tiantiannews.data.bean.result.UserResult;
 import com.tiantiannews.ui.widget.DeleteEditText;
 import com.tiantiannews.ui.widget.PassVisibleCheckBox;
-import com.tiantiannews.utils.ActivityUtils;
 import com.tiantiannews.utils.StringUtils;
 import com.tiantiannews.utils.ToastUtils;
 import com.tiantiannews.utils.ViewUtils;
@@ -53,6 +54,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
 
     }
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void initViews() {
 
@@ -63,6 +65,15 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
         imgPassVisible.setPassVisible(etLoginPass);
         btnLogin.setEnabled(false);
         btnLogin.setTextScaleX(1.2f);
+
+//        ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
+//            @Override
+//            public void getOutline(View view, Outline outline) {
+//                int size = getResources().getDimensionPixelSize(R.dimen.offset_8);
+//                outline.setOval(0, 0, size, size);
+//            }
+//        };
+//        btnLogin.setOutlineProvider(viewOutlineProvider);
     }
 
     @Override
@@ -117,7 +128,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
                     @Override
                     public void onResponse(BaseModel<UserResult> response) {
                         ToastUtils.makeLongText(mContext, response.detail.userName);
-                        ActivityUtils.openActivity(LoginActivity.this, SelectPicturesActivity.class);
+//                        ActivityUtils.openActivity(LoginActivity.this, SelectPicturesActivity.class);
                     }
 
                     @Override

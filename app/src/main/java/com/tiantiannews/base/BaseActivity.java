@@ -9,7 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.tiantiannews.R;
 import com.tiantiannews.ui.interf.BaseViewInterface;
+import com.tiantiannews.ui.widget.AppBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +19,8 @@ import java.util.List;
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseViewInterface {
+
+    protected AppBar appBar;
 
     protected LayoutInflater mInflater;
 
@@ -38,6 +42,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     protected List<ImageView> imageViews = new ArrayList<>();
 
     protected Context mContext;
+
+    protected void initAppBar() {
+        appBar = (AppBar) findViewById(R.id.app_bar);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

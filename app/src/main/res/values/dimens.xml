@@ -9,27 +9,23 @@
     <dimen name="font_size_12">12sp</dimen>
 
     <!-- offset-size-->
-    <dimen name="offset_100">100.0dp</dimen>
-    <dimen name="offset_90">90.0dp</dimen>
+    <dimen name="offset_120">120.0dp</dimen>
+    <dimen name="offset_96">96.0dp</dimen>
     <dimen name="offset_80">80.0dp</dimen>
-    <dimen name="offset_60">60.0dp</dimen>
+    <dimen name="offset_72">72.0dp</dimen>
+    <dimen name="offset_64">64.0dp</dimen>
+    <dimen name="offset_56">56.0dp</dimen>
     <dimen name="offset_48">48.0dp</dimen>
     <dimen name="offset_40">40.0dp</dimen>
-    <dimen name="offset_36">36.0dp</dimen>
     <dimen name="offset_32">32.0dp</dimen>
-    <dimen name="offset_28">28.0dp</dimen>
     <dimen name="offset_24">24.0dp</dimen>
-    <dimen name="offset_20">20.0dp</dimen>
     <dimen name="offset_16">16.0dp</dimen>
-    <dimen name="offset_12">12.0dp</dimen>
     <dimen name="offset_8">8.0dp</dimen>
     <dimen name="offset_4">4.0dp</dimen>
     <dimen name="offset_2">2.0dp</dimen>
     <dimen name="offset_1">1.0dp</dimen>
-    <dimen name="offset_0.5">0.5dp</dimen>
     <dimen name="offset_0">0dp</dimen>
     <dimen name="offset_1_px">1px</dimen>
 
-    <dimen name="navigation_bar_height">48.0dp</dimen>
-    <dimen name="navigation_bar_width">48.0dp</dimen>
+    <dimen name="app_bar_height">48.0dp</dimen>
 </resources>

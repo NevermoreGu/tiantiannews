@@ -26,11 +26,10 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.tiantiannews.R;
@@ -43,6 +42,7 @@ import com.tiantiannews.ui.adapter.FolderAdapter;
 import com.tiantiannews.ui.adapter.ImageGridAdapter;
 import com.tiantiannews.utils.ActivityUtils;
 import com.tiantiannews.utils.FileUtils;
+import com.tiantiannews.utils.ToastUtils;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -52,14 +52,6 @@ import butterknife.BindView;
 
 public class SelectPicturesActivity extends BaseActivity {
 
-    @BindView(R.id.navigation)
-    View toolBar;
-    @BindView(R.id.rl_navigation_left)
-    RelativeLayout tvToolBarLeft;
-    @BindView(R.id.rl_navigation_right)
-    RelativeLayout tvToolBarRight;
-    @BindView(R.id.tv_navigation)
-    TextView tvToolBarTitle;
     @BindView(R.id.gv_select_pictures)
     GridView mGridView;
 
@@ -95,7 +87,11 @@ public class SelectPicturesActivity extends BaseActivity {
         if (intent != null) {
             try {
                 mSelectPicturesInfo = (SelectPicturesInfo) intent.getSerializableExtra(SelectPicturesInfo.EXTRA_PARAMETER);
-                resultList = mSelectPicturesInfo.getImage_list();
+                if (mSelectPicturesInfo == null) {
+                    mSelectPicturesInfo =new SelectPicturesInfo();
+                } else {
+                    resultList = mSelectPicturesInfo.getImage_list();
+                }
             } catch (Exception e) {
 
             }
@@ -108,18 +104,26 @@ public class SelectPicturesActivity extends BaseActivity {
     }
 
     @Override
-    public void initViews() {
-//        if (resultList.size() > 0) {
-//            tvToolBarRight.setText("完成(" + resultList.size() + "/" + Constants.MAXSELECTPICTURES + ")");
-//            tvToolBarRight.setBackgroundResource(R.drawable.bg_select_compete);
-//        } else {
-//            tvToolBarRight.setText("完成(0/" + Constants.MAXSELECTPICTURES + ")");
+    protected void initAppBar() {
+        super.initAppBar();
+        appBar.setAppBarTitle(R.string.select_picture_album_all);
+
+        if (resultList.size() > 0) {
+            appBar.setAppBarRightText("完成(" + resultList.size() + "/" + Constants.MAXSELECTPICTURES + ")");
+//            appBar.setAppBarRightDrawable(R.drawable.bg_select_compete);
+        } else {
+            appBar.setAppBarRightText("完成(0/" + Constants.MAXSELECTPICTURES + ")");
 //            tvToolBarRight.setBackgroundResource(R.drawable.bg_select_uncompete);
-//        }
-        tvToolBarTitle.setText(getResources().getText(R.string.select_picture_album_all));
+        }
+        appBar.setAppBarTitle(R.string.select_picture_album_all);
         Drawable drawable = getResources().getDrawable(R.drawable.message_popover_arrow);
         drawable.setBounds(10, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
-        tvToolBarTitle.setCompoundDrawables(null, null, drawable, null);
+        appBar.getAppBarTitle().setCompoundDrawables(null, null, drawable, null);
+    }
+
+    @Override
+    public void initViews() {
+        initAppBar();
         mImageAdapter = new ImageGridAdapter(this, mSelectPicturesInfo.isShow_camera());
         mGridView.setAdapter(mImageAdapter);
         mFolderAdapter = new FolderAdapter(this);
@@ -127,21 +131,21 @@ public class SelectPicturesActivity extends BaseActivity {
 
     @Override
     public void loadData() {
-        tvToolBarTitle.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showPopupFolder(view);
-            }
-        });
-        tvToolBarRight.setOnClickListener(new OnClickListener() {
-
-            @Override
-            public void onClick(View v) {
-                if (resultList.size() > 0) {
-                    selectComplate();
-                }
-            }
-        });
+//        tvToolBarTitle.setOnClickListener(new OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                showPopupFolder(view);
+//            }
+//        });
+//        tvToolBarRight.setOnClickListener(new OnClickListener() {
+//
+//            @Override
+//            public void onClick(View v) {
+//                if (resultList.size() > 0) {
+//                    selectComplate();
+//                }
+//            }
+//        });
         mGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int state) {
@@ -168,7 +172,7 @@ public class SelectPicturesActivity extends BaseActivity {
                 final int height = mGridView.getHeight();
                 // mGridWidth = width;
                 // mGridHeight = height;
-                final int desireSize = getResources().getDimensionPixelOffset(R.dimen.offset_100);
+                final int desireSize = getResources().getDimensionPixelOffset(R.dimen.offset_120);
                 final int numCount = width / desireSize;
                 final int columnSpace = getResources().getDimensionPixelOffset(R.dimen.offset_2);
                 int columnWidth = (width - columnSpace * (numCount - 1)) / numCount;
@@ -264,7 +268,7 @@ public class SelectPicturesActivity extends BaseActivity {
             } else {
                 // 判断选择数量问题
                 if (Constants.MAXSELECTPICTURES == resultList.size()) {
-                    Toast.makeText(this, R.string.select_picture_msg_amount_limit, Toast.LENGTH_SHORT).show();
+                    ToastUtils.makeLongText(this, R.string.select_picture_msg_amount_limit);
                     return;
                 }
                 resultList.add(imageInfo.path);
@@ -411,13 +415,13 @@ public class SelectPicturesActivity extends BaseActivity {
                         mpopupWindow.dismiss();
                         if (index == 0) {
                             getSupportLoaderManager().restartLoader(LOADER_ALL, null, mLoaderCallback);
-                            tvToolBarTitle.setText(R.string.select_picture_album_all);
+//                            tvToolBarTitle.setText(R.string.select_picture_album_all);
                             mImageAdapter.setShowCamera(mSelectPicturesInfo.isShow_camera());
                         } else {
                             FolderInfo folderInfo = (FolderInfo) mFolderAdapter.getItem(index);
                             if (null != folderInfo) {
                                 mImageAdapter.setData(folderInfo.imageInfos);
-                                tvToolBarTitle.setText(folderInfo.name);
+//                                tvToolBarTitle.setText(folderInfo.name);
                                 // 设定默认选择
                                 if (resultList != null && resultList.size() > 0) {
                                     mImageAdapter.setSelectedList(resultList);
@@ -434,7 +438,7 @@ public class SelectPicturesActivity extends BaseActivity {
         });
         mpopupWindow.setContentView(view);
         mpopupWindow.setBackgroundDrawable(new ColorDrawable(0xb0000000));
-        mpopupWindow.showAsDropDown(toolBar);
+//        mpopupWindow.showAsDropDown(toolBar);
     }
 
 
@@ -468,4 +472,20 @@ public class SelectPicturesActivity extends BaseActivity {
         finish();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (imageViews != null && imageViews.size() > 0) {
+            for (ImageView imageView : imageViews) {
+                Drawable d = imageView.getDrawable();
+                if (d != null) {
+                    d.setCallback(null);
+                }
+                imageView.setImageDrawable(null);
+                imageView.setBackgroundDrawable(null);
+            }
+        }
+        imageViews.clear();
+        imageViews = null;
+    }
 }

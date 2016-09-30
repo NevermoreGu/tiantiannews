@@ -34,10 +34,23 @@ public class ToastUtils {
     /**
      * 自定义toast
      * @param context
-     * @param text
+     * @param textId
      * @param duration
      */
-    public static void makeText(Context context, CharSequence text, int duration) {
+    public static void makeText(Context context, int textId, int duration) {
+        Toast result = new Toast(context);
+
+        LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.toast_custom_layout, null);
+        TextView textView = (TextView) layout.findViewById(R.id.text);
+        textView.setText(context.getResources().getString(textId));
+
+        result.setView(layout);
+        result.setDuration(duration);
+        result.show();
+    }
+
+    public static void makeText(Context context, String text, int duration) {
         Toast result = new Toast(context);
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -50,7 +63,11 @@ public class ToastUtils {
         result.show();
     }
 
-    public static void makeLongText(Context context, CharSequence text) {
+    public static void makeLongText(Context context, int textId) {
+        makeText(context, textId, Toast.LENGTH_LONG);
+    }
+
+    public static void makeLongText(Context context, String text) {
         makeText(context, text, Toast.LENGTH_LONG);
     }
 }
