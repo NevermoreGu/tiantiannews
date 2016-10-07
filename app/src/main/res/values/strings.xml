@@ -27,4 +27,11 @@
     <string name="select_picture_msg_amount_limit">已经达到最高选择数量</string>
     <string name="select_picture_images_building">处理图片</string>
     <string name="facebook_app_id">1444817025830662</string>
+
+    <!--找回密码-->
+    <string name="get_pass">找回密码</string>
+    <string name="next_step">下一步</string>
+
+    <!--选择城市-->
+    <string name="select_city">选择城市</string>
 </resources>

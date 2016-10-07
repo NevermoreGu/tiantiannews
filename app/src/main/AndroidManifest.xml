@@ -35,22 +35,33 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".ui.activity.MainActivity">
-
-        </activity>
-        <activity android:name=".ui.activity.LoginActivity">
+        <!-- 高德地图 -->
+        <!-- 设置key -->
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="dc7b88c62279b506a52e8cf60b09e1f3" />
+        <!-- 定位需要的服务 -->
+        <service android:name="com.amap.api.location.APSService" />
+        <!-- 高德地图 -->
+        <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.PicturesBrowseActivity">
+        <activity android:name=".ui.activity.MainActivity"></activity>
+        <activity android:name=".ui.activity.LoginActivity"></activity>
+        <activity android:name=".ui.activity.PicturesBrowseActivity"></activity>
+        <activity android:name=".ui.activity.SelectPicturesActivity"></activity>
+        <activity android:name=".ui.activity.ForgetPasswordActivity"></activity>
+        <activity
+            android:name=".ui.activity.CityListActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
 
-        </activity>
-        <activity android:name=".ui.activity.SelectPicturesActivity">
-
-        </activity>
+        <provider
+            android:name="com.tiantiannews.data.contentprovider.CitiesDBProvider"
+            android:authorities="com.guqian.database.cities"></provider>
     </application>
 
 </manifest>

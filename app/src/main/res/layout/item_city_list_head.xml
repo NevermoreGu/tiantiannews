@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tv_item_city_list_current_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/offset_16"
+        android:text="当前:未选择城市"
+        android:textColor="@color/black_text"
+        android:textSize="@dimen/font_size_16" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/offset_16"
+        android:text="当前定位城市"
+        android:textColor="@color/black_hint_text"
+        android:textSize="@dimen/font_size_16" />
+
+    <com.tiantiannews.ui.widget.BaseGridView
+        android:id="@+id/gv_item_city_list_location"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/offset_16"
+        android:layout_marginRight="@dimen/offset_24"
+        android:horizontalSpacing="@dimen/offset_8"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:verticalSpacing="@dimen/offset_8"></com.tiantiannews.ui.widget.BaseGridView>
+
+    <TextView
+        android:id="@+id/tv_item_city_list_history_hint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/offset_16"
+        android:text="最近访问的城市"
+        android:textColor="@color/black_hint_text"
+        android:textSize="@dimen/font_size_16" />
+
+    <com.tiantiannews.ui.widget.BaseGridView
+        android:id="@+id/gv_item_city_list_history"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/offset_8"
+        android:layout_marginRight="@dimen/offset_24"
+        android:horizontalSpacing="@dimen/offset_16"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:verticalSpacing="@dimen/offset_8"></com.tiantiannews.ui.widget.BaseGridView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/offset_16"
+        android:text="热门城市"
+        android:textColor="@color/black_hint_text"
+        android:textSize="@dimen/font_size_16" />
+
+    <com.tiantiannews.ui.widget.BaseGridView
+        android:id="@+id/gv_item_city_list_hot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/offset_16"
+        android:layout_marginRight="@dimen/offset_24"
+        android:horizontalSpacing="@dimen/offset_8"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:verticalSpacing="@dimen/offset_8"></com.tiantiannews.ui.widget.BaseGridView>
+
+    <View
+        android:id="@+id/diver_city_list"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/offset_1_px"
+        android:layout_marginTop="@dimen/offset_16"
+        android:background="@color/black_divers"></View>
+</LinearLayout>

@@ -6,8 +6,10 @@ import android.content.Context;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
 
+import org.litepal.LitePalApplication;
 
-public class BaseApplication extends Application {
+
+public class BaseApplication extends LitePalApplication {
 
     public static BaseApplication instance;
 

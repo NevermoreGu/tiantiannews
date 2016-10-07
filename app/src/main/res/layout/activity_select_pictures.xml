@@ -13,7 +13,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="@dimen/offset_1"
-        android:background="@color/line_divider" />
+        android:background="@color/black_divers" />
 
     <GridView
         android:id="@+id/gv_select_pictures"

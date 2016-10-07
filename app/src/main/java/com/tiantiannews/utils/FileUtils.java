@@ -1,15 +1,18 @@
 package com.tiantiannews.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -632,5 +635,28 @@ public class FileUtils {
         }
         saveDir = null;
         return savePath;
+    }
+
+    /**
+     * 读取assets目录下文件
+     *
+     * @param context
+     * @param fileName
+     * @return
+     */
+    public static String getStringFormAssets(Context context, String fileName) {
+        StringBuilder stringBuilder = new StringBuilder();
+        try {
+            InputStream inputStream = context.getAssets().open(fileName);
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+            String str;
+            while ((str = bufferedReader.readLine()) != null) {
+                stringBuilder.append(str);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "";
+        }
+        return stringBuilder.toString();
     }
 }

@@ -44,6 +44,12 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
     Button btnLogin;
     @BindView(R.id.tv_login_register)
     TextView tvLoginRegister;
+    @BindView(R.id.tv_login_qq)
+    TextView tvLoginQQ;
+    @BindView(R.id.tv_login_blog)
+    TextView tvLoginBlog;
+    @BindView(R.id.tv_login_chat)
+    TextView tvLoginChat;
 
     @Override
     protected int getLayoutId() {
@@ -62,19 +68,16 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
         etLoginName.addTextChangedListener(this);
         etLoginPass.addTextChangedListener(this);
 
-        ViewUtils.addTouchColor(btnLogin, R.color.colorPrimaryDark, R.color.colorPrimary);
         imgPassVisible.setPassVisible(etLoginPass);
+
+        ViewUtils.addTouchColor(btnLogin, R.color.colorPrimaryDark, R.color.colorPrimary);
         btnLogin.setEnabled(false);
         btnLogin.setTextScaleX(1.2f);
 
-//        ViewOutlineProvider viewOutlineProvider = new ViewOutlineProvider() {
-//            @Override
-//            public void getOutline(View view, Outline outline) {
-//                int size = getResources().getDimensionPixelSize(R.dimen.offset_8);
-//                outline.setOval(0, 0, size, size);
-//            }
-//        };
-//        btnLogin.setOutlineProvider(viewOutlineProvider);
+        ViewUtils.addTouchDrawable(tvLoginQQ, R.drawable.ic_login_way_qq_pressed, R.drawable.ic_login_way_qq_normal, 1);
+        ViewUtils.addTouchDrawable(tvLoginBlog, R.drawable.ic_login_way_blog_pressed, R.drawable.ic_login_way_blog_normal, 1);
+        ViewUtils.addTouchDrawable(tvLoginChat, R.drawable.ic_login_way_wx_pressed, R.drawable.ic_login_way_wx_normal, 1);
+
     }
 
     @Override
@@ -109,11 +112,11 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
 
     }
 
-    @OnClick({R.id.tv_login_forget_pass, R.id.btn_login, R.id.tv_login_register})
+    @OnClick({R.id.tv_login_forget_pass, R.id.btn_login, R.id.tv_login_register, R.id.tv_login_chat, R.id.tv_login_blog, R.id.tv_login_qq})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login_forget_pass:
-                ToastUtils.makeText(mContext, "1", Toast.LENGTH_LONG);
+                ActivityUtils.openActivity(LoginActivity.this, ForgetPasswordActivity.class);
                 break;
             case R.id.btn_login:
                 String name = etLoginName.getText().toString().trim();
@@ -129,7 +132,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
                     @Override
                     public void onResponse(BaseModel<UserResult> response) {
                         ToastUtils.makeLongText(mContext, response.detail.userName);
-                        ActivityUtils.openActivity(LoginActivity.this, SelectPicturesActivity.class);
+                        ActivityUtils.openActivity(mContext, SelectPicturesActivity.class);
                     }
 
                     @Override
@@ -145,8 +148,15 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
                 break;
 
             case R.id.tv_login_register:
+
                 break;
             case R.id.img_pass_visible:
+                break;
+            case R.id.tv_login_chat:
+                break;
+            case R.id.tv_login_blog:
+                break;
+            case R.id.tv_login_qq:
                 break;
         }
     }

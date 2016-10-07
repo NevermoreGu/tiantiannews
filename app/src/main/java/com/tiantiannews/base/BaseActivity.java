@@ -1,5 +1,6 @@
 package com.tiantiannews.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -41,7 +42,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected List<ImageView> imageViews = new ArrayList<>();
 
-    protected Context mContext;
+    protected Activity mContext;
 
     protected void initAppBar() {
         appBar = (AppBar) findViewById(R.id.app_bar);

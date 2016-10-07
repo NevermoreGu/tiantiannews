@@ -30,11 +30,11 @@ public class Constants {
 
     //SQLiteDbAdapter
     public static final String ASSETS_DATABASE_NAME = "cities.db";
-    public static final String DATABASE_PATH = "/data/data/com.guqian.tiantianguoyuan/databases/";
+    public static final String DATABASE_PATH = "/data/data/com.tiantiannews/databases/";
     public static final String DATABASE_NAME = "cities.db";
     public static final int DATABASE_VERSION = 1;
-    public static final String CITY_TABLE_NAME = "city";
-    public static final String CITY_ID = "id";
+    public static final String CITY_TABLE_NAME = "cityinfo";
+    public static final String CITY_ID = "cityid";
     public static final String CITY_NAME = "name";
     public static final String CITY_PINYIN = "pinyin";
     /**
