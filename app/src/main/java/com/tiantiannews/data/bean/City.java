@@ -7,6 +7,7 @@ public class City implements Serializable {
     public int id;
     public String name;
     public String letter;
+    public String rank;
 
     public City() {
     }

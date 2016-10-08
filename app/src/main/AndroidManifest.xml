@@ -50,18 +50,19 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity"></activity>
-        <activity android:name=".ui.activity.LoginActivity"></activity>
-        <activity android:name=".ui.activity.PicturesBrowseActivity"></activity>
-        <activity android:name=".ui.activity.SelectPicturesActivity"></activity>
-        <activity android:name=".ui.activity.ForgetPasswordActivity"></activity>
-        <activity
-            android:name=".ui.activity.CityListActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+        <activity android:name=".ui.activity.MainActivity" />
+        <activity android:name=".ui.activity.LoginActivity" />
+        <activity android:name=".ui.activity.PicturesBrowseActivity" />
+        <activity android:name=".ui.activity.SelectPicturesActivity" />
+        <activity android:name=".ui.activity.ForgetPasswordActivity" />
 
         <provider
-            android:name="com.tiantiannews.data.contentprovider.CitiesDBProvider"
-            android:authorities="com.guqian.database.cities"></provider>
+            android:name=".data.contentprovider.CitiesDBProvider"
+            android:authorities="com.guqian.database.cities" />
+
+        <activity
+            android:name=".ui.activity.CitiesActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
     </application>
 
 </manifest>

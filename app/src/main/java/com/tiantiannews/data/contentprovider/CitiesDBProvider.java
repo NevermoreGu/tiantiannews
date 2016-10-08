@@ -22,6 +22,7 @@ import com.tiantiannews.utils.FileUtils;
 import com.tiantiannews.utils.StringUtils;
 import com.tiantiannews.utils.ToastUtils;
 
+import java.io.IOException;
 import java.util.List;
 
 import rx.Observable;
@@ -67,31 +68,31 @@ public class CitiesDBProvider extends ContentProvider {
     @Override
     public boolean onCreate() {
         mOpenHelper = new DatabaseHelper(getContext());
-//        try {
-//            mOpenHelper.createDataBase();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-        db = SearchDB.getInstance();
-        String fileJson = FileUtils.getStringFormAssets(getContext(), "cities.json");
-        Gson gson = new Gson();
-        Cities cities = null;
-        if (!StringUtils.isEmpty(fileJson)) {
-            cities = gson.fromJson(fileJson, Cities.class);
+        try {
+            mOpenHelper.createDataBase();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        final List<Cities.DataBean> data = cities.data;
-        Observable.from(data).subscribe(new Action1<Cities.DataBean>() {
-            @Override
-            public void call(Cities.DataBean dataBean) {
-                if (dataBean == null || dataBean.locationId == null || dataBean.rank == null || dataBean.acronym == null || dataBean.divisionStr == null) {
-                    ToastUtils.makeLongText(getContext(), dataBean.id + "");
-                }
-                insertCityLogDB(dataBean.id, dataBean.name, dataBean.pinyin,
-                        dataBean.rank, dataBean.acronym, dataBean.onlineTime, dataBean.divisionStr, dataBean.locationId,
-                        dataBean.lng, dataBean.lat,
-                        dataBean.isOpen);
-            }
-        });
+//        db = SearchDB.getInstance();
+//        String fileJson = FileUtils.getStringFormAssets(getContext(), "cities.json");
+//        Gson gson = new Gson();
+//        Cities cities = null;
+//        if (!StringUtils.isEmpty(fileJson)) {
+//            cities = gson.fromJson(fileJson, Cities.class);
+//        }
+//        final List<Cities.DataBean> data = cities.data;
+//        Observable.from(data).subscribe(new Action1<Cities.DataBean>() {
+//            @Override
+//            public void call(Cities.DataBean dataBean) {
+//                if (dataBean == null || dataBean.locationId == null || dataBean.rank == null || dataBean.acronym == null || dataBean.divisionStr == null) {
+//                    ToastUtils.makeLongText(getContext(), dataBean.id + "");
+//                }
+//                insertCityLogDB(dataBean.id, dataBean.name, dataBean.pinyin,
+//                        dataBean.rank, dataBean.acronym, dataBean.onlineTime, dataBean.divisionStr, dataBean.locationId,
+//                        dataBean.lng, dataBean.lat,
+//                        dataBean.isOpen);
+//            }
+//        });
 
         return true;
     }

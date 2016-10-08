@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_cities"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.tiantiannews.ui.activity.CitiesActivity">
+
+    <com.tiantiannews.ui.widget.AppBar
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:background="@color/white"
+        android:elevation="@dimen/offset_2"></com.tiantiannews.ui.widget.AppBar>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/offset_1_px"
+        android:background="@color/black_divers"></View>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:paddingBottom="@dimen/offset_8"
+        android:paddingLeft="@dimen/offset_16"
+        android:paddingRight="@dimen/offset_16"
+        android:paddingTop="@dimen/offset_8">
+
+        <com.tiantiannews.ui.widget.DeleteEditText
+            android:id="@+id/det_cities_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/offset_40"
+            android:layout_centerVertical="true"
+            android:background="@color/bg_grey"
+            android:drawableLeft="@drawable/ic_city_search"
+            android:drawablePadding="@dimen/offset_8"
+            android:gravity="center_vertical"
+            android:hint="输入城市名或拼音查询"
+            android:paddingLeft="@dimen/offset_8"
+            android:paddingRight="@dimen/offset_8"
+            android:textColor="@color/black_text"
+            android:textSize="@dimen/font_size_14" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/offset_1_px"
+        android:background="@color/black_divers"></View>
+
+    <FrameLayout
+        android:id="@+id/fl_cities"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"></FrameLayout>
+
+</LinearLayout>
