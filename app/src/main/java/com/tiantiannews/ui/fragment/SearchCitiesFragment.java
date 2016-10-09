@@ -45,8 +45,7 @@ public class SearchCitiesFragment extends BaseFragment {
 
     @Override
     protected void handlerIntent() {
-        allCities = (ArrayList<City>) mContext.getIntent().getSerializableExtra("citiesList");
-
+        allCities = getArguments().getParcelableArrayList("allCities");
     }
 
     @Override
@@ -61,6 +60,10 @@ public class SearchCitiesFragment extends BaseFragment {
     @Override
     public void initViews() {
 
+    }
+
+    @Override
+    public void loadData() {
         List<CityInfo> cityLogs = db.getLogCities();
         if (cityLogs.size() > 0) {
             for (CityInfo log : cityLogs) {
@@ -98,16 +101,10 @@ public class SearchCitiesFragment extends BaseFragment {
                     });
                 } else {
                     City city = filterCities.get(position);
-//                    EventBus.getDefault().post(new LocateEventBus(city.getName()));
                     insertCityLogDB(city.id, city.name, city.letter);
                 }
             }
         });
-    }
-
-    @Override
-    public void loadData() {
-
     }
 
     /**
@@ -158,7 +155,7 @@ public class SearchCitiesFragment extends BaseFragment {
 
     @Subscribe
     public void onEvent(CitiesEvent event) {
-
+        filterData(event.getInputContent());
     }
 
     @Override

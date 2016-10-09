@@ -40,7 +40,7 @@ public class CityListAdapter extends BaseAdapter implements SectionIndexer {
     }
 
     public interface OnSelectCityListener {
-        public void selectCity(String cityName);
+        void selectCity(String cityName);
     }
 
     public void setOnSelectCityListener(OnSelectCityListener listener) {

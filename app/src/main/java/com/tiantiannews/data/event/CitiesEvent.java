@@ -1,22 +1,18 @@
 package com.tiantiannews.data.event;
 
-import com.tiantiannews.data.bean.City;
-
-import java.util.List;
-
 public class CitiesEvent {
 
-    private List<City> cities;
+    private String inputContent;
 
-    public CitiesEvent(List<City> cities) {
-        this.cities = cities;
+    public CitiesEvent(String inputContent) {
+        this.inputContent = inputContent;
     }
 
-    public List<City> getCities() {
-        return cities;
+    public String getInputContent() {
+        return inputContent;
     }
 
-    public void setCities(List<City> cities) {
-        this.cities = cities;
+    public void setInputContent(String inputContent) {
+        this.inputContent = inputContent;
     }
 }

@@ -1,6 +1,8 @@
 package com.tiantiannews.ui.fragment;
 
-import android.content.SharedPreferences;
+import android.content.AsyncQueryHandler;
+import android.database.Cursor;
+import android.net.Uri;
 import android.os.SystemClock;
 import android.view.MotionEvent;
 import android.view.View;
@@ -8,18 +10,17 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.common.eventbus.Subscribe;
 import com.tiantiannews.R;
 import com.tiantiannews.base.BaseFragment;
+import com.tiantiannews.base.Constants;
 import com.tiantiannews.data.bean.City;
-import com.tiantiannews.data.event.CitiesEvent;
 import com.tiantiannews.ui.adapter.CityListAdapter;
 import com.tiantiannews.ui.widget.LetterView;
+import com.tiantiannews.utils.StringUtils;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import butterknife.BindView;
-import de.greenrobot.event.EventBus;
 
 public class CityListFragment extends BaseFragment {
 
@@ -33,9 +34,7 @@ public class CityListFragment extends BaseFragment {
     LetterView llLocationLetter;
 
     private CityListAdapter listAdapter;
-    private List<City> allCities;
-    private SharedPreferences sharedPreferences;
-    private SharedPreferences.Editor sharedPreferencesEditor;
+    private ArrayList<City> allCities;
 
     @Override
     protected int getLayoutId() {
@@ -44,7 +43,7 @@ public class CityListFragment extends BaseFragment {
 
     @Override
     public void initVariables() {
-        EventBus.getDefault().register(this);
+        allCities = new ArrayList<>();
     }
 
     @Override
@@ -53,38 +52,42 @@ public class CityListFragment extends BaseFragment {
     }
 
     @Override
+    public void onStart() {
+        super.onStart();
+    }
+
+    @Override
     public void loadData() {
-//        //城市列表
-//        String[] projection = {"cityid", "name", "pinyin", "rank"};
-//        Uri uri = Uri.parse("content://" + Constants.CITIES_AUTHORITY + "/" + Constants.CITY_TABLE_NAME);
-//        AsyncQueryHandler asyncQueryHandler = new AsyncQueryHandler(mContext.getContentResolver()) {
-//            @Override
-//            protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
-//                allCities = new ArrayList<>();
-//                while (cursor.moveToNext()) {
-//                    City city = new City();
-//                    city.id = cursor.getInt(0);
-//                    city.name = cursor.getString(1);
-//                    city.letter = StringUtils.getAlpha(cursor.getString(2));
-//                    city.rank = cursor.getString(3);
-//                    allCities.add(city);
-//                }
-//                if (allCities.size() > 0) {
-//                    listAdapter = new CityListAdapter(mContext, allCities, "");
-//                    if (listAdapter != null) {
-//                        lvLocationCities.setAdapter(listAdapter);
-//                        listAdapter.setOnSelectCityListener(new CityListAdapter.OnSelectCityListener() {
-//                            @Override
-//                            public void selectCity(String cityName) {
-//
-//                            }
-//                        });
-//                    }
-//                }
-//                cursor.close();
-//            }
-//        };
-//        asyncQueryHandler.startQuery(0, null, uri, projection, null, null, "pinyin COLLATE LOCALIZED asc");
+        //城市列表
+        String[] projection = {"cityid", "name", "pinyin", "rank"};
+        Uri uri = Uri.parse("content://" + Constants.CITIES_AUTHORITY + "/" + Constants.CITY_TABLE_NAME);
+        AsyncQueryHandler asyncQueryHandler = new AsyncQueryHandler(mContext.getContentResolver()) {
+            @Override
+            protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
+                City city;
+                while (cursor.moveToNext()) {
+                    city = new City();
+                    city.id = cursor.getInt(0);
+                    city.name = cursor.getString(1);
+                    city.letter = StringUtils.getAlpha(cursor.getString(2));
+                    city.rank = cursor.getString(3);
+                    allCities.add(city);
+                }
+                if (allCities != null && allCities.size() > 0) {
+                    listAdapter = new CityListAdapter(mContext, allCities, "");
+
+                    lvLocationCities.setAdapter(listAdapter);
+                    listAdapter.setOnSelectCityListener(new CityListAdapter.OnSelectCityListener() {
+                        @Override
+                        public void selectCity(String cityName) {
+
+                        }
+                    });
+                }
+                cursor.close();
+            }
+        };
+        asyncQueryHandler.startQuery(0, null, uri, projection, null, null, "pinyin COLLATE LOCALIZED asc");
 
         lvLocationCities.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -112,24 +115,7 @@ public class CityListFragment extends BaseFragment {
         });
     }
 
-    @Subscribe
-    public void onEvent(CitiesEvent event) {
-        allCities = event.getCities();
-        listAdapter = new CityListAdapter(mContext, allCities, "");
-        if (listAdapter != null) {
-            lvLocationCities.setAdapter(listAdapter);
-            listAdapter.setOnSelectCityListener(new CityListAdapter.OnSelectCityListener() {
-                @Override
-                public void selectCity(String cityName) {
-
-                }
-            });
-        }
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        EventBus.getDefault().unregister(this);
+    public ArrayList<City> getAllCities() {
+        return allCities;
     }
 }

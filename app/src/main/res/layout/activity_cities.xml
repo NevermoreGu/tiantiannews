@@ -33,9 +33,9 @@
         <com.tiantiannews.ui.widget.DeleteEditText
             android:id="@+id/det_cities_search"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/offset_40"
+            android:layout_height="@dimen/offset_32"
             android:layout_centerVertical="true"
-            android:background="@color/bg_grey"
+            android:background="@drawable/bg_radus_grey"
             android:drawableLeft="@drawable/ic_city_search"
             android:drawablePadding="@dimen/offset_8"
             android:gravity="center_vertical"

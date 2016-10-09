@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/offset_16"
-        android:background="@drawable/bg_about"
+        android:background="@drawable/bg_white"
         android:elevation="@dimen/offset_2"
         android:orientation="vertical">
 
@@ -105,7 +105,7 @@
         android:layout_height="@dimen/offset_40"
         android:layout_marginLeft="@dimen/offset_16"
         android:layout_marginRight="@dimen/offset_16"
-        android:background="@drawable/bg_about"
+        android:background="@drawable/bg_white"
         android:text="@string/login"
         android:textColor="@color/gray"
         android:textSize="@dimen/font_size_18" />
@@ -126,7 +126,7 @@
         android:layout_marginLeft="@dimen/offset_16"
         android:layout_marginRight="@dimen/offset_16"
         android:layout_marginTop="@dimen/offset_8"
-        android:background="@drawable/bg_about"
+        android:background="@drawable/bg_white"
         android:elevation="@dimen/offset_2"
         android:orientation="vertical">
 

@@ -1,8 +1,9 @@
 package com.tiantiannews.data.bean;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class City implements Serializable {
+public class City implements Parcelable {
 
     public int id;
     public String name;
@@ -22,36 +23,35 @@ public class City implements Serializable {
         this.letter = letter;
     }
 
-
-    /*@Override
+    @Override
     public int describeContents() {
         return 0;
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeInt(id);
-        dest.writeString(name);
-        dest.writeString(letter);
+        dest.writeInt(this.id);
+        dest.writeString(this.name);
+        dest.writeString(this.letter);
+        dest.writeString(this.rank);
     }
 
-    *//**
-     * 该静态常量值负责恢复从Parcel数据包中恢复City对象
-     *//*
-    public static final Creator<City> CREATOR = new Creator<City>() {
+    protected City(Parcel in) {
+        this.id = in.readInt();
+        this.name = in.readString();
+        this.letter = in.readString();
+        this.rank = in.readString();
+    }
 
+    public static final Creator<City> CREATOR = new Creator<City>() {
         @Override
         public City createFromParcel(Parcel source) {
-            City city = new City();
-            city.id = source.readInt();
-            city.name = source.readString();
-            city.letter = source.readString();
-            return city;
+            return new City(source);
         }
 
         @Override
         public City[] newArray(int size) {
             return new City[size];
         }
-    };*/
+    };
 }
