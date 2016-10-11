@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.KeyEvent;
 import android.view.View;
 
 import com.tiantiannews.R;
@@ -33,7 +34,12 @@ public class CitiesActivity extends BaseFragmentActivity {
         appBar.setOnClickListenerAppBarLeft(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBackPressed();
+                if (fragmentManager.getBackStackEntryCount() == 1) {
+                    fragmentManager.popBackStack();
+                    etCitiesSearch.clearFocus();
+                } else {
+                    finish();
+                }
             }
         });
     }
@@ -97,4 +103,16 @@ public class CitiesActivity extends BaseFragmentActivity {
 
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (fragmentManager.getBackStackEntryCount() == 1) {
+                fragmentManager.popBackStack();
+                etCitiesSearch.clearFocus();
+                return true;
+            }
+            return super.onKeyDown(keyCode, event);
+        }
+        return super.onKeyDown(keyCode, event);
+    }
 }
