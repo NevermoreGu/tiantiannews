@@ -263,12 +263,7 @@ public class ImageGridAdapter extends BaseAdapter {
                         ImageLoaderUtil imageLoaderUtil = ImageLoaderUtil.getInstance();
                         ImageLoader imageLoader = ImageLoader.builder().url(data.path).imgView(holder.image).placeHolder(R.drawable.default_img_bg).type(1).build();
                         imageLoaderUtil.loadImage(mContext, imageLoader);
-//                        Glide.with(mContext)
-//                                .load(data.path)
-//                                .centerCrop()
-//                                .placeholder(R.drawable.default_img_bg)
-//                                .crossFade()
-//                                .into();
+
                     }
                 }
             }
