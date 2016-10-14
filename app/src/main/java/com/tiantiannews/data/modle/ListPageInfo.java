@@ -1,9 +1,11 @@
-package com.tiantiannews.data.bean;
+package com.tiantiannews.data.modle;
+
+import com.tiantiannews.base.BaseModel;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListPageInfo<T> {
+public class ListPageInfo<T extends BaseModel> {
 
     private int mNumPerPage = 0;//每页的总数量
     private int mPage = 1; //默认起始页为1
@@ -24,7 +26,7 @@ public class ListPageInfo<T> {
             return;
         }
         if (mPage == 1 || mDataList == null) {
-            mDataList = new ArrayList<T>();
+            mDataList = new ArrayList<>();
         }
         mDataList.addAll(dataList);
     }
