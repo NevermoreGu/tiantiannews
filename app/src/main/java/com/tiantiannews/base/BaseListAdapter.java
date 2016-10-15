@@ -9,13 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tiantiannews.R;
-import com.tiantiannews.data.bean.ListPageInfo;
+import com.tiantiannews.data.modle.ListPageInfo;
 import com.tiantiannews.utils.StringUtils;
 import com.tiantiannews.utils.image.ImageLoader;
 import com.tiantiannews.utils.image.ImageLoaderUtil;
 
-
-public class BaseListAdapter<T extends BaseModel> extends BaseAdapter {
+public class BaseListAdapter<T> extends BaseAdapter {
 
     public static final int STATE_EMPTY_ITEM = 0;
     public static final int STATE_LOAD_MORE = 1;
@@ -28,14 +27,14 @@ public class BaseListAdapter<T extends BaseModel> extends BaseAdapter {
 
     private LayoutInflater mInflater;
 
-    protected ListPageInfo<T> mListPageInfo;
+    protected ListPageInfo<BaseModel<T>> mListPageInfo;
 
     //adapter数据源
-    public void setListPageInfo(ListPageInfo<T> listPageInfo) {
+    public void setListPageInfo(ListPageInfo<BaseModel<T>> listPageInfo) {
         mListPageInfo = listPageInfo;
     }
 
-    public ListPageInfo<T> getListPageInfo() {
+    public ListPageInfo<BaseModel<T>> getListPageInfo() {
         return mListPageInfo;
     }
 
@@ -64,7 +63,7 @@ public class BaseListAdapter<T extends BaseModel> extends BaseAdapter {
     }
 
     @Override
-    public T getItem(int position) {
+    public BaseModel<T> getItem(int position) {
         if (mListPageInfo == null) {
             return null;
         }
@@ -86,20 +85,12 @@ public class BaseListAdapter<T extends BaseModel> extends BaseAdapter {
         return null;
     }
 
-    protected void setText(TextView textView, String text, boolean needGone) {
-        if (needGone) {
-            textView.setVisibility(View.GONE);
-            return;
-        }
+    protected void setText(TextView textView, String text) {
         if (StringUtils.isEmpty(text)) {
-            textView.setVisibility(View.GONE);
+            textView.setText("");
         } else {
             textView.setText(text);
         }
-    }
-
-    protected void setText(TextView textView, String text) {
-        setText(textView, text, false);
     }
 
     protected void setImage(ImageView imageView, String imageUrl, Context context) {

@@ -120,6 +120,6 @@ dependencies {
     apt 'com.ryanharter.auto.value:auto-value-gson:0.3.2-rc1'
     compile 'com.squareup.sqlbrite:sqlbrite:0.7.0'
     compile 'top.zibin:Luban:1.0.3'
-    //    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:' + BaseRecyclerViewAdapterHelper_VERSION
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:' + BaseRecyclerViewAdapterHelper_VERSION
 }
 
