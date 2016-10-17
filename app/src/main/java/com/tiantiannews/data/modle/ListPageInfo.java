@@ -5,7 +5,7 @@ import com.tiantiannews.base.BaseModel;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ListPageInfo<T extends BaseModel> {
+public class ListPageInfo<T> {
 
     private int mNumPerPage = 0;//每页的总数量
     private int mPage = 1; //默认起始页为1
@@ -15,13 +15,13 @@ public class ListPageInfo<T extends BaseModel> {
     private boolean mHasMore;
     private boolean mIsBusy = false;
 
-    private List<T> mDataList; //adapter的数据源
+    private List<BaseModel<T>> mDataList; //adapter的数据源
 
     public ListPageInfo(int numPerPage) {
         mNumPerPage = numPerPage;
     }
 
-    private void addMore(List<T> dataList) {
+    private void addMore(List<BaseModel<T>> dataList) {
         if (dataList == null) {
             return;
         }
@@ -31,18 +31,18 @@ public class ListPageInfo<T extends BaseModel> {
         mDataList.addAll(dataList);
     }
 
-    public void updateListInfo(List<T> dataList) {
+    public void updateListInfo(List<BaseModel<T>> dataList) {
         addMore(dataList);
         mIsBusy = false;
     }
 
-    public void updateListInfo(List<T> dataList, int total) {
+    public void updateListInfo(List<BaseModel<T>> dataList, int total) {
         addMore(dataList);
         mHasMore = mDataList.size() < total;
         mIsBusy = false;
     }
 
-    public void updateListInfo(List<T> dataList, boolean hasMore) {
+    public void updateListInfo(List<BaseModel<T>> dataList, boolean hasMore) {
         addMore(dataList);
         mHasMore = hasMore;
         mIsBusy = false;
@@ -95,7 +95,7 @@ public class ListPageInfo<T extends BaseModel> {
         mPage = 1;
     }
 
-    public T getItem(int position) {
+    public BaseModel<T> getItem(int position) {
         if (mDataList == null || position < 0 || position > mDataList.size()) {
             return null;
         }
@@ -122,7 +122,7 @@ public class ListPageInfo<T extends BaseModel> {
         return false;
     }
 
-    public List<T> getDataList() {
+    public List<BaseModel<T>> getDataList() {
         return mDataList;
     }
 
@@ -138,7 +138,7 @@ public class ListPageInfo<T extends BaseModel> {
      *
      * @return
      */
-    public T firstItem() {
+    public BaseModel<T> firstItem() {
         if (mDataList == null || mDataList.size() == 0) {
             return null;
         }
@@ -150,7 +150,7 @@ public class ListPageInfo<T extends BaseModel> {
      *
      * @return
      */
-    public T lastItem() {
+    public BaseModel<T> lastItem() {
         if (mDataList == null || mDataList.size() == 0) {
             return null;
         }

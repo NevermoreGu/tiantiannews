@@ -9,10 +9,10 @@ import java.util.List;
 import rx.Observable;
 import rx.Subscriber;
 
-public abstract class PageListDataModel<T extends BaseModel> {
+public abstract class PageListDataModel<T> {
 
     protected ListPageInfo<T> mListPageInfo;//由子类实现
-    protected List<T> listData; //解析的数据
+    protected List<BaseModel<T>> listData; //解析的数据
     protected String mUrlPart; //交由子类实现
 
 //    /**
@@ -135,19 +135,19 @@ public abstract class PageListDataModel<T extends BaseModel> {
      * @param is
      * @return
      */
-    protected ArrayList<T> parseListData(String is) {
+    protected ArrayList<List<BaseModel<T>>> parseListData(String is) {
         return null;
     }
 
-    protected void setRequestResult(List<T> list) {
+    protected void setRequestResult(List<BaseModel<T>> list) {
         mListPageInfo.updateListInfo(list); //只是改变数据，需要调用adapter change更新
     }
 
-    protected void setRequestResult(List<T> list, int total) {
+    protected void setRequestResult(List<BaseModel<T>> list, int total) {
         mListPageInfo.updateListInfo(list, total);
     }
 
-    protected void setRequestResult(List<T> list, boolean hasMore) {
+    protected void setRequestResult(List<BaseModel<T>> list, boolean hasMore) {
         mListPageInfo.updateListInfo(list, hasMore);
     }
 
