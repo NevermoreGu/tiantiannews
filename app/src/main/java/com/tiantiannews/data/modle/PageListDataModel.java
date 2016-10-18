@@ -139,17 +139,17 @@ public abstract class PageListDataModel<T> {
         return null;
     }
 
-    protected void setRequestResult(List<BaseModel<T>> list) {
-        mListPageInfo.updateListInfo(list); //只是改变数据，需要调用adapter change更新
-    }
-
-    protected void setRequestResult(List<BaseModel<T>> list, int total) {
-        mListPageInfo.updateListInfo(list, total);
-    }
-
-    protected void setRequestResult(List<BaseModel<T>> list, boolean hasMore) {
-        mListPageInfo.updateListInfo(list, hasMore);
-    }
+//    protected void setRequestResult(List<BaseModel<T>> list) {
+//        mListPageInfo.updateListInfo(list); //只是改变数据，需要调用adapter change更新
+//    }
+//
+//    protected void setRequestResult(List<BaseModel<T>> list, int total) {
+//        mListPageInfo.updateListInfo(list, total);
+//    }
+//
+//    protected void setRequestResult(List<BaseModel<T>> list, boolean hasMore) {
+//        mListPageInfo.updateListInfo(list, hasMore);
+//    }
 
     protected void setRequestFail() {
         mListPageInfo.rollbackOnFail();

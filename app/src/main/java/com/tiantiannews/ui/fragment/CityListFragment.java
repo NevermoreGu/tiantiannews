@@ -36,6 +36,8 @@ public class CityListFragment extends BaseFragment {
     private CityListAdapter listAdapter;
     private ArrayList<City> allCities;
 
+    private AsyncQueryHandler asyncQueryHandler;
+
     @Override
     protected int getLayoutId() {
         return R.layout.activity_city_list;
@@ -61,7 +63,7 @@ public class CityListFragment extends BaseFragment {
         //城市列表
         String[] projection = {"cityid", "name", "pinyin", "rank"};
         Uri uri = Uri.parse("content://" + Constants.CITIES_AUTHORITY + "/" + Constants.CITY_TABLE_NAME);
-        AsyncQueryHandler asyncQueryHandler = new AsyncQueryHandler(mContext.getContentResolver()) {
+         asyncQueryHandler = new AsyncQueryHandler(mContext.getContentResolver()) {
             @Override
             protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
                 City city;
@@ -117,5 +119,11 @@ public class CityListFragment extends BaseFragment {
 
     public ArrayList<City> getAllCities() {
         return allCities;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        asyncQueryHandler.cancelOperation(0);
     }
 }
