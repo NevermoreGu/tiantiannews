@@ -28,6 +28,9 @@ public class AppBar extends RelativeLayout {
     @BindView(R.id.tv_app_right)
     TextView tVAppBarRight;
 
+    @BindView(R.id.rl_app_right)
+    RelativeLayout rlAppBarRight;
+
     private Context mContext;
 
     private int AppBarLeftDrawableId = 0;
@@ -116,6 +119,11 @@ public class AppBar extends RelativeLayout {
         tvAppBarTitle.setText(getResources().getString(titleId));
     }
 
+    public void setAppBarTitleAndColor(String title, int colorId) {
+        tvAppBarTitle.setText(title);
+        tvAppBarTitle.setTextColor(getResources().getColor(colorId));
+    }
+
     /**
      * 设置右边的文字
      *
@@ -124,6 +132,12 @@ public class AppBar extends RelativeLayout {
     public void setAppBarRightText(String title) {
         tVAppBarRight.setText(title);
     }
+
+    public void setAppBarRightTextAndColor(String title, int colorId) {
+        tVAppBarRight.setText(title);
+        tVAppBarRight.setTextColor(getResources().getColor(colorId));
+    }
+
 
     /**
      * 设置右边的图标
@@ -140,6 +154,6 @@ public class AppBar extends RelativeLayout {
      * @param listener
      */
     public void setOnClickListenerAppBarRight(OnClickListener listener) {
-        imgAppBarLeft.setOnClickListener(listener);
+        rlAppBarRight.setOnClickListener(listener);
     }
 }

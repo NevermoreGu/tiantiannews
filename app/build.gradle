@@ -93,6 +93,9 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
+
+    compile project(':qrcode')
+
     compile 'com.android.support:appcompat-v7:' + SUPPORT_VERSION
     compile 'com.android.support:support-v13:' + SUPPORT_VERSION
     compile 'com.android.support:design:' + SUPPORT_VERSION
@@ -121,5 +124,6 @@ dependencies {
     compile 'com.squareup.sqlbrite:sqlbrite:0.7.0'
     compile 'top.zibin:Luban:1.0.3'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:' + BaseRecyclerViewAdapterHelper_VERSION
+
 }
 

@@ -1,12 +1,15 @@
 package com.tiantiannews.utils.image;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.Priority;
 import com.bumptech.glide.load.data.DataFetcher;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.model.stream.StreamModelLoader;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 import com.tiantiannews.base.BaseApplication;
 import com.tiantiannews.utils.TDevice;
 
@@ -43,7 +46,21 @@ public class GlideImageLoaderProvider implements BaseImageLoaderProvider {
      * load image with Glide
      */
     private void loadNormal(Context ctx, ImageLoader img) {
-        Glide.with(ctx).load(img.url()).placeholder(img.placeHolder()).into(img.imgView());
+//        Glide.with(ctx).load(img.url()).placeholder(img.placeHolder()).into(img.imgView());
+        Glide.with(ctx).load(img.url()).asBitmap().placeholder(img.placeHolder()).listener(new RequestListener<String, Bitmap>() {
+            @Override
+            public boolean onException(Exception e, String model, Target<Bitmap> target, boolean isFirstResource) {
+                return false;
+            }
+
+            @Override
+            public boolean onResourceReady(Bitmap resource, String model, Target<Bitmap> target, boolean isFromMemoryCache, boolean isFirstResource) {
+//                if (delegate != null) {
+//                    delegate.onSuccess(imageView, finalPath);
+//                }
+                return false;
+            }
+        }).into(img.imgView());
     }
 
 

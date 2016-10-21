@@ -294,7 +294,7 @@ public class ImageGridAdapter extends BaseAdapter {
         set.start();
     }
 
-    class ViewHolder {
+    static class ViewHolder {
         ImageView image;
         CheckBox checkBox;
         View mask;

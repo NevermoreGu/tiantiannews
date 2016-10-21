@@ -55,6 +55,7 @@
         <activity android:name=".ui.activity.PicturesBrowseActivity" />
         <activity android:name=".ui.activity.SelectPicturesActivity" />
         <activity android:name=".ui.activity.ForgetPasswordActivity" />
+        <activity android:name=".ui.activity.ScanActivity" />
 
         <provider
             android:name=".data.contentprovider.CitiesDBProvider"
@@ -62,7 +63,10 @@
 
         <activity
             android:name=".ui.activity.CitiesActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".ui.activity.TestActivity">
+
+        </activity>
     </application>
 
 </manifest>

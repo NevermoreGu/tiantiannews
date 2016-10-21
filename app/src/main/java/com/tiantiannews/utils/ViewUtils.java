@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.tiantiannews.base.BaseApplication;
@@ -42,7 +43,7 @@ public class ViewUtils {
      * @param view
      * @param downDrawableId
      * @param upDrawableId
-     * @param location     location为0时是left drawable,1时是top drawable,2时是right drawable,3时是bottom drawable,4为background
+     * @param location       location为0时是left drawable,1时是top drawable,2时是right drawable,3时是bottom drawable,4为background
      */
     public static void addTouchDrawable(final View view, final int downDrawableId, final int upDrawableId, final int location) {
         final Drawable downDrawable = BaseApplication.getInstance().getResources().getDrawable(
@@ -135,5 +136,21 @@ public class ViewUtils {
             }
         });
 
+    }
+
+    public static void addTouchImageResource(final ImageView imageView, final int downImageId, final int upImageId) {
+
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
+                    imageView.setImageResource(downImageId);
+
+                } else if (event.getAction() == MotionEvent.ACTION_UP) {
+                    imageView.setImageResource(upImageId);
+                }
+                return false;
+            }
+        });
     }
 }
