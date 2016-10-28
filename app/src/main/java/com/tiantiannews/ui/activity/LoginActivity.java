@@ -8,7 +8,6 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.tiantiannews.R;
 import com.tiantiannews.api.ApiParams;
@@ -60,6 +59,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
     public void initVariables() {
 
     }
+
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -159,5 +159,10 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
             case R.id.tv_login_qq:
                 break;
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

@@ -9,7 +9,6 @@ import android.widget.TextView;
 
 import com.tiantiannews.base.BaseApplication;
 
-
 public class ViewUtils {
 
     /**
@@ -153,4 +152,13 @@ public class ViewUtils {
             }
         });
     }
+
+    public static void setBackgroundPlatform(View view, int res) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            view.setBackground(BaseApplication.getInstance().getResources().getDrawable(res));
+        } else {
+            view.setBackgroundDrawable(BaseApplication.getInstance().getResources().getDrawable(res));
+        }
+    }
+
 }

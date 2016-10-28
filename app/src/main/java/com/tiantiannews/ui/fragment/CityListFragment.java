@@ -66,6 +66,7 @@ public class CityListFragment extends BaseFragment {
          asyncQueryHandler = new AsyncQueryHandler(mContext.getContentResolver()) {
             @Override
             protected void onQueryComplete(int token, Object cookie, Cursor cursor) {
+
                 City city;
                 while (cursor.moveToNext()) {
                     city = new City();

@@ -141,7 +141,6 @@
                 android:id="@+id/tv_login_chat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/offset_8"
                 android:layout_weight="1"
                 android:drawablePadding="@dimen/offset_8"
                 android:drawableTop="@drawable/ic_login_way_wx_normal"
@@ -154,7 +153,6 @@
                 android:id="@+id/tv_login_blog"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/offset_8"
                 android:layout_weight="1"
                 android:drawablePadding="@dimen/offset_8"
                 android:drawableTop="@drawable/ic_login_way_blog_normal"
@@ -167,7 +165,6 @@
                 android:id="@+id/tv_login_qq"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/offset_8"
                 android:layout_weight="1"
                 android:drawablePadding="@dimen/offset_8"
                 android:drawableTop="@drawable/ic_login_way_qq_normal"
@@ -192,6 +189,5 @@
             android:text="@string/no_account_go_register"
             android:textSize="@dimen/font_size_14" />
     </LinearLayout>
-
 
 </LinearLayout>
