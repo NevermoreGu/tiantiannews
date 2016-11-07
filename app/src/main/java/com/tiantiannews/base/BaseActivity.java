@@ -1,10 +1,10 @@
 package com.tiantiannews.base;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,6 +44,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected Activity mContext;
 
+    protected FragmentManager fragmentManager;
+
     protected void initAppBar() {
         appBar = (AppBar) findViewById(R.id.app_bar);
     }
@@ -62,6 +64,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         initVariables();
         initViews();
         loadData();
+    }
+
+    @Override
+    public void initVariables() {
+        fragmentManager = getSupportFragmentManager();
     }
 
     @Override

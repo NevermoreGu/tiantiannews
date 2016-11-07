@@ -11,7 +11,7 @@ import com.tiantiannews.base.BaseFragment;
 import com.tiantiannews.data.bean.City;
 import com.tiantiannews.data.bean.CityInfo;
 import com.tiantiannews.data.database.SearchDB;
-import com.tiantiannews.data.event.CitiesEvent;
+import com.tiantiannews.data.event.CitiesSearchInputEvent;
 import com.tiantiannews.ui.adapter.SearchCitiesListAdapter;
 import com.tiantiannews.utils.CharacterParser;
 import com.tiantiannews.utils.PinyinComparator;
@@ -154,7 +154,7 @@ public class SearchCitiesFragment extends BaseFragment {
     }
 
     @Subscribe
-    public void onEvent(CitiesEvent event) {
+    public void onEvent(CitiesSearchInputEvent event) {
         filterData(event.getInputContent());
     }
 

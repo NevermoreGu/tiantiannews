@@ -1,10 +1,10 @@
 package com.tiantiannews.data.event;
 
-public class CitiesEvent {
+public class CitiesSearchInputEvent {
 
     private String inputContent;
 
-    public CitiesEvent(String inputContent) {
+    public CitiesSearchInputEvent(String inputContent) {
         this.inputContent = inputContent;
     }
 

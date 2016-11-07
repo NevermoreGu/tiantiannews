@@ -64,7 +64,6 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void initViews() {
-
         etLoginName.addTextChangedListener(this);
         etLoginPass.addTextChangedListener(this);
 
@@ -82,7 +81,6 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
 
     @Override
     public void loadData() {
-
     }
 
     @Override

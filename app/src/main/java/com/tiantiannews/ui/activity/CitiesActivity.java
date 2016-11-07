@@ -7,9 +7,11 @@ import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.amap.api.location.AMapLocation;
 import com.tiantiannews.R;
-import com.tiantiannews.base.BaseFragmentActivity;
-import com.tiantiannews.data.event.CitiesEvent;
+import com.tiantiannews.base.LocationActivity;
+import com.tiantiannews.data.event.CitiesSearchInputEvent;
+import com.tiantiannews.data.event.CityChangeEvent;
 import com.tiantiannews.ui.fragment.CityListFragment;
 import com.tiantiannews.ui.fragment.SearchCitiesFragment;
 import com.tiantiannews.ui.widget.DeleteEditText;
@@ -17,7 +19,7 @@ import com.tiantiannews.ui.widget.DeleteEditText;
 import butterknife.BindView;
 import de.greenrobot.event.EventBus;
 
-public class CitiesActivity extends BaseFragmentActivity {
+public class CitiesActivity extends LocationActivity {
 
     @BindView(R.id.det_cities_search)
     DeleteEditText etCitiesSearch;
@@ -79,7 +81,6 @@ public class CitiesActivity extends BaseFragmentActivity {
                     fragmentTransaction.replace(R.id.fl_cities, searchCitiesFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-
                 }
             }
         });
@@ -92,7 +93,7 @@ public class CitiesActivity extends BaseFragmentActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                EventBus.getDefault().post(new CitiesEvent(s.toString()));
+                EventBus.getDefault().post(new CitiesSearchInputEvent(s.toString()));
             }
 
             @Override
@@ -101,6 +102,16 @@ public class CitiesActivity extends BaseFragmentActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onLocationSuccess(AMapLocation loc) {
+        EventBus.getDefault().post(new CityChangeEvent(loc));
+    }
+
+    @Override
+    public void onLocationFail() {
+        EventBus.getDefault().post(new CityChangeEvent(null));
     }
 
     @Override

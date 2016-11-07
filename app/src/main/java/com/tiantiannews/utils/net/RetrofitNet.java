@@ -2,6 +2,7 @@ package com.tiantiannews.utils.net;
 
 import com.tiantiannews.api.ApiService;
 import com.tiantiannews.base.BaseModel;
+import com.tiantiannews.utils.image.ImageLoaderUtil;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -22,6 +23,7 @@ public class RetrofitNet<T> {
     private NetBuilder netBuilder;
     private Retrofit retrofit;
     private OkHttpClient httpClient;
+    private static RetrofitNet mInstance;
 
 //    HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
 //        @Override public void log(String message) {
@@ -50,6 +52,18 @@ public class RetrofitNet<T> {
 //        }
 //        return mInstance;
 //    }
+    public static RetrofitNet getInstance(NetBuilder netBuilder) {
+        if (mInstance == null) {
+            synchronized (ImageLoaderUtil.class) {
+                if (mInstance == null) {
+                    mInstance = new RetrofitNet(netBuilder);
+                    return mInstance;
+                }
+            }
+        }
+        return mInstance;
+    }
+
     public ApiService getService() {
         return retrofit.create(ApiService.class);
     }
