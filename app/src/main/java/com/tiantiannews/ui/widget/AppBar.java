@@ -38,6 +38,7 @@ public class AppBar extends RelativeLayout {
     public AppBar(Context context) {
         super(context);
         mContext = context;
+
         initView();
     }
 

@@ -1,6 +1,7 @@
 package com.tiantiannews.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -27,7 +28,10 @@ public class CitiesActivity extends LocationActivity {
     CityListFragment cityListFragment;
     SearchCitiesFragment searchCitiesFragment;
 
-    private FragmentTransaction fragmentTransaction;
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     protected void initAppBar() {
@@ -52,30 +56,43 @@ public class CitiesActivity extends LocationActivity {
     }
 
     @Override
-    public void initVariables() {
-        super.initVariables();
-        cityListFragment = new CityListFragment();
-        searchCitiesFragment = new SearchCitiesFragment();
-        fragmentTransaction = fragmentManager.beginTransaction();
-    }
-
-    @Override
     public void initViews() {
         initAppBar();
     }
 
     @Override
-    public void loadData() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            cityListFragment = new CityListFragment();
+            searchCitiesFragment = new SearchCitiesFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.fl_cities, cityListFragment);
+            fragmentTransaction.commit();
+        } else {
+            Fragment fragment = getVisibleFragment();
+            if (fragment != null) {
+                if (fragment instanceof CityListFragment) {
+                    cityListFragment = (CityListFragment) fragment;
+                    searchCitiesFragment = new SearchCitiesFragment();
+                } else if (fragment instanceof CityListFragment) {
+                    searchCitiesFragment = (SearchCitiesFragment) fragment;
+                    cityListFragment = new CityListFragment();
+                }
+            }
+        }
+    }
 
-        fragmentTransaction.add(R.id.fl_cities, cityListFragment);
-        fragmentTransaction.commit();
+    @Override
+    public void loadData() {
 
         etCitiesSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    fragmentTransaction = fragmentManager.beginTransaction();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     Bundle bundle = new Bundle();
+
                     bundle.putParcelableArrayList("allCities", cityListFragment.getAllCities());
                     searchCitiesFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.fl_cities, searchCitiesFragment);

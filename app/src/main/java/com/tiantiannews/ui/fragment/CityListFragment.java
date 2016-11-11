@@ -5,9 +5,11 @@ import android.content.AsyncQueryHandler;
 import android.content.ContentResolver;
 import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
+import android.support.annotation.Nullable;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -51,6 +53,12 @@ public class CityListFragment extends BaseFragment {
     private MyHandler1 myHandler1;
 
     @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putParcelableArrayList("allCities", allCities);
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.activity_city_list;
     }
@@ -62,14 +70,18 @@ public class CityListFragment extends BaseFragment {
     }
 
     @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        if (savedInstanceState != null) {
+            allCities = savedInstanceState.getParcelableArrayList("allCities");
+        }
+    }
+
+    @Override
     public void initViews() {
 
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-    }
 
     @Override
     public void loadData() {
