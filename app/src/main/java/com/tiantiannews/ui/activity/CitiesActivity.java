@@ -1,15 +1,18 @@
 package com.tiantiannews.ui.activity;
 
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.KeyEvent;
 import android.view.View;
 
+import com.amap.api.location.AMapLocation;
 import com.tiantiannews.R;
-import com.tiantiannews.base.BaseFragmentActivity;
-import com.tiantiannews.data.event.CitiesEvent;
+import com.tiantiannews.base.LocationActivity;
+import com.tiantiannews.data.event.CitiesSearchInputEvent;
+import com.tiantiannews.data.event.CityChangeEvent;
 import com.tiantiannews.ui.fragment.CityListFragment;
 import com.tiantiannews.ui.fragment.SearchCitiesFragment;
 import com.tiantiannews.ui.widget.DeleteEditText;
@@ -17,7 +20,7 @@ import com.tiantiannews.ui.widget.DeleteEditText;
 import butterknife.BindView;
 import de.greenrobot.event.EventBus;
 
-public class CitiesActivity extends BaseFragmentActivity {
+public class CitiesActivity extends LocationActivity {
 
     @BindView(R.id.det_cities_search)
     DeleteEditText etCitiesSearch;
@@ -25,7 +28,10 @@ public class CitiesActivity extends BaseFragmentActivity {
     CityListFragment cityListFragment;
     SearchCitiesFragment searchCitiesFragment;
 
-    private FragmentTransaction fragmentTransaction;
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+    }
 
     @Override
     protected void initAppBar() {
@@ -50,36 +56,48 @@ public class CitiesActivity extends BaseFragmentActivity {
     }
 
     @Override
-    public void initVariables() {
-        super.initVariables();
-        cityListFragment = new CityListFragment();
-        searchCitiesFragment = new SearchCitiesFragment();
-        fragmentTransaction = fragmentManager.beginTransaction();
-    }
-
-    @Override
     public void initViews() {
         initAppBar();
     }
 
     @Override
-    public void loadData() {
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (savedInstanceState == null) {
+            cityListFragment = new CityListFragment();
+            searchCitiesFragment = new SearchCitiesFragment();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.add(R.id.fl_cities, cityListFragment);
+            fragmentTransaction.commit();
+        } else {
+            Fragment fragment = getVisibleFragment();
+            if (fragment != null) {
+                if (fragment instanceof CityListFragment) {
+                    cityListFragment = (CityListFragment) fragment;
+                    searchCitiesFragment = new SearchCitiesFragment();
+                } else if (fragment instanceof CityListFragment) {
+                    searchCitiesFragment = (SearchCitiesFragment) fragment;
+                    cityListFragment = new CityListFragment();
+                }
+            }
+        }
+    }
 
-        fragmentTransaction.add(R.id.fl_cities, cityListFragment);
-        fragmentTransaction.commit();
+    @Override
+    public void loadData() {
 
         etCitiesSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    fragmentTransaction = fragmentManager.beginTransaction();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     Bundle bundle = new Bundle();
+
                     bundle.putParcelableArrayList("allCities", cityListFragment.getAllCities());
                     searchCitiesFragment.setArguments(bundle);
                     fragmentTransaction.replace(R.id.fl_cities, searchCitiesFragment);
                     fragmentTransaction.addToBackStack(null);
                     fragmentTransaction.commit();
-
                 }
             }
         });
@@ -92,7 +110,7 @@ public class CitiesActivity extends BaseFragmentActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                EventBus.getDefault().post(new CitiesEvent(s.toString()));
+                EventBus.getDefault().post(new CitiesSearchInputEvent(s.toString()));
             }
 
             @Override
@@ -101,6 +119,16 @@ public class CitiesActivity extends BaseFragmentActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onLocationSuccess(AMapLocation loc) {
+        EventBus.getDefault().post(new CityChangeEvent(loc));
+    }
+
+    @Override
+    public void onLocationFail() {
+        EventBus.getDefault().post(new CityChangeEvent(null));
     }
 
     @Override

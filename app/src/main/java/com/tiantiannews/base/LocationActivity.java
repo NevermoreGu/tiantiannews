@@ -27,10 +27,24 @@ public abstract class LocationActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
     }
 
+
     @Override
-    public void loadData() {
+    public void initVariables() {
+        super.initVariables();
         //初始化定位
         initLocation();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        startLocation();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopLocation();
     }
 
     /**
@@ -59,7 +73,7 @@ public abstract class LocationActivity extends BaseActivity {
     AMapLocationListener locationListener = new AMapLocationListener() {
         @Override
         public void onLocationChanged(AMapLocation loc) {
-            if (null != loc) {
+            if (null != loc && loc.getErrorCode() == 0) {
                 //定位成功,解析定位结果
                 onLocationSuccess(loc);
             } else {

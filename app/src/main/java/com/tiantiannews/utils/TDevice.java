@@ -2,6 +2,7 @@ package com.tiantiannews.utils;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.ClipboardManager;
@@ -767,4 +768,8 @@ public class TDevice {
         return flag;
     }
 
+    public static int getMemorySize(Context context){
+        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        return activityManager.getMemoryClass();
+    }
 }
