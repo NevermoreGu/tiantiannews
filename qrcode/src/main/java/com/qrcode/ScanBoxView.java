@@ -39,7 +39,7 @@ public class ScanBoxView extends View {
      */
     private int mCornerColor;
     /**
-     * 扫描框边角线的长度，默认值为30dp
+     * 扫描框边角线的长度，默认值为20dp
      */
     private int mCornerLength;
     /**
@@ -180,8 +180,8 @@ public class ScanBoxView extends View {
         mMaskColor = Color.parseColor("#33FFFFFF");
 
         mCornerColor = Color.WHITE;
-        mCornerLength = BGAQRCodeUtil.dp2px(context, 30);
-        mCornerSize = BGAQRCodeUtil.dp2px(context, 3);
+        mCornerLength = BGAQRCodeUtil.dp2px(context, 20);
+        mCornerSize = BGAQRCodeUtil.dp2px(context, 6);
 
         mScanLineSize = BGAQRCodeUtil.dp2px(context, 1);
         mScanLineColor = Color.WHITE;

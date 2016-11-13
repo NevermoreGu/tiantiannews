@@ -88,10 +88,7 @@ public abstract class PageListDataModel<T> {
      * @return
      */
     protected boolean isReadCacheData() {
-        if (!TDevice.hasInternet()) {
-            return true; //读取缓存
-        }
-        return false;  //联网请求数据
+        return !TDevice.hasInternet();
     }
 
 //    protected Response.Listener<String> listener = new Response.Listener<String>() {

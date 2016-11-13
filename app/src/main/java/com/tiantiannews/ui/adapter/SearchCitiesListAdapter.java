@@ -38,7 +38,7 @@ public class SearchCitiesListAdapter extends BaseAdapter {
     }
 
     public interface OnSelectCityLogListener {
-        public void selectCityLog(String cityLog);
+        void selectCityLog(String cityLog);
     }
 
     public void setOnSelectCityLogListener(OnSelectCityLogListener listener) {

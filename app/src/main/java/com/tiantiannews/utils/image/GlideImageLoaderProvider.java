@@ -25,20 +25,27 @@ public class GlideImageLoaderProvider implements BaseImageLoaderProvider {
          * 检查 wifi下下载图片是否开启，如果开启检查是否wifi状态下
          */
         boolean flag;
-        if (BaseApplication.CheckWifi) {
-            if (TDevice.isWifiOpen()) {
-                flag = true;
-            } else {
-                flag = false;
-            }
-        } else {
-            flag = true;
-        }
+        flag = isFlag();
         if (flag) {
             loadNormal(ctx, img);
         } else {
             loadCache(ctx, img);
         }
+    }
+
+    private boolean isFlag() {
+        boolean flag;
+        if (BaseApplication.CheckWifi) {
+            flag = TDevice.isWifiOpen();
+        } else {
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public void clearMemoryCache() {
+
     }
 
 

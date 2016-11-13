@@ -25,8 +25,8 @@ public class ScanActivity extends BaseActivity implements QRCodeView.Delegate {
     protected void initAppBar() {
         super.initAppBar();
         appBar.setAppBarTitleAndColor(getString(R.string.scan), R.color.white);
-        appBar.setAppBarLeftDrawable(R.drawable.ie_arrow_normal);
-        ViewUtils.addTouchImageResource(appBar.getAppBarImageLeft(), R.drawable.ie_arrow_press, R.drawable.ie_arrow_normal);
+        appBar.setAppBarLeftDrawable(R.drawable.ic_title_back_white_normal);
+        ViewUtils.addTouchImageResource(appBar.getAppBarImageLeft(), R.drawable.ic_title_back_white_press, R.drawable.ic_title_back_white_normal);
         appBar.setAppBarRightTextAndColor(getString(R.string.select_picture_album_button), R.color.whit_secondary);
         appBar.setOnClickListenerAppBarRight(new View.OnClickListener() {
             @Override

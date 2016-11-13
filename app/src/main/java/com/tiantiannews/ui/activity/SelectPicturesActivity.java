@@ -418,7 +418,7 @@ public class SelectPicturesActivity extends BaseActivity {
 //                            tvToolBarTitle.setText(R.string.select_picture_album_all);
                             mImageAdapter.setShowCamera(mSelectPicturesInfo.isShow_camera());
                         } else {
-                            FolderInfo folderInfo = (FolderInfo) mFolderAdapter.getItem(index);
+                            FolderInfo folderInfo = mFolderAdapter.getItem(index);
                             if (null != folderInfo) {
                                 mImageAdapter.setData(folderInfo.imageInfos);
 //                                tvToolBarTitle.setText(folderInfo.name);

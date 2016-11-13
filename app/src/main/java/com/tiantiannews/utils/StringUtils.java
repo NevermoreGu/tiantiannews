@@ -346,7 +346,7 @@ public class StringUtils {
             String line;
             line = read.readLine();
             while (line != null) {
-                res.append(line + "<br>");
+                res.append(line).append("<br>");
                 line = read.readLine();
             }
         } catch (IOException e) {

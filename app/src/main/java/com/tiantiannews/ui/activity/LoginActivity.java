@@ -17,6 +17,7 @@ import com.tiantiannews.data.bean.request.UserRequest;
 import com.tiantiannews.data.bean.result.UserResult;
 import com.tiantiannews.ui.widget.DeleteEditText;
 import com.tiantiannews.ui.widget.PassVisibleCheckBox;
+import com.tiantiannews.ui.widget.progressbar.CircularLoadingProgressBar;
 import com.tiantiannews.utils.ActivityUtils;
 import com.tiantiannews.utils.StringUtils;
 import com.tiantiannews.utils.ToastUtils;
@@ -49,6 +50,8 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
     TextView tvLoginBlog;
     @BindView(R.id.tv_login_chat)
     TextView tvLoginChat;
+    @BindView(R.id.clp)
+    CircularLoadingProgressBar circularLoadingProgressBar;
 
     @Override
     protected int getLayoutId() {
@@ -112,7 +115,7 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
 
     }
 
-    @OnClick({R.id.tv_login_forget_pass, R.id.btn_login, R.id.tv_login_register, R.id.tv_login_chat, R.id.tv_login_blog, R.id.tv_login_qq})
+    @OnClick({R.id.tv_login_forget_pass, R.id.btn_login, R.id.tv_login_register, R.id.tv_login_chat, R.id.tv_login_blog, R.id.tv_login_qq,R.id.clp})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login_forget_pass:
@@ -157,6 +160,9 @@ public class LoginActivity extends BaseActivity implements TextWatcher {
             case R.id.tv_login_blog:
                 break;
             case R.id.tv_login_qq:
+                break;
+            case R.id.clp:
+                circularLoadingProgressBar.startAnim();
                 break;
         }
     }

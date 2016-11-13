@@ -225,11 +225,7 @@ public class TDevice {
                     .hasSystemFeature("android.hardware.camera.front");
             boolean flag1 = pckMgr.hasSystemFeature("android.hardware.camera");
             boolean flag2;
-            if (flag || flag1) {
-                flag2 = true;
-            } else {
-                flag2 = false;
-            }
+            flag2 = flag || flag1;
             _hasCamera = Boolean.valueOf(flag2);
         }
         return _hasCamera.booleanValue();
@@ -287,11 +283,7 @@ public class TDevice {
 
     public static boolean isLandscape() {
         boolean flag;
-        if (BaseApplication.getInstance().getResources().getConfiguration().orientation == 2) {
-            flag = true;
-        } else {
-            flag = false;
-        }
+        flag = BaseApplication.getInstance().getResources().getConfiguration().orientation == 2;
         return flag;
     }
 
@@ -305,12 +297,8 @@ public class TDevice {
     public static boolean isTablet() {
         if (_isTablet == null) {
             boolean flag;
-            if ((0xf & BaseApplication.getInstance().getResources()
-                    .getConfiguration().screenLayout) >= 3) {
-                flag = true;
-            } else {
-                flag = false;
-            }
+            flag = (0xf & BaseApplication.getInstance().getResources()
+                    .getConfiguration().screenLayout) >= 3;
             _isTablet = Boolean.valueOf(flag);
         }
         return _isTablet.booleanValue();
@@ -357,10 +345,7 @@ public class TDevice {
     public static boolean isZhCN() {
         String lang = BaseApplication.getInstance().getResources()
                 .getConfiguration().locale.getCountry();
-        if (lang.equalsIgnoreCase("CN")) {
-            return true;
-        }
-        return false;
+        return lang.equalsIgnoreCase("CN");
     }
 
     public static String percent(double p1, double p2) {
@@ -728,11 +713,7 @@ public class TDevice {
 
     public static boolean hasStatusBar(Activity activity) {
         WindowManager.LayoutParams attrs = activity.getWindow().getAttributes();
-        if ((attrs.flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) == WindowManager.LayoutParams.FLAG_FULLSCREEN) {
-            return false;
-        } else {
-            return true;
-        }
+        return (attrs.flags & WindowManager.LayoutParams.FLAG_FULLSCREEN) != WindowManager.LayoutParams.FLAG_FULLSCREEN;
     }
 
     /**
@@ -782,11 +763,7 @@ public class TDevice {
 
     public static boolean hasInternet() {
         boolean flag;
-        if (getNetworkType() != 0) {
-            flag = true;
-        } else {
-            flag = false;
-        }
+        flag = getNetworkType() != 0;
         return flag;
     }
 

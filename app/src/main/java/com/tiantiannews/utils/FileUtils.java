@@ -1,6 +1,5 @@
 package com.tiantiannews.utils;
 
-import android.app.Activity;
 import android.content.Context;
 import android.os.Environment;
 import android.os.StatFs;
@@ -322,10 +321,7 @@ public class FileUtils {
     public static boolean checkSaveLocationExists() {
         String sDCardStatus = Environment.getExternalStorageState();
         boolean status;
-        if (sDCardStatus.equals(Environment.MEDIA_MOUNTED)) {
-            status = true;
-        } else
-            status = false;
+        status = sDCardStatus.equals(Environment.MEDIA_MOUNTED);
         return status;
     }
 
@@ -402,7 +398,7 @@ public class FileUtils {
                 try {
                     for (int i = 0; i < listFiles.length; i++) {
                         File deletedFile = new File(newPath.toString() + "/"
-                                + listFiles[i].toString());
+                                + listFiles[i]);
                         deletedFile.delete();
                     }
                     newPath.delete();

@@ -21,44 +21,44 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/offset_56"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="@dimen/offset_8">
 
             <ImageView
-                android:layout_width="@dimen/offset_24"
-                android:layout_height="@dimen/offset_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/image"
                 android:src="@drawable/ic_username_icon" />
 
             <com.tiantiannews.ui.widget.DeleteEditText
                 android:id="@+id/et_login_name"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/offset_48"
+                android:layout_height="match_parent"
                 android:layout_marginLeft="@dimen/offset_8"
                 android:background="@null"
                 android:hint="@string/hint_username"
                 android:textSize="@dimen/font_size_16" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginLeft="@dimen/offset_40"
+                android:background="@color/black_divers" />
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginLeft="@dimen/offset_40"
-            android:background="@color/black_divers" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/offset_56"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="@dimen/offset_8">
 
             <ImageView
-                android:layout_width="@dimen/offset_24"
-                android:layout_height="@dimen/offset_24"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:contentDescription="@string/image"
                 android:src="@drawable/ic_pwd_icon" />
 
@@ -70,7 +70,7 @@
                 <com.tiantiannews.ui.widget.DeleteEditText
                     android:id="@+id/et_login_pass"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/offset_48"
+                    android:layout_height="match_parent"
                     android:layout_marginRight="@dimen/offset_8"
                     android:layout_toLeftOf="@+id/img_pass_visible"
                     android:background="@null"
@@ -190,4 +190,8 @@
             android:textSize="@dimen/font_size_14" />
     </LinearLayout>
 
+    <com.tiantiannews.ui.widget.progressbar.CircularLoadingProgressBar
+        android:id="@+id/clp"
+        android:layout_width="@dimen/offset_48"
+        android:layout_height="@dimen/offset_48" />
 </LinearLayout>

@@ -130,7 +130,7 @@ public class SearchCitiesFragment extends BaseFragment {
             for (City city : allCities) {
                 String name = city.name;
                 if (name.indexOf(content) != -1 || characterParser.getSelling(name).startsWith(
-                        content.toString())) {
+                        content)) {
                     filterCities.add(city);
                 }
             }
