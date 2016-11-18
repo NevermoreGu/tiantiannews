@@ -35,6 +35,7 @@ android {
         debug {
 
             buildConfigField "boolean", "LOG_DEBUG", "true"
+            buildConfigField "boolean", "USE_CANARY", "true"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
@@ -47,7 +48,7 @@ android {
 
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
-
+            buildConfigField "boolean", "USE_CANARY", "false"
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
@@ -85,9 +86,6 @@ android {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
-    dataBinding {
-        enabled = true
-    }
 }
 
 dependencies {
@@ -104,7 +102,7 @@ dependencies {
     compile 'com.android.support:support-annotations:' + SUPPORT_VERSION
     compile 'com.jakewharton:butterknife:8.2.1'
     apt 'com.jakewharton:butterknife-compiler:8.2.1'
-    compile 'de.greenrobot:eventbus:2.4.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
     compile 'io.reactivex:rxjava:1.0.14'
     compile 'io.reactivex:rxandroid:1.0.1'
     compile 'in.srain.cube:ultra-ptr:1.0.11'
@@ -125,6 +123,6 @@ dependencies {
 
     compile 'top.zibin:Luban:1.0.9'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:' + BaseRecyclerViewAdapterHelper_VERSION
-    
+
 }
 

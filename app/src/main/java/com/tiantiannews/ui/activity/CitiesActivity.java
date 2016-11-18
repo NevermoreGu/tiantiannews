@@ -17,8 +17,9 @@ import com.tiantiannews.ui.fragment.CityListFragment;
 import com.tiantiannews.ui.fragment.SearchCitiesFragment;
 import com.tiantiannews.ui.widget.DeleteEditText;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.BindView;
-import de.greenrobot.event.EventBus;
 
 public class CitiesActivity extends LocationActivity {
 

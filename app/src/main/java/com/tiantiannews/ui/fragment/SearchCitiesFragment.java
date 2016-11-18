@@ -5,7 +5,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
-import com.google.common.eventbus.Subscribe;
 import com.tiantiannews.R;
 import com.tiantiannews.base.BaseFragment;
 import com.tiantiannews.data.bean.City;
@@ -17,6 +16,8 @@ import com.tiantiannews.utils.CharacterParser;
 import com.tiantiannews.utils.PinyinComparator;
 import com.tiantiannews.utils.StringUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 import org.litepal.crud.DataSupport;
 
 import java.util.ArrayList;
@@ -24,7 +25,6 @@ import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
-import de.greenrobot.event.EventBus;
 
 public class SearchCitiesFragment extends BaseFragment {
 

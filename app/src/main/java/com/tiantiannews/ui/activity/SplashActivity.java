@@ -23,7 +23,7 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void loadData() {
-        ActivityUtils.openActivity(mContext, CitiesActivity.class);
+        ActivityUtils.openActivity(mContext, LoginActivity.class);
         finish();
     }
 }

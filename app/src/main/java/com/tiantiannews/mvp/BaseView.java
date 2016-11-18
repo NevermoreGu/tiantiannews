@@ -1,4 +1,4 @@
-package com.tiantiannews.base;
+package com.tiantiannews.mvp;
 
 public interface BaseView<T> {
 

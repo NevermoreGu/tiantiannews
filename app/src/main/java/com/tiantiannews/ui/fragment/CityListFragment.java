@@ -16,7 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.google.common.eventbus.Subscribe;
 import com.tiantiannews.R;
 import com.tiantiannews.base.BaseFragment;
 import com.tiantiannews.base.Constants;
@@ -26,12 +25,16 @@ import com.tiantiannews.ui.adapter.CityListAdapter;
 import com.tiantiannews.ui.widget.LetterView;
 import com.tiantiannews.utils.StringUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import de.greenrobot.event.EventBus;
+
 
 public class CityListFragment extends BaseFragment {
 
@@ -60,7 +63,7 @@ public class CityListFragment extends BaseFragment {
 
     @Override
     protected int getLayoutId() {
-        return R.layout.activity_city_list;
+        return R.layout.fragment_city_list;
     }
 
     @Override
@@ -81,7 +84,6 @@ public class CityListFragment extends BaseFragment {
     public void initViews() {
 
     }
-
 
     @Override
     public void loadData() {
@@ -163,7 +165,7 @@ public class CityListFragment extends BaseFragment {
         return allCities;
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN)
     public void onEvent(CityChangeEvent event) {
         if (event != null) {
             event.getCity();

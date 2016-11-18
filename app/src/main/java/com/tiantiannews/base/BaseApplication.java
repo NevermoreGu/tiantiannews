@@ -1,5 +1,6 @@
 package com.tiantiannews.base;
 
+import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.res.Configuration;
@@ -8,22 +9,27 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.squareup.leakcanary.LeakCanary;
 import com.squareup.leakcanary.RefWatcher;
+import com.tiantiannews.BuildConfig;
+import com.tiantiannews.di.component.AppComponent;
+import com.tiantiannews.di.component.DaggerAppComponent;
+import com.tiantiannews.di.module.AppModule;
 
-import org.litepal.LitePalApplication;
+public class BaseApplication extends Application {
 
-public class BaseApplication extends LitePalApplication {
+    private static BaseApplication instance;
 
-    public static BaseApplication instance;
-
-    private RefWatcher refWatcher;
+    private RefWatcher mRefWatcher;
 
     public static boolean CheckWifi;
+
+    AppComponent mAppComponent;
 
     @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
-        refWatcher = LeakCanary.install(this);
+        mAppComponent = DaggerAppComponent.builder().appModule(new AppModule(this)).build();
+
         registerComponentCallbacks(new ComponentCallbacks2() {
             @Override
             public void onTrimMemory(int level) {
@@ -44,15 +50,30 @@ public class BaseApplication extends LitePalApplication {
 
             }
         });
+        installLeakCanary();
     }
+
 
     public static BaseApplication getInstance() {
         return instance;
     }
 
+    /**
+     * leakCanary内存泄露检查
+     */
+    protected void installLeakCanary() {
+        this.mRefWatcher = BuildConfig.USE_CANARY ? LeakCanary.install(this) : RefWatcher.DISABLED;
+    }
+
+    /**
+     * 获得leakCanary观察器
+     *
+     * @param context
+     * @return
+     */
     public static RefWatcher getRefWatcher(Context context) {
         BaseApplication application = (BaseApplication) context.getApplicationContext();
-        return application.refWatcher;
+        return application.mRefWatcher;
     }
 
 }

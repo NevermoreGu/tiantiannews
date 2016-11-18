@@ -12,7 +12,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
 
-public class CircularLoadingProgressBar extends View {
+import com.tiantiannews.ui.widget.dialog.DialogAinm;
+
+public class CircularLoadingProgressBar extends View implements DialogAinm{
 
     private Paint mPaint;
 
@@ -67,20 +69,6 @@ public class CircularLoadingProgressBar extends View {
         mPaint.setStrokeWidth(8);
     }
 
-    public void startAnim() {
-        stopAnim();
-        startViewAnim(0f, 1f, 1000);
-    }
-
-    public void stopAnim() {
-        if (valueAnimator != null) {
-            clearAnimation();
-            valueAnimator.setRepeatCount(0);
-            valueAnimator.cancel();
-            valueAnimator.end();
-        }
-    }
-
     ValueAnimator valueAnimator;
 
     private ValueAnimator startViewAnim(float startF, final float endF, long time) {
@@ -114,4 +102,19 @@ public class CircularLoadingProgressBar extends View {
         return valueAnimator;
     }
 
+    @Override
+    public void startAnim() {
+        stopAnim();
+        startViewAnim(0f, 1f, 1000);
+    }
+
+    @Override
+    public void stopAnim() {
+        if (valueAnimator != null) {
+            clearAnimation();
+            valueAnimator.setRepeatCount(0);
+            valueAnimator.cancel();
+            valueAnimator.end();
+        }
+    }
 }

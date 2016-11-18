@@ -1,7 +1,8 @@
-package com.tiantiannews.base;
+package com.tiantiannews.mvp;
 
 import android.support.annotation.NonNull;
 
+import com.tiantiannews.base.BaseModel;
 
 import java.util.List;
 
