@@ -45,7 +45,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected Activity mContext;
 
-    protected FragmentManager fragmentManager;
+    protected FragmentManager mFragmentManager;
 
     protected void initAppBar() {
         appBar = (AppBar) findViewById(R.id.app_bar);
@@ -69,7 +69,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     @Override
     public void initVariables() {
-        fragmentManager = getSupportFragmentManager();
+        mFragmentManager = getSupportFragmentManager();
     }
 
     @Override

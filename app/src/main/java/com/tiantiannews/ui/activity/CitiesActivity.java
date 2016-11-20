@@ -41,8 +41,8 @@ public class CitiesActivity extends LocationActivity {
         appBar.setOnClickListenerAppBarLeft(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (fragmentManager.getBackStackEntryCount() == 1) {
-                    fragmentManager.popBackStack();
+                if (mFragmentManager.getBackStackEntryCount() == 1) {
+                    mFragmentManager.popBackStack();
                     etCitiesSearch.clearFocus();
                 } else {
                     finish();
@@ -67,7 +67,7 @@ public class CitiesActivity extends LocationActivity {
         if (savedInstanceState == null) {
             cityListFragment = new CityListFragment();
             searchCitiesFragment = new SearchCitiesFragment();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
             fragmentTransaction.add(R.id.fl_cities, cityListFragment);
             fragmentTransaction.commit();
         } else {
@@ -91,7 +91,7 @@ public class CitiesActivity extends LocationActivity {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    FragmentTransaction fragmentTransaction = mFragmentManager.beginTransaction();
                     Bundle bundle = new Bundle();
 
                     bundle.putParcelableArrayList("allCities", cityListFragment.getAllCities());
@@ -135,8 +135,8 @@ public class CitiesActivity extends LocationActivity {
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
-            if (fragmentManager.getBackStackEntryCount() == 1) {
-                fragmentManager.popBackStack();
+            if (mFragmentManager.getBackStackEntryCount() == 1) {
+                mFragmentManager.popBackStack();
                 etCitiesSearch.clearFocus();
                 return true;
             }

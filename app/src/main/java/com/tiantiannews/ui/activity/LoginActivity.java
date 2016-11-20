@@ -1,13 +1,18 @@
 package com.tiantiannews.ui.activity;
 
 import android.os.Bundle;
-import android.support.v4.app.FragmentTransaction;
 
 import com.tiantiannews.R;
 import com.tiantiannews.base.BaseActivity;
+import com.tiantiannews.di.Injection;
+import com.tiantiannews.mvp.presenter.LoginPresenter;
 import com.tiantiannews.ui.fragment.LoginFragment;
+import com.tiantiannews.utils.ActivityUtils;
 
-public class LoginActivity extends BaseActivity{
+public class LoginActivity extends BaseActivity {
+
+    private LoginPresenter mLoginPresenter;
+    private LoginFragment loginFragment;
 
     @Override
     protected int getLayoutId() {
@@ -18,11 +23,12 @@ public class LoginActivity extends BaseActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (savedInstanceState == null) {
-            LoginFragment loginFragment = new LoginFragment();
-            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-            fragmentTransaction.add(R.id.fl_content_login, loginFragment);
-            fragmentTransaction.commit();
+            loginFragment = new LoginFragment();
+            ActivityUtils.addFragmentToActivity(mFragmentManager, loginFragment, R.id.fl_content_login);
         }
+        mLoginPresenter = new LoginPresenter(Injection.provideTasksRepository(getApplicationContext()),
+                loginFragment,
+                Injection.provideSchedulerProvider());
     }
 
     @Override

@@ -13,6 +13,7 @@ import com.tiantiannews.base.BaseFragment;
 import com.tiantiannews.base.BaseModel;
 import com.tiantiannews.data.bean.request.UserRequest;
 import com.tiantiannews.data.bean.result.UserResult;
+import com.tiantiannews.mvp.contract.LoginContract;
 import com.tiantiannews.ui.activity.ForgetPasswordActivity;
 import com.tiantiannews.ui.activity.SelectPicturesActivity;
 import com.tiantiannews.ui.widget.DeleteEditText;
@@ -30,7 +31,7 @@ import butterknife.BindView;
 import butterknife.OnClick;
 import retrofit2.Call;
 
-public class LoginFragment extends BaseFragment implements TextWatcher {
+public class LoginFragment extends BaseFragment implements TextWatcher,LoginContract.View{
 
     @BindView(R.id.et_login_name)
     DeleteEditText etLoginName;
@@ -161,5 +162,40 @@ public class LoginFragment extends BaseFragment implements TextWatcher {
 //                circularLoadingProgressBar.startAnim();
                 break;
         }
+    }
+
+    @Override
+    public boolean isActive() {
+        return false;
+    }
+
+    @Override
+    public void showProgress() {
+
+    }
+
+    @Override
+    public void hideProgress() {
+
+    }
+
+    @Override
+    public void setUsernameError() {
+
+    }
+
+    @Override
+    public void setPasswordError() {
+
+    }
+
+    @Override
+    public void navigateToHome() {
+
+    }
+
+    @Override
+    public void setPresenter(LoginContract.Presenter presenter) {
+
     }
 }
