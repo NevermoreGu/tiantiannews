@@ -9,6 +9,7 @@ import java.io.InterruptedIOException;
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -16,14 +17,19 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 public class RetrofitNet<T> {
 
     private NetBuilder netBuilder;
     private Retrofit retrofit;
-    private OkHttpClient httpClient;
     private static RetrofitNet mInstance;
+    private static final int DEFAULT_TIMEOUT = 10;
 
 //    HttpLoggingInterceptor logging = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
 //        @Override public void log(String message) {
@@ -34,10 +40,16 @@ public class RetrofitNet<T> {
     public RetrofitNet(NetBuilder netBuilder) {
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
-        httpClient = new OkHttpClient.Builder().addInterceptor(logging).build();
+
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
+        builder.
+                connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS).build();
+        OkHttpClient httpClient = builder.build();
+
         retrofit = new Retrofit.Builder()
                 .baseUrl(netBuilder.url)
                 .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .client(httpClient)
                 .build();
         this.netBuilder = netBuilder;
@@ -68,6 +80,53 @@ public class RetrofitNet<T> {
         return retrofit.create(ApiService.class);
     }
 
+    public void addToRequestQueue(Observable<BaseModel<T>> observable) {
+
+        if (netBuilder == null) {
+            return;
+        }
+        final NetCallBack netCallBack = netBuilder.callBack;
+
+        netCallBack.onStart();
+
+        observable.subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<BaseModel<T>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable t) {
+                        netCallBack.onFinish();
+                        String error = "";
+                        if (t instanceof ConnectException) {// 不能在指定的ip和端口上建立连接
+                            error = "";
+                        } else if (t instanceof SocketTimeoutException) {// 读取数据超时
+                            error = "";
+                        } else if (t instanceof UnknownHostException) {
+                            error = "";
+                        } else if (t instanceof InterruptedIOException) {
+                            error = "";
+                        } else if (t instanceof RuntimeException) {
+                            error = "";
+                        } else if (t instanceof IOException) {
+                            error = "未知错误";
+                        }
+                        netCallBack.onErrorResponse(error);
+                    }
+
+                    @Override
+                    public void onNext(BaseModel<T> response) {
+                        netCallBack.onFinish();
+
+                        netCallBack.onResponse(response);
+
+                    }
+                });
+    }
+
     public void addToRequestQueue(Call<BaseModel<T>> call) {
 
         if (netBuilder == null) {
@@ -76,6 +135,7 @@ public class RetrofitNet<T> {
         final NetCallBack netCallBack = netBuilder.callBack;
 
         netCallBack.onStart();
+
 
         call.enqueue(new Callback<BaseModel<T>>() {
             @Override

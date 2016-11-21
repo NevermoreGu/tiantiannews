@@ -6,15 +6,14 @@ import com.tiantiannews.mvp.BaseView;
 public interface LoginContract {
 
     interface View extends BaseView<Presenter> {
+
         boolean isActive();
 
         void showProgress();
 
         void hideProgress();
 
-        void setUsernameError();
-
-        void setPasswordError();
+        void setLoginError();
 
         void navigateToHome();
     }

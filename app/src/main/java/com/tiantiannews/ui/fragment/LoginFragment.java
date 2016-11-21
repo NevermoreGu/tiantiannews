@@ -29,9 +29,9 @@ import com.tiantiannews.utils.net.RetrofitNet;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import retrofit2.Call;
+import rx.Observable;
 
-public class LoginFragment extends BaseFragment implements TextWatcher,LoginContract.View{
+public class LoginFragment extends BaseFragment implements TextWatcher, LoginContract.View {
 
     @BindView(R.id.et_login_name)
     DeleteEditText etLoginName;
@@ -53,6 +53,8 @@ public class LoginFragment extends BaseFragment implements TextWatcher,LoginCont
     TextView tvLoginChat;
     @BindView(R.id.clp)
     CircularLoadingProgressBar circularLoadingProgressBar;
+
+    private LoginContract.Presenter mPresenter;
 
     @Override
     protected int getLayoutId() {
@@ -86,6 +88,18 @@ public class LoginFragment extends BaseFragment implements TextWatcher,LoginCont
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+//        mPresenter.subscribe();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+//        mPresenter.unSubscribe();
+    }
+
+    @Override
     public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
     }
@@ -112,7 +126,7 @@ public class LoginFragment extends BaseFragment implements TextWatcher,LoginCont
 
     }
 
-    @OnClick({R.id.tv_login_forget_pass, R.id.btn_login, R.id.tv_login_register, R.id.tv_login_chat, R.id.tv_login_blog, R.id.tv_login_qq,R.id.clp})
+    @OnClick({R.id.tv_login_forget_pass, R.id.btn_login, R.id.tv_login_register, R.id.tv_login_chat, R.id.tv_login_blog, R.id.tv_login_qq, R.id.clp})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.tv_login_forget_pass:
@@ -142,8 +156,9 @@ public class LoginFragment extends BaseFragment implements TextWatcher,LoginCont
                 }).build();
                 RetrofitNet retrofitNet = new RetrofitNet(netBuilder);
                 UserRequest userRequest = ApiParams.getLoginParams(name, pass);
-                Call userCall = retrofitNet.getService().login(userRequest);
-                retrofitNet.addToRequestQueue(userCall);
+
+                Observable observable = retrofitNet.getService().login(userRequest);
+                retrofitNet.addToRequestQueue(observable);
 
                 break;
 
@@ -166,7 +181,7 @@ public class LoginFragment extends BaseFragment implements TextWatcher,LoginCont
 
     @Override
     public boolean isActive() {
-        return false;
+        return isAdded();
     }
 
     @Override
@@ -180,12 +195,7 @@ public class LoginFragment extends BaseFragment implements TextWatcher,LoginCont
     }
 
     @Override
-    public void setUsernameError() {
-
-    }
-
-    @Override
-    public void setPasswordError() {
+    public void setLoginError() {
 
     }
 
@@ -196,6 +206,6 @@ public class LoginFragment extends BaseFragment implements TextWatcher,LoginCont
 
     @Override
     public void setPresenter(LoginContract.Presenter presenter) {
-
+        mPresenter = presenter;
     }
 }
