@@ -7,8 +7,6 @@ import com.tiantiannews.base.BaseModel;
 import com.tiantiannews.data.source.TasksDataSource;
 import com.tiantiannews.utils.schedulers.BaseSchedulerProvider;
 
-import java.util.List;
-
 import rx.Observable;
 
 
@@ -37,47 +35,12 @@ public class TasksLocalDataSource implements TasksDataSource {
     }
 
     @Override
-    public Observable<List<BaseModel>> getTasks() {
+    public Observable<BaseModel> getTasks(@NonNull String taskId) {
         return null;
     }
 
     @Override
-    public Observable<BaseModel> getTask(@NonNull String taskId) {
-        return null;
-    }
-
-    @Override
-    public void saveTask(@NonNull BaseModel task) {
-
-    }
-
-    @Override
-    public void completeTask(@NonNull BaseModel task) {
-
-    }
-
-    @Override
-    public void completeTask(@NonNull String taskId) {
-
-    }
-
-    @Override
-    public void activateTask(@NonNull BaseModel task) {
-
-    }
-
-    @Override
-    public void activateTask(@NonNull String taskId) {
-
-    }
-
-    @Override
-    public void clearCompletedTasks() {
-
-    }
-
-    @Override
-    public void refreshTasks() {
+    public void saveTasks(@NonNull BaseModel task) {
 
     }
 
