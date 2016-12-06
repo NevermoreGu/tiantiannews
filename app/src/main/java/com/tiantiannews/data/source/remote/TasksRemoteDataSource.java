@@ -9,19 +9,19 @@ import rx.Observable;
 
 public class TasksRemoteDataSource implements TasksDataSource {
 
-//    private static TasksRemoteDataSource INSTANCE;
+    private static TasksRemoteDataSource INSTANCE;
 
     public TasksRemoteDataSource() {}
 
-//    public static TasksRemoteDataSource getInstance() {
-//        if (INSTANCE == null) {
-//            INSTANCE = new TasksRemoteDataSource();
-//        }
-//        return INSTANCE;
-//    }
+    public static TasksRemoteDataSource getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new TasksRemoteDataSource();
+        }
+        return INSTANCE;
+    }
 
     @Override
-    public Observable<BaseModel> getTasks(@NonNull String taskId) {
+    public Observable<BaseModel> getTasks(@NonNull String key) {
         return null;
     }
 
@@ -35,7 +35,7 @@ public class TasksRemoteDataSource implements TasksDataSource {
     }
 
     @Override
-    public void deleteTask(@NonNull String taskId) {
+    public void deleteTask(@NonNull String key) {
 
     }
 }

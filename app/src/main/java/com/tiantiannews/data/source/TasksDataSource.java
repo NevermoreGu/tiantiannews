@@ -8,11 +8,11 @@ import rx.Observable;
 
 public interface TasksDataSource<T> {
 
-    Observable<BaseModel<T>> getTasks(@NonNull String taskId);
+    Observable<BaseModel<T>> getTasks(@NonNull String key);
 
     void saveTasks(@NonNull BaseModel<T> task);
 
     void deleteAllTasks();
 
-    void deleteTask(@NonNull String taskId);
+    void deleteTask(@NonNull String key);
 }

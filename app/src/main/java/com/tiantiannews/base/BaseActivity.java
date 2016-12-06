@@ -22,6 +22,8 @@ import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends AppCompatActivity implements BaseViewInterface {
 
+    protected final String TAG = this.getClass().getSimpleName();
+
     protected AppBar appBar;
 
     protected LayoutInflater mInflater;

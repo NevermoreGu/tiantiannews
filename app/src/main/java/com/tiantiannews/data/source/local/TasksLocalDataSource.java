@@ -35,7 +35,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     }
 
     @Override
-    public Observable<BaseModel> getTasks(@NonNull String taskId) {
+    public Observable<BaseModel> getTasks(@NonNull String key) {
         return null;
     }
 
@@ -50,7 +50,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     }
 
     @Override
-    public void deleteTask(@NonNull String taskId) {
+    public void deleteTask(@NonNull String key) {
 
     }
 }
