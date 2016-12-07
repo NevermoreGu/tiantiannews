@@ -4,8 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.tiantiannews.base.BaseModel;
 
-import java.util.List;
-
 import rx.Observable;
 
 public class TasksRepository implements TasksDataSource {
@@ -17,54 +15,19 @@ public class TasksRepository implements TasksDataSource {
     private final TasksDataSource mTasksLocalDataSource;
 
     public TasksRepository(@NonNull TasksDataSource tasksRemoteDataSource,
-                            @NonNull TasksDataSource tasksLocalDataSource) {
+                           @NonNull TasksDataSource tasksLocalDataSource) {
         mTasksRemoteDataSource = tasksRemoteDataSource;
         mTasksLocalDataSource = tasksLocalDataSource;
     }
 
 
     @Override
-    public Observable<List<BaseModel>> getTasks() {
+    public Observable<BaseModel> getTasks(@NonNull String key) {
         return null;
     }
 
     @Override
-    public Observable<BaseModel> getTask(@NonNull String taskId) {
-        return null;
-    }
-
-    @Override
-    public void saveTask(@NonNull BaseModel task) {
-
-    }
-
-    @Override
-    public void completeTask(@NonNull BaseModel task) {
-
-    }
-
-    @Override
-    public void completeTask(@NonNull String taskId) {
-
-    }
-
-    @Override
-    public void activateTask(@NonNull BaseModel task) {
-
-    }
-
-    @Override
-    public void activateTask(@NonNull String taskId) {
-
-    }
-
-    @Override
-    public void clearCompletedTasks() {
-
-    }
-
-    @Override
-    public void refreshTasks() {
+    public void saveTasks(@NonNull BaseModel task) {
 
     }
 
@@ -74,7 +37,7 @@ public class TasksRepository implements TasksDataSource {
     }
 
     @Override
-    public void deleteTask(@NonNull String taskId) {
+    public void deleteTask(@NonNull String key) {
 
     }
 }
