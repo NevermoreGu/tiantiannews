@@ -89,15 +89,16 @@ public class ClientModule {
     }
 
 
-//    /**
-//     * 提供缓存地址
-//     */
-//
-//    @Singleton
-//    @Provides
-//    File provideCacheFile(Application application) {
+    /**
+     * 提供缓存地址
+     */
+
+    @Singleton
+    @Provides
+    File provideCacheFile(Application application) {
 //        return DataHelper.getCacheFile(application);
-//    }
+        return null;
+    }
 
     /**
      * 提供RXCache客户端
@@ -194,7 +195,7 @@ public class ClientModule {
 
         public Builder baseurl(String baseurl) {//基础url
             if (TextUtils.isEmpty(baseurl)) {
-                throw new IllegalArgumentException("baseurl can not be empty");
+                throw new IllegalArgumentException("base_url can not be empty");
             }
             this.apiUrl = HttpUrl.parse(baseurl);
             return this;

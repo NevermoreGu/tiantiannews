@@ -9,7 +9,7 @@ public abstract class ErrorHandleSubscriber<T> extends Subscriber<T> {
     private ErrorHandlerFactory mHandlerFactory;
 
     public ErrorHandleSubscriber(RxErrorHandler rxErrorHandler){
-        this.mHandlerFactory = rxErrorHandler.getmHandlerFactory();
+        this.mHandlerFactory = rxErrorHandler.getHandlerFactory();
     }
 
     @Override

@@ -9,6 +9,7 @@ import com.rxhandler.handler.listener.ResponseErrorListener;
 public class RxErrorHandler {
 
     public final String TAG = this.getClass().getSimpleName();
+
     private ErrorHandlerFactory mHandlerFactory;
 
     private RxErrorHandler(Builder builder) {
@@ -19,7 +20,7 @@ public class RxErrorHandler {
         return new Builder();
     }
 
-    public ErrorHandlerFactory getmHandlerFactory() {
+    public ErrorHandlerFactory getHandlerFactory() {
         return mHandlerFactory;
     }
 
