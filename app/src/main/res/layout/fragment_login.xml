@@ -2,13 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingLeft="@dimen/offset_16"
+    android:paddingRight="@dimen/offset_16"
+    android:paddingTop="@dimen/offset_16">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/offset_16"
-        android:background="@drawable/bg_white"
+        android:background="@drawable/bg_radius"
         android:elevation="@dimen/offset_2"
         android:orientation="vertical">
 
@@ -34,13 +36,13 @@
                 android:hint="@string/hint_username"
                 android:textSize="@dimen/font_size_16" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1px"
-                android:layout_marginLeft="@dimen/offset_40"
-                android:background="@color/black_divers" />
         </LinearLayout>
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="@dimen/offset_40"
+            android:background="@color/black_divers" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -96,18 +98,15 @@
         android:id="@+id/btn_login"
         android:layout_width="match_parent"
         android:layout_height="@dimen/offset_40"
-        android:layout_marginLeft="@dimen/offset_16"
-        android:layout_marginRight="@dimen/offset_16"
-        android:background="@drawable/bg_white"
+        android:layout_marginTop="@dimen/offset_16"
+        android:background="@drawable/bg_unenable_button"
         android:text="@string/login"
-        android:textColor="@color/gray"
-        android:textSize="@dimen/font_size_18" />
+        android:textColor="@color/white"
+        android:textSize="@dimen/font_size_16" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/offset_16"
-        android:layout_marginRight="@dimen/offset_16"
         android:layout_marginTop="@dimen/offset_16"
         android:text="@string/other_login"
         android:textColor="@color/gray"
@@ -116,10 +115,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/offset_16"
-        android:layout_marginRight="@dimen/offset_16"
         android:layout_marginTop="@dimen/offset_8"
-        android:background="@drawable/bg_white"
+        android:background="@drawable/bg_radius"
         android:elevation="@dimen/offset_2"
         android:orientation="vertical">
 
