@@ -5,20 +5,23 @@ import android.support.annotation.NonNull;
 import com.tiantiannews.base.BaseModel;
 import com.tiantiannews.data.source.TasksDataSource;
 
+import javax.inject.Singleton;
+
 import rx.Observable;
 
+@Singleton
 public class TasksRemoteDataSource implements TasksDataSource {
 
-    private static TasksRemoteDataSource INSTANCE;
+//    private static TasksRemoteDataSource INSTANCE;
 
     public TasksRemoteDataSource() {}
 
-    public static TasksRemoteDataSource getInstance() {
-        if (INSTANCE == null) {
-            INSTANCE = new TasksRemoteDataSource();
-        }
-        return INSTANCE;
-    }
+//    public static TasksRemoteDataSource getInstance() {
+//        if (INSTANCE == null) {
+//            INSTANCE = new TasksRemoteDataSource();
+//        }
+//        return INSTANCE;
+//    }
 
     @Override
     public Observable<BaseModel> getTasks(@NonNull String key) {

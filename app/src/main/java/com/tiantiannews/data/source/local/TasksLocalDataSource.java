@@ -5,17 +5,16 @@ import android.support.annotation.NonNull;
 
 import com.tiantiannews.base.BaseModel;
 import com.tiantiannews.data.source.TasksDataSource;
-import com.tiantiannews.utils.schedulers.BaseSchedulerProvider;
+
+import javax.inject.Singleton;
 
 import rx.Observable;
 
 
+@Singleton
 public class TasksLocalDataSource implements TasksDataSource {
 
-    private static TasksLocalDataSource INSTANCE;
-
-    public TasksLocalDataSource(@NonNull Context context,
-                                 @NonNull BaseSchedulerProvider schedulerProvider) {
+    public TasksLocalDataSource(@NonNull Context context) {
 
 //        TasksDbHelper dbHelper = new TasksDbHelper(context);
 //        SqlBrite sqlBrite = SqlBrite.create();

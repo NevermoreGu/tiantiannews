@@ -4,8 +4,12 @@ import android.support.annotation.NonNull;
 
 import com.tiantiannews.base.BaseModel;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import rx.Observable;
 
+@Singleton
 public class TasksRepository implements TasksDataSource {
 
     private static TasksRepository INSTANCE = null;
@@ -14,6 +18,7 @@ public class TasksRepository implements TasksDataSource {
 
     private final TasksDataSource mTasksLocalDataSource;
 
+    @Inject
     public TasksRepository(@NonNull TasksDataSource tasksRemoteDataSource,
                            @NonNull TasksDataSource tasksLocalDataSource) {
         mTasksRemoteDataSource = tasksRemoteDataSource;
