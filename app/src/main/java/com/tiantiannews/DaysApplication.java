@@ -26,6 +26,10 @@ public class DaysApplication extends BaseApplication {
                 .build();
     }
 
+    public AppComponent getAppComponent() {
+        return mAppComponent;
+    }
+
     @Override
     protected String getBaseUrl() {
         return "http://58.215.50.61:19080/";

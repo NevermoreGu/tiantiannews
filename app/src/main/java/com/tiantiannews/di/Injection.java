@@ -15,7 +15,7 @@ public class Injection {
 
     public static TasksRepository provideTasksRepository(@NonNull Context context) {
         return new TasksRepository(new TasksRemoteDataSource(),
-                new TasksLocalDataSource(context, provideSchedulerProvider()));
+                new TasksLocalDataSource(context));
     }
 
     public static BaseSchedulerProvider provideSchedulerProvider() {

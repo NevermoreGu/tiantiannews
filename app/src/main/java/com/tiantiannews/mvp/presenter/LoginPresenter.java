@@ -4,10 +4,10 @@ import android.support.annotation.NonNull;
 
 import com.tiantiannews.data.source.TasksRepository;
 import com.tiantiannews.mvp.contract.LoginContract;
-import com.tiantiannews.utils.schedulers.BaseSchedulerProvider;
+
+import javax.inject.Inject;
 
 import rx.subscriptions.CompositeSubscription;
-import rx.subscriptions.Subscriptions;
 
 public class LoginPresenter implements LoginContract.Presenter {
 
@@ -15,15 +15,12 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private final LoginContract.View mTasksView;
 
-    private final BaseSchedulerProvider mSchedulerProvider;
-
     private CompositeSubscription mSubscriptions;
 
-    public LoginPresenter(@NonNull TasksRepository tasksRepository, @NonNull LoginContract.View loginView,
-                          @NonNull BaseSchedulerProvider schedulerProvider) {
+    @Inject
+    public LoginPresenter(@NonNull TasksRepository tasksRepository, @NonNull LoginContract.View loginView) {
         mTasksRepository = tasksRepository;
         mTasksView = loginView;
-        mSchedulerProvider = schedulerProvider;
         mSubscriptions = new CompositeSubscription();
         mTasksView.setPresenter(this);
     }

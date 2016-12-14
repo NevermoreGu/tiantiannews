@@ -11,7 +11,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.tiantiannews.DaysApplication;
 import com.tiantiannews.R;
+import com.tiantiannews.di.component.AppComponent;
 import com.tiantiannews.ui.interf.BaseViewInterface;
 import com.tiantiannews.ui.widget.AppBar;
 
@@ -53,6 +55,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         appBar = (AppBar) findViewById(R.id.app_bar);
     }
 
+    protected DaysApplication mApplication;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +65,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             setContentView(getLayoutId());
         }
         ButterKnife.bind(this);
+        mApplication = (DaysApplication)getApplication();
+        setupActivityComponent(mApplication.getAppComponent());
         mContext = this;
         mInflater = getLayoutInflater();
         handlerIntent();
@@ -72,6 +78,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void initVariables() {
         mFragmentManager = getSupportFragmentManager();
+    }
+
+    protected void setupActivityComponent(AppComponent appComponent){
+
     }
 
     @Override
