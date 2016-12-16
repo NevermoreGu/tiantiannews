@@ -66,7 +66,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         }
         ButterKnife.bind(this);
         mApplication = (DaysApplication)getApplication();
-        setupActivityComponent(mApplication.getAppComponent());
+//        setupActivityComponent(mApplication.getAppComponent());
         mContext = this;
         mInflater = getLayoutInflater();
         handlerIntent();
@@ -78,6 +78,10 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
     @Override
     public void initVariables() {
         mFragmentManager = getSupportFragmentManager();
+    }
+
+    protected AppComponent getAppComponent(){
+       return mApplication.getAppComponent();
     }
 
     protected void setupActivityComponent(AppComponent appComponent){

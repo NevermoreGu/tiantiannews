@@ -8,8 +8,8 @@ import com.tiantiannews.ui.activity.LoginActivity;
 import dagger.Component;
 
 @FragmentScoped
-@Component(dependencies = TasksRepositoryComponent.class, modules = LoginPresenterModule.class)
-public interface TasksComponent {
+@Component(dependencies = LoginRepositoryComponent.class, modules = LoginPresenterModule.class)
+public interface LoginComponent {
 	
     void inject(LoginActivity activity);
 }

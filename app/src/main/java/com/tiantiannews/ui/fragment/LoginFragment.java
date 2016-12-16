@@ -84,7 +84,7 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
 
     @Override
     public void loadData() {
-
+        mPresenter.loadTasks(false);
     }
 
     @Override

@@ -2,36 +2,37 @@ package com.tiantiannews.data.source.remote;
 
 import android.support.annotation.NonNull;
 
+import com.tiantiannews.api.ApiParams;
+import com.tiantiannews.api.ApiService;
 import com.tiantiannews.base.BaseModel;
+import com.tiantiannews.data.bean.request.UserRequest;
 import com.tiantiannews.data.source.TasksDataSource;
-
-import javax.inject.Singleton;
+import com.tiantiannews.di.module.RemoteDataSourceManager;
 
 import rx.Observable;
 
-@Singleton
+
 public class TasksRemoteDataSource implements TasksDataSource {
 
-//    private static TasksRemoteDataSource INSTANCE;
+    private RemoteDataSourceManager mRemoteDataSourceManager;
 
-    public TasksRemoteDataSource() {}
-
-//    public static TasksRemoteDataSource getInstance() {
-//        if (INSTANCE == null) {
-//            INSTANCE = new TasksRemoteDataSource();
-//        }
-//        return INSTANCE;
-//    }
+    public TasksRemoteDataSource(RemoteDataSourceManager remoteDataSourceManager) {
+        this.mRemoteDataSourceManager = remoteDataSourceManager;
+    }
 
     @Override
-    public Observable<BaseModel> getTasks(@NonNull String key) {
-        return null;
+    public Observable<BaseModel> getTasks() {
+        ApiService apiService = mRemoteDataSourceManager.getApiService();
+        UserRequest userRequest = ApiParams.getLoginParams("13951894334", "000000");
+        Observable observable = apiService.login(userRequest);
+        return observable;
     }
 
     @Override
     public void saveTasks(@NonNull BaseModel task) {
 
     }
+
     @Override
     public void deleteAllTasks() {
 

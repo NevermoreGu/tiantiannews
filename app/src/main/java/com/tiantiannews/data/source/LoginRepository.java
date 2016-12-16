@@ -5,30 +5,29 @@ import android.support.annotation.NonNull;
 import com.tiantiannews.base.BaseModel;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import rx.Observable;
 
-@Singleton
-public class TasksRepository implements TasksDataSource {
 
-    private static TasksRepository INSTANCE = null;
+public class LoginRepository implements TasksDataSource {
+
+    private static LoginRepository INSTANCE = null;
 
     private final TasksDataSource mTasksRemoteDataSource;
 
     private final TasksDataSource mTasksLocalDataSource;
 
     @Inject
-    public TasksRepository(@NonNull TasksDataSource tasksRemoteDataSource,
-                           @NonNull TasksDataSource tasksLocalDataSource) {
+    public LoginRepository(@Remote TasksDataSource tasksRemoteDataSource,
+                           @Local TasksDataSource tasksLocalDataSource) {
         mTasksRemoteDataSource = tasksRemoteDataSource;
         mTasksLocalDataSource = tasksLocalDataSource;
     }
 
 
     @Override
-    public Observable<BaseModel> getTasks(@NonNull String key) {
-        return null;
+    public Observable<BaseModel> getTasks() {
+        return mTasksRemoteDataSource.getTasks();
     }
 
     @Override

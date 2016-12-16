@@ -1,20 +1,15 @@
 package com.tiantiannews.data.source.local;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.tiantiannews.base.BaseModel;
 import com.tiantiannews.data.source.TasksDataSource;
 
-import javax.inject.Singleton;
-
 import rx.Observable;
 
-
-@Singleton
 public class TasksLocalDataSource implements TasksDataSource {
 
-    public TasksLocalDataSource(@NonNull Context context) {
+    public TasksLocalDataSource() {
 
 //        TasksDbHelper dbHelper = new TasksDbHelper(context);
 //        SqlBrite sqlBrite = SqlBrite.create();
@@ -34,7 +29,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     }
 
     @Override
-    public Observable<BaseModel> getTasks(@NonNull String key) {
+    public Observable<BaseModel> getTasks() {
         return null;
     }
 

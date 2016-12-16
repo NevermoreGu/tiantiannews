@@ -1,34 +1,28 @@
 package com.tiantiannews.di.module;
 
 
-import android.content.Context;
-
 import com.tiantiannews.data.source.Local;
 import com.tiantiannews.data.source.Remote;
 import com.tiantiannews.data.source.TasksDataSource;
 import com.tiantiannews.data.source.local.TasksLocalDataSource;
-
-import javax.inject.Singleton;
+import com.tiantiannews.data.source.remote.TasksRemoteDataSource;
 
 import dagger.Module;
 import dagger.Provides;
 
-
 @Module
-public class TasksRepositoryModule {
+public class LoginRepositoryModule {
 
-    @Singleton
     @Provides
     @Local
-    TasksDataSource provideTasksLocalDataSource(Context context) {
-        return new TasksLocalDataSource(context);
+    TasksDataSource provideTasksLocalDataSource() {
+        return new TasksLocalDataSource();
     }
 
-    @Singleton
     @Provides
     @Remote
-    TasksDataSource provideTasksRemoteDataSource() {
-        return null;
+    TasksDataSource provideTasksRemoteDataSource(RemoteDataSourceManager RemoteDataSourceManager) {
+        return new TasksRemoteDataSource(RemoteDataSourceManager);
     }
 
 }

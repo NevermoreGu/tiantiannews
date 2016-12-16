@@ -8,14 +8,12 @@ import com.network.http.RequestIntercept;
 import com.rxhandler.core.RxErrorHandler;
 import com.rxhandler.handler.listener.ResponseErrorListener;
 
-import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -46,15 +44,22 @@ public class ClientModule {
     }
 
     /**
-     * @param cache     缓存
+     * @param
      * @param intercept 拦截器
      * @description:提供OkhttpClient
      */
+//    @Singleton
+//    @Provides
+//    OkHttpClient provideClient(Cache cache, Interceptor intercept) {
+//        final OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
+//        return configureClient(okHttpClient, cache, intercept);
+//    }
+
     @Singleton
     @Provides
-    OkHttpClient provideClient(Cache cache, Interceptor intercept) {
+    OkHttpClient provideClient(Interceptor intercept) {
         final OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
-        return configureClient(okHttpClient, cache, intercept);
+        return configureClient(okHttpClient,intercept);
     }
 
     /**
@@ -75,11 +80,11 @@ public class ClientModule {
         return mApiUrl;
     }
 
-    @Singleton
-    @Provides
-    Cache provideCache(File cacheFile) {
-        return new Cache(cacheFile, HTTP_RESPONSE_DISK_CACHE_MAX_SIZE);//设置缓存路径和大小
-    }
+//    @Singleton
+//    @Provides
+//    Cache provideCache(File cacheFile) {
+//        return new Cache(cacheFile, HTTP_RESPONSE_DISK_CACHE_MAX_SIZE);//设置缓存路径和大小
+//    }
 
 
     @Singleton
@@ -93,12 +98,12 @@ public class ClientModule {
      * 提供缓存地址
      */
 
-    @Singleton
-    @Provides
-    File provideCacheFile(Application application) {
-//        return DataHelper.getCacheFile(application);
-        return null;
-    }
+//    @Singleton
+//    @Provides
+//    File provideCacheFile(Application application) {
+////        return DataHelper.getCacheFile(application);
+//        return null;
+//    }
 
     /**
      * 提供RXCache客户端
@@ -166,13 +171,36 @@ public class ClientModule {
      * @param okHttpClient
      * @return
      */
-    private OkHttpClient configureClient(OkHttpClient.Builder okHttpClient, Cache cache, Interceptor intercept) {
+//    private OkHttpClient configureClient(OkHttpClient.Builder okHttpClient, Cache cache, Interceptor intercept) {
+//
+//
+//        OkHttpClient.Builder builder = okHttpClient
+//                .connectTimeout(TOME_OUT, TimeUnit.SECONDS)
+//                .readTimeout(TOME_OUT, TimeUnit.SECONDS)
+//                .cache(cache)//设置缓存
+//                .addNetworkInterceptor(intercept);
+//        if (mInterceptors != null && mInterceptors.length > 0) {//如果外部提供了interceptor的数组则遍历添加
+//            for (Interceptor interceptor : mInterceptors) {
+//                builder.addInterceptor(interceptor);
+//            }
+//        }
+//        return builder
+//                .build();
+//    }
+
+    /**
+     * 配置okhttpclient
+     *
+     * @param okHttpClient
+     * @return
+     */
+    private OkHttpClient configureClient(OkHttpClient.Builder okHttpClient,Interceptor intercept) {
 
 
         OkHttpClient.Builder builder = okHttpClient
                 .connectTimeout(TOME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TOME_OUT, TimeUnit.SECONDS)
-                .cache(cache)//设置缓存
+//                .cache(cache)//设置缓存
                 .addNetworkInterceptor(intercept);
         if (mInterceptors != null && mInterceptors.length > 0) {//如果外部提供了interceptor的数组则遍历添加
             for (Interceptor interceptor : mInterceptors) {
