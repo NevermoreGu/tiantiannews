@@ -29,7 +29,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     }
 
     @Override
-    public Observable<BaseModel> getTasks() {
+    public Observable<BaseModel> getTasks(String content) {
         return null;
     }
 

@@ -29,7 +29,6 @@ import com.tiantiannews.utils.net.RetrofitNet;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import rx.Observable;
 
 public class LoginFragment extends BaseFragment implements TextWatcher, LoginContract.View {
 
@@ -157,8 +156,8 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
                 RetrofitNet retrofitNet = new RetrofitNet(netBuilder);
                 UserRequest userRequest = ApiParams.getLoginParams(name, pass);
 
-                Observable observable = retrofitNet.getService().login(userRequest);
-                retrofitNet.addToRequestQueue(observable);
+//                Observable observable = retrofitNet.getService().login(userRequest);
+//                retrofitNet.addToRequestQueue(observable);
 
                 break;
 

@@ -10,9 +10,7 @@ import rx.Observable;
 
 
 public class LoginRepository implements TasksDataSource {
-
-    private static LoginRepository INSTANCE = null;
-
+    
     private final TasksDataSource mTasksRemoteDataSource;
 
     private final TasksDataSource mTasksLocalDataSource;
@@ -26,8 +24,8 @@ public class LoginRepository implements TasksDataSource {
 
 
     @Override
-    public Observable<BaseModel> getTasks() {
-        return mTasksRemoteDataSource.getTasks();
+    public Observable<BaseModel> getTasks(String content) {
+        return mTasksRemoteDataSource.getTasks(content);
     }
 
     @Override

@@ -8,7 +8,7 @@ import rx.Observable;
 
 public interface TasksDataSource<T> {
 
-    Observable<BaseModel<T>> getTasks();
+    Observable<BaseModel<T>> getTasks(String content);
 
     void saveTasks(@NonNull BaseModel<T> task);
 
