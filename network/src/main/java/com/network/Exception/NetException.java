@@ -13,7 +13,7 @@ import java.net.ConnectException;
 import retrofit2.adapter.rxjava.HttpException;
 
 
-public class Exception {
+public class NetException {
 
     private static final int UNAUTHORIZED = 401;
     private static final int FORBIDDEN = 403;

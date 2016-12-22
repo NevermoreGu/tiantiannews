@@ -2,7 +2,6 @@ package com.tiantiannews.utils.net;
 
 import com.tiantiannews.api.ApiService;
 import com.tiantiannews.base.BaseModel;
-import com.tiantiannews.utils.image.ImageLoaderUtil;
 
 import java.io.IOException;
 import java.io.InterruptedIOException;
@@ -66,7 +65,7 @@ public class RetrofitNet<T> {
 //    }
     public static RetrofitNet getInstance(NetBuilder netBuilder) {
         if (mInstance == null) {
-            synchronized (ImageLoaderUtil.class) {
+            synchronized (RetrofitNet.class) {
                 if (mInstance == null) {
                     mInstance = new RetrofitNet(netBuilder);
                     return mInstance;

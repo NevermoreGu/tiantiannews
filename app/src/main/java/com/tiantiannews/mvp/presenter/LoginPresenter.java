@@ -1,12 +1,11 @@
 package com.tiantiannews.mvp.presenter;
 
-import android.support.annotation.NonNull;
-
 import com.google.gson.Gson;
 import com.tiantiannews.api.ApiParams;
 import com.tiantiannews.base.BaseModel;
 import com.tiantiannews.data.bean.request.UserRequest;
 import com.tiantiannews.data.source.LoginRepository;
+import com.tiantiannews.di.scope.ActivityScope;
 import com.tiantiannews.mvp.contract.LoginContract;
 
 import java.io.IOException;
@@ -23,6 +22,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subscriptions.CompositeSubscription;
 
+@ActivityScope
 public class LoginPresenter implements LoginContract.Presenter {
 
     private final LoginRepository mTasksRepository;
@@ -32,7 +32,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     private CompositeSubscription mSubscriptions;
 
     @Inject
-    public LoginPresenter(@NonNull LoginRepository tasksRepository, @NonNull LoginContract.View loginView) {
+    public LoginPresenter(LoginRepository tasksRepository, LoginContract.View loginView) {
         mTasksRepository = tasksRepository;
         mTasksView = loginView;
         mSubscriptions = new CompositeSubscription();

@@ -19,28 +19,28 @@ import timber.log.Timber;
 
 public class RequestIntercept implements Interceptor {
 
-    private HttpHandler mHandler;
+    private HttpHandler mHttpHandler;
 
-    public RequestIntercept(HttpHandler handler) {
-        this.mHandler = handler;
+    public RequestIntercept(HttpHandler httpHandler) {
+        this.mHttpHandler = httpHandler;
     }
 
     @Override
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
-        Buffer requestbuffer = new Buffer();
+        Buffer requestBuffer = new Buffer();
         if (request.body() != null) {
-            request.body().writeTo(requestbuffer);
+            request.body().writeTo(requestBuffer);
         } else {
             Timber.tag("Request").w("request.body() == null");
         }
 
-        if (mHandler != null)//在请求服务器之前可以拿到request,做一些操作比如给request添加header,如果不做操作则返回参数中的request
-            request = mHandler.onHttpRequestBefore(chain,request);
+        if (mHttpHandler != null)//在请求服务器之前可以拿到request,做一些操作比如给request添加header,如果不做操作则返回参数中的request
+            request = mHttpHandler.onHttpRequestBefore(chain,request);
 
         //打印url信息
         Timber.tag("Request").w("Sending Request %s on %n Params --->  %s%n Connection ---> %s%n Headers ---> %s", request.url()
-                , request.body() != null ? requestbuffer.readUtf8() : "null"
+                , request.body() != null ? requestBuffer.readUtf8() : "null"
                 , chain.connection()
                 , request.headers());
 
@@ -88,8 +88,8 @@ public class RequestIntercept implements Interceptor {
 
         Timber.tag("Result").w(JsonUtils.jsonFormat(bodyString));
 
-        if (mHandler != null)//这里可以比客户端提前一步拿到服务器返回的结果,可以做一些操作,比如token超时,重新获取
-           return mHandler.onHttpResultResponse(bodyString,chain,originalResponse);
+        if (mHttpHandler != null)//这里可以比客户端提前一步拿到服务器返回的结果,可以做一些操作,比如token超时,重新获取
+           return mHttpHandler.onHttpResultResponse(bodyString,chain,originalResponse);
 
         return originalResponse;
     }

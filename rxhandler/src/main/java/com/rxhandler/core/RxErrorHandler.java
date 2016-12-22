@@ -26,7 +26,7 @@ public class RxErrorHandler {
 
     public static final class Builder {
         private Context context;
-        private ResponseErrorListener responseErroListener;
+        private ResponseErrorListener responseErrorListener;
         private ErrorHandlerFactory errorHandlerFactory;
 
         private Builder() {
@@ -37,8 +37,8 @@ public class RxErrorHandler {
             return this;
         }
 
-        public Builder responseErroListener(ResponseErrorListener responseErroListener) {
-            this.responseErroListener = responseErroListener;
+        public Builder responseErrorListener(ResponseErrorListener responseErroListener) {
+            this.responseErrorListener = responseErroListener;
             return this;
         }
 
@@ -46,10 +46,10 @@ public class RxErrorHandler {
             if (context == null)
                 throw new IllegalStateException("context is required");
 
-            if (responseErroListener == null)
+            if (responseErrorListener == null)
                 throw new IllegalStateException("responseErroListener is required");
 
-            this.errorHandlerFactory = new ErrorHandlerFactory(context, responseErroListener);
+            this.errorHandlerFactory = new ErrorHandlerFactory(context, responseErrorListener);
 
             return new RxErrorHandler(this);
         }

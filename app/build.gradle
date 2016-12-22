@@ -125,5 +125,7 @@ dependencies {
     provided 'org.glassfish:javax.annotation:10.0-b28'
     apt 'com.google.dagger:dagger-compiler:2.6'
     compile 'com.google.dagger:dagger:2.6'
+
+    compile 'com.facebook.network.connectionclass:connectionclass:1.0.1'
 }
 

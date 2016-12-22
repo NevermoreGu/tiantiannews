@@ -9,8 +9,8 @@ public class ErrorHandlerFactory {
     private Context mContext;
     private ResponseErrorListener mResponseErrorListener;
 
-    public ErrorHandlerFactory(Context mContext, ResponseErrorListener mResponseErroListener) {
-        this.mResponseErrorListener = mResponseErroListener;
+    public ErrorHandlerFactory(Context mContext, ResponseErrorListener mResponseErrorListener) {
+        this.mResponseErrorListener = mResponseErrorListener;
         this.mContext = mContext;
     }
 

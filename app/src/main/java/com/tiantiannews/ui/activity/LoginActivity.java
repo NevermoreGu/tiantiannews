@@ -5,8 +5,6 @@ import android.os.Bundle;
 import com.tiantiannews.R;
 import com.tiantiannews.base.BaseActivity;
 import com.tiantiannews.di.component.DaggerLoginComponent;
-import com.tiantiannews.di.component.DaggerLoginRepositoryComponent;
-import com.tiantiannews.di.component.LoginRepositoryComponent;
 import com.tiantiannews.di.module.LoginPresenterModule;
 import com.tiantiannews.di.module.LoginRepositoryModule;
 import com.tiantiannews.mvp.presenter.LoginPresenter;
@@ -33,15 +31,20 @@ public class LoginActivity extends BaseActivity {
             loginFragment = new LoginFragment();
             ActivityUtils.addFragmentToActivity(mFragmentManager, loginFragment, R.id.fl_content_login);
         }
-        LoginRepositoryComponent daggerLoginRepositoryComponent = DaggerLoginRepositoryComponent.builder()
-                .appComponent(getAppComponent())
-                .loginRepositoryModule(new LoginRepositoryModule())
-                .build();
+//        LoginRepositoryComponent daggerLoginRepositoryComponent = DaggerLoginRepositoryComponent.builder()
+//                .appComponent(getAppComponent())
+//                .loginRepositoryModule(new LoginRepositoryModule())
+//                .build();
 
-        DaggerLoginComponent.builder()
-                .loginRepositoryComponent(daggerLoginRepositoryComponent)
-                .loginPresenterModule(new LoginPresenterModule(loginFragment)).build()
-                .inject(this);
+//        DaggerLoginComponent.builder()
+//                .appComponent(getAppComponent())
+//                .loginPresenterModule(new LoginPresenterModule(loginFragment)).build()
+//                .inject(this);
+
+        DaggerLoginComponent.builder().appComponent(getAppComponent())
+                .loginRepositoryModule(new LoginRepositoryModule())
+                .loginPresenterModule(new LoginPresenterModule(loginFragment))
+                .build().inject(this);
 
     }
 //

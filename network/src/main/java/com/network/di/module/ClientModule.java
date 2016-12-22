@@ -131,7 +131,7 @@ public class ClientModule {
         return RxErrorHandler
                 .builder()
                 .with(application)
-                .responseErroListener(mErrorListener)
+                .responseErrorListener(mErrorListener)
                 .build();
     }
 
@@ -207,8 +207,7 @@ public class ClientModule {
                 builder.addInterceptor(interceptor);
             }
         }
-        return builder
-                .build();
+        return builder.build();
     }
 
 
