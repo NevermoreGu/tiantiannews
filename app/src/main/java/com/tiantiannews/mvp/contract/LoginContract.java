@@ -21,5 +21,7 @@ public interface LoginContract {
     interface Presenter extends BasePresenter {
 
         void loadTasks(boolean forceUpdate);
+
+        void login(String userName,String password);
     }
 }

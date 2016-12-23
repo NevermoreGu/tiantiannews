@@ -1,6 +1,7 @@
 package com.network.di.module;
 
 import android.app.Application;
+import android.os.Environment;
 import android.text.TextUtils;
 
 import com.network.http.HttpHandler;
@@ -8,12 +9,14 @@ import com.network.http.RequestIntercept;
 import com.rxhandler.core.RxErrorHandler;
 import com.rxhandler.handler.listener.ResponseErrorListener;
 
+import java.io.File;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
@@ -48,18 +51,11 @@ public class ClientModule {
      * @param intercept 拦截器
      * @description:提供OkhttpClient
      */
-//    @Singleton
-//    @Provides
-//    OkHttpClient provideClient(Cache cache, Interceptor intercept) {
-//        final OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
-//        return configureClient(okHttpClient, cache, intercept);
-//    }
-
     @Singleton
     @Provides
-    OkHttpClient provideClient(Interceptor intercept) {
+    OkHttpClient provideClient(Cache cache, Interceptor intercept) {
         final OkHttpClient.Builder okHttpClient = new OkHttpClient.Builder();
-        return configureClient(okHttpClient,intercept);
+        return configureClient(okHttpClient, cache, intercept);
     }
 
     /**
@@ -72,6 +68,22 @@ public class ClientModule {
     Retrofit provideRetrofit(OkHttpClient client, HttpUrl httpUrl) {
         final Retrofit.Builder builder = new Retrofit.Builder();
         return configureRetrofit(builder, client, httpUrl);
+    }
+
+    /**
+     * 提供缓存地址
+     */
+
+    @Singleton
+    @Provides
+    File provideCacheFile(Application application) {
+        return new File(Environment.getExternalStorageDirectory() + "/day_day_news/caches");
+    }
+
+    @Singleton
+    @Provides
+    Cache provideCache(File cacheFile) {
+        return new Cache(cacheFile, HTTP_RESPONSE_DISK_CACHE_MAX_SIZE);//设置缓存路径和大小
     }
 
     @Singleton
@@ -92,18 +104,6 @@ public class ClientModule {
     Interceptor provideIntercept() {
         return new RequestIntercept(mHandler);//打印请求信息的拦截器
     }
-
-
-    /**
-     * 提供缓存地址
-     */
-
-//    @Singleton
-//    @Provides
-//    File provideCacheFile(Application application) {
-////        return DataHelper.getCacheFile(application);
-//        return null;
-//    }
 
     /**
      * 提供RXCache客户端
@@ -171,45 +171,22 @@ public class ClientModule {
      * @param okHttpClient
      * @return
      */
-//    private OkHttpClient configureClient(OkHttpClient.Builder okHttpClient, Cache cache, Interceptor intercept) {
-//
-//
-//        OkHttpClient.Builder builder = okHttpClient
-//                .connectTimeout(TOME_OUT, TimeUnit.SECONDS)
-//                .readTimeout(TOME_OUT, TimeUnit.SECONDS)
-//                .cache(cache)//设置缓存
-//                .addNetworkInterceptor(intercept);
-//        if (mInterceptors != null && mInterceptors.length > 0) {//如果外部提供了interceptor的数组则遍历添加
-//            for (Interceptor interceptor : mInterceptors) {
-//                builder.addInterceptor(interceptor);
-//            }
-//        }
-//        return builder
-//                .build();
-//    }
-
-    /**
-     * 配置okhttpclient
-     *
-     * @param okHttpClient
-     * @return
-     */
-    private OkHttpClient configureClient(OkHttpClient.Builder okHttpClient,Interceptor intercept) {
+    private OkHttpClient configureClient(OkHttpClient.Builder okHttpClient, Cache cache, Interceptor intercept) {
 
 
         OkHttpClient.Builder builder = okHttpClient
                 .connectTimeout(TOME_OUT, TimeUnit.SECONDS)
                 .readTimeout(TOME_OUT, TimeUnit.SECONDS)
-//                .cache(cache)//设置缓存
+                .cache(cache)//设置缓存
                 .addNetworkInterceptor(intercept);
         if (mInterceptors != null && mInterceptors.length > 0) {//如果外部提供了interceptor的数组则遍历添加
             for (Interceptor interceptor : mInterceptors) {
                 builder.addInterceptor(interceptor);
             }
         }
-        return builder.build();
+        return builder
+                .build();
     }
-
 
     public static final class Builder {
         private HttpUrl apiUrl = HttpUrl.parse("https://api.github.com/");

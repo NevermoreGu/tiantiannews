@@ -8,7 +8,7 @@ import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
-public class DataSourceUtils<T> {
+public class DataSourceUtils {
 
     private static DataSourceUtils mInstance;
 
@@ -29,8 +29,7 @@ public class DataSourceUtils<T> {
     }
 
 
-
-    public void handlerData(Observable<BaseModel<T>> observable, final NetCallBack netCallBack) {
+    public <T> void handlerData(Observable<BaseModel<T>> observable, final NetCallBack netCallBack) {
         netCallBack.onStart();
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())

@@ -8,24 +8,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.tiantiannews.R;
-import com.tiantiannews.api.ApiParams;
 import com.tiantiannews.base.BaseFragment;
-import com.tiantiannews.base.BaseModel;
-import com.tiantiannews.data.bean.request.UserRequest;
-import com.tiantiannews.data.bean.result.UserResult;
 import com.tiantiannews.mvp.contract.LoginContract;
 import com.tiantiannews.ui.activity.ForgetPasswordActivity;
-import com.tiantiannews.ui.activity.SelectPicturesActivity;
 import com.tiantiannews.ui.widget.DeleteEditText;
 import com.tiantiannews.ui.widget.PassVisibleCheckBox;
 import com.tiantiannews.ui.widget.progressbar.CircularLoadingProgressBar;
 import com.tiantiannews.utils.ActivityUtils;
-import com.tiantiannews.utils.StringUtils;
-import com.tiantiannews.utils.ToastUtils;
 import com.tiantiannews.utils.ViewUtils;
-import com.tiantiannews.utils.net.NetBuilder;
-import com.tiantiannews.utils.net.NetCallBack;
-import com.tiantiannews.utils.net.RetrofitNet;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -132,33 +122,7 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
                 ActivityUtils.openActivity(getActivity(), ForgetPasswordActivity.class);
                 break;
             case R.id.btn_login:
-                String name = etLoginName.getText().toString().trim();
-                String pass = etLoginPass.getText().toString().trim();
-                if (StringUtils.isEmpty(name)) {
-                    return;
-                }
-                if (StringUtils.isEmpty(pass)) {
-                    return;
-                }
-                NetBuilder netBuilder = new NetBuilder.Builder().url("http://58.215.50.61:19080/").callback(new NetCallBack<BaseModel<UserResult>>() {
-
-                    @Override
-                    public void onResponse(BaseModel<UserResult> response) {
-                        ToastUtils.makeLongText(mContext, response.detail.userName);
-                        ActivityUtils.openActivity(mContext, SelectPicturesActivity.class);
-                    }
-
-                    @Override
-                    public void onErrorResponse(String error) {
-                        ToastUtils.makeLongText(mContext, error);
-                    }
-                }).build();
-                RetrofitNet retrofitNet = new RetrofitNet(netBuilder);
-                UserRequest userRequest = ApiParams.getLoginParams(name, pass);
-
-//                Observable observable = retrofitNet.getService().login(userRequest);
-//                retrofitNet.addToRequestQueue(observable);
-
+                mPresenter.login(etLoginName.getText().toString().trim(),etLoginPass.getText().toString().trim());
                 break;
 
             case R.id.tv_login_register:

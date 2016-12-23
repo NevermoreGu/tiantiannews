@@ -15,6 +15,7 @@ import com.squareup.leakcanary.RefWatcher;
 import com.tiantiannews.BuildConfig;
 
 import okhttp3.Interceptor;
+import timber.log.Timber;
 
 public abstract class BaseApplication extends Application {
 
@@ -59,6 +60,9 @@ public abstract class BaseApplication extends Application {
 
             }
         });
+        if (BuildConfig.LOG_DEBUG) {//Timber日志打印
+            Timber.plant(new Timber.DebugTree());
+        }
         installLeakCanary();
     }
 

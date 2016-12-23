@@ -54,9 +54,10 @@ public class LoginPresenter implements LoginContract.Presenter {
         loadTasks(forceUpdate, true);
     }
 
-    private void loadTasks(final boolean forceUpdate, final boolean showLoadingUI) {
+    @Override
+    public void login(String userName, String password) {
         mSubscriptions.clear();
-        UserRequest userRequest = ApiParams.getLoginParams("13951894334", "000000");
+        UserRequest userRequest = ApiParams.getLoginParams(userName, password);
         Gson gson = new Gson();
         String content = gson.toJson(userRequest);
         Observable<BaseModel> observable = mTasksRepository.getTasks(content);
@@ -91,10 +92,13 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     @Override
                     public void onNext(BaseModel response) {
-                        String S ="";
+                        String S = "";
 
                     }
                 });
+    }
+
+    private void loadTasks(final boolean forceUpdate, final boolean showLoadingUI) {
     }
 
 }

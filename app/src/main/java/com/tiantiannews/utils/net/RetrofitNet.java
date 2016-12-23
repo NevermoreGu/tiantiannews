@@ -113,7 +113,7 @@ public class RetrofitNet<T> {
                         } else if (t instanceof IOException) {
                             error = "未知错误";
                         }
-                        netCallBack.onErrorResponse(error);
+//                        netCallBack.onErrorResponse(error);
                     }
 
                     @Override
@@ -145,7 +145,7 @@ public class RetrofitNet<T> {
 
                         netCallBack.onResponse(response.body());
                     } else {
-                        netCallBack.onErrorResponse(response.body().resultNote);
+//                        netCallBack.onErrorResponse(response.body().resultNote);
                     }
 
                 } else {
@@ -171,7 +171,7 @@ public class RetrofitNet<T> {
                 } else if (t instanceof IOException) {
                     error = "未知错误";
                 }
-                netCallBack.onErrorResponse(error);
+//                netCallBack.onErrorResponse(error);
 
             }
 
