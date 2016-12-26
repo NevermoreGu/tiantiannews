@@ -25,23 +25,23 @@ import rx.subscriptions.CompositeSubscription;
 @ActivityScope
 public class LoginPresenter implements LoginContract.Presenter {
 
-    private final LoginRepository mTasksRepository;
+    private final LoginRepository mLoginRepository;
 
-    private final LoginContract.View mTasksView;
+    private final LoginContract.View mLoginView;
 
     private CompositeSubscription mSubscriptions;
 
     @Inject
-    public LoginPresenter(LoginRepository tasksRepository, LoginContract.View loginView) {
-        mTasksRepository = tasksRepository;
-        mTasksView = loginView;
+    public LoginPresenter(LoginRepository loginRepository, LoginContract.View loginView) {
+        mLoginRepository = loginRepository;
+        mLoginView = loginView;
         mSubscriptions = new CompositeSubscription();
-        mTasksView.setPresenter(this);
+        mLoginView.setPresenter(this);
     }
 
     @Override
     public void subscribe() {
-        loadTasks(false);
+
     }
 
     @Override
@@ -51,7 +51,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     @Override
     public void loadTasks(boolean forceUpdate) {
-        loadTasks(forceUpdate, true);
+
     }
 
     @Override
@@ -60,7 +60,7 @@ public class LoginPresenter implements LoginContract.Presenter {
         UserRequest userRequest = ApiParams.getLoginParams(userName, password);
         Gson gson = new Gson();
         String content = gson.toJson(userRequest);
-        Observable<BaseModel> observable = mTasksRepository.getTasks(content);
+        Observable<BaseModel> observable = mLoginRepository.getTasks(content);
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -96,9 +96,6 @@ public class LoginPresenter implements LoginContract.Presenter {
 
                     }
                 });
-    }
-
-    private void loadTasks(final boolean forceUpdate, final boolean showLoadingUI) {
     }
 
 }

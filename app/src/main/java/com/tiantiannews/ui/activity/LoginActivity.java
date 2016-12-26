@@ -31,15 +31,6 @@ public class LoginActivity extends BaseActivity {
             loginFragment = new LoginFragment();
             ActivityUtils.addFragmentToActivity(mFragmentManager, loginFragment, R.id.fl_content_login);
         }
-//        LoginRepositoryComponent daggerLoginRepositoryComponent = DaggerLoginRepositoryComponent.builder()
-//                .appComponent(getAppComponent())
-//                .loginRepositoryModule(new LoginRepositoryModule())
-//                .build();
-
-//        DaggerLoginComponent.builder()
-//                .appComponent(getAppComponent())
-//                .loginPresenterModule(new LoginPresenterModule(loginFragment)).build()
-//                .inject(this);
 
         DaggerLoginComponent.builder().appComponent(getAppComponent())
                 .loginRepositoryModule(new LoginRepositoryModule())
