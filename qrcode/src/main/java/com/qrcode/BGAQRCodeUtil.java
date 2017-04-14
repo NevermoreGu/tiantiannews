@@ -13,7 +13,7 @@ import android.view.Display;
 import android.view.WindowManager;
 
 public class BGAQRCodeUtil {
-
+//SJJJ
     public static Point getScreenResolution(Context context) {
         WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
