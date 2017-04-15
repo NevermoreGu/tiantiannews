@@ -1,5 +1,11 @@
 package com.tiantiannews.ui.fragment;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.Bundle;
+import android.os.IBinder;
+import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -7,18 +13,28 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.base.ui.widget.DeleteEditText;
+import com.base.ui.widget.PassVisibleCheckBox;
+import com.base.ui.widget.progressbar.CircularLoadingProgressBar;
 import com.tiantiannews.R;
+import com.tiantiannews.aidl.IImageAidlInterface;
 import com.tiantiannews.base.BaseFragment;
+import com.tiantiannews.data.bean.SelectPicturesInfo;
 import com.tiantiannews.mvp.contract.LoginContract;
+import com.tiantiannews.service.ImageService;
 import com.tiantiannews.ui.activity.ForgetPasswordActivity;
-import com.tiantiannews.ui.widget.DeleteEditText;
-import com.tiantiannews.ui.widget.PassVisibleCheckBox;
-import com.tiantiannews.ui.widget.progressbar.CircularLoadingProgressBar;
+import com.tiantiannews.ui.activity.SelectPicturesActivity;
+import com.tiantiannews.ui.widget.progressbar.CircularRingPercentageView;
 import com.tiantiannews.utils.ActivityUtils;
 import com.tiantiannews.utils.ViewUtils;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+
+import static android.content.Context.BIND_AUTO_CREATE;
+import static com.tiantiannews.data.bean.SelectPicturesInfo.EXTRA_PARAMETER;
 
 public class LoginFragment extends BaseFragment implements TextWatcher, LoginContract.View {
 
@@ -42,8 +58,13 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
     TextView tvLoginChat;
     @BindView(R.id.clp)
     CircularLoadingProgressBar circularLoadingProgressBar;
+    @BindView(R.id.pb_view)
+    CircularRingPercentageView pbView;
 
     private LoginContract.Presenter mPresenter;
+    private IImageAidlInterface iImageAidlInterface;
+    private boolean canBind = false;
+    private SelectPicturesInfo mSelectPicturesInfo;
 
     @Override
     protected int getLayoutId() {
@@ -52,7 +73,7 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
 
     @Override
     public void initVariables() {
-
+        mSelectPicturesInfo = new SelectPicturesInfo();
     }
 
     @Override
@@ -69,6 +90,9 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
         ViewUtils.addTouchDrawable(tvLoginQQ, R.drawable.ic_login_way_qq_pressed, R.drawable.ic_login_way_qq_normal, 1);
         ViewUtils.addTouchDrawable(tvLoginBlog, R.drawable.ic_login_way_blog_pressed, R.drawable.ic_login_way_blog_normal, 1);
         ViewUtils.addTouchDrawable(tvLoginChat, R.drawable.ic_login_way_wx_pressed, R.drawable.ic_login_way_wx_normal, 1);
+        pbView.setMaxColorNumber(20);
+        pbView.setRoundBackgroundColor(getResources().getColor(R.color.colorPrimary));
+        pbView.setLineWidth(20f);
     }
 
     @Override
@@ -79,6 +103,27 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
     @Override
     public void onResume() {
         super.onResume();
+        if (canBind) {
+            Intent intentService = new Intent(getActivity(), ImageService.class);
+            getActivity().bindService(intentService, new ServiceConnection() {
+                @Override
+                public void onServiceConnected(ComponentName name, IBinder service) {
+                    iImageAidlInterface = IImageAidlInterface.Stub.asInterface(service);
+                    try {
+                        List<String> imageInfo = iImageAidlInterface.getImages();
+                        mSelectPicturesInfo.setImage_list(imageInfo);
+                    } catch (RemoteException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onServiceDisconnected(ComponentName name) {
+
+                }
+            }, BIND_AUTO_CREATE);
+            canBind = false;
+        }
 //        mPresenter.subscribe();
     }
 
@@ -122,7 +167,7 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
                 ActivityUtils.openActivity(getActivity(), ForgetPasswordActivity.class);
                 break;
             case R.id.btn_login:
-                mPresenter.login(etLoginName.getText().toString().trim(),etLoginPass.getText().toString().trim());
+                mPresenter.login(etLoginName.getText().toString().trim(), etLoginPass.getText().toString().trim());
                 break;
 
             case R.id.tv_login_register:
@@ -131,6 +176,13 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
             case R.id.img_pass_visible:
                 break;
             case R.id.tv_login_chat:
+                canBind = true;
+                Intent intentService = new Intent(getActivity(), ImageService.class);
+                getActivity().startService(intentService);
+
+                Bundle bundle = new Bundle();
+                bundle.putSerializable(EXTRA_PARAMETER, mSelectPicturesInfo);
+                ActivityUtils.openActivity(getActivity(), SelectPicturesActivity.class, bundle);
                 break;
             case R.id.tv_login_blog:
                 break;
@@ -170,5 +222,11 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
     @Override
     public void setPresenter(LoginContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+
     }
 }

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/offset_48"
+        android:layout_marginTop="@dimen/offset_16"
+        android:background="@color/white"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/offset_16"
+        android:paddingRight="@dimen/offset_16">
+
+        <TextView
+            android:id="@+id/tv_key"
+            android:layout_width="@dimen/offset_0"
+            android:layout_height="match_parent"
+            android:layout_weight="3"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/font_size_16" />
+
+        <com.base.ui.widget.DeleteEditText
+            android:id="@+id/et_value"
+            android:layout_width="@dimen/offset_0"
+            android:layout_height="match_parent"
+            android:layout_weight="7"
+            android:background="@null"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/font_size_16" />
+    </LinearLayout>
+</LinearLayout>

@@ -3,11 +3,11 @@
               android:layout_height="match_parent"
               android:orientation="vertical">
 
-    <com.tiantiannews.ui.widget.AppBar
+    <com.base.ui.widget.AppBar
         android:id="@+id/navigation"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        android:background="@color/white"></com.tiantiannews.ui.widget.AppBar>
+        android:background="@color/white"></com.base.ui.widget.AppBar>
 
     <View
         android:layout_width="match_parent"

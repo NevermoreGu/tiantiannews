@@ -41,7 +41,7 @@ android {
             signingConfig signingConfigs.release
 
             //移除无用的Resource
-            shrinkResources true
+            shrinkResources false
             //资源文件对齐
             zipAlignEnabled true
         }
@@ -54,7 +54,7 @@ android {
             signingConfig signingConfigs.release
 
             //移除无用的Resource
-            shrinkResources true
+            shrinkResources false
             //资源文件对齐
             zipAlignEnabled true
         }
@@ -90,11 +90,12 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    testCompile 'junit:junit:4.12'
 
     compile project(':qrcode')
     compile project(':network')
     compile project(':utils')
+    compile project(':amaplibrary')
+    compile project(':base')
 
     compile 'com.android.support:appcompat-v7:' + SUPPORT_VERSION
     compile 'com.android.support:support-v13:' + SUPPORT_VERSION
@@ -102,30 +103,26 @@ dependencies {
     compile 'com.android.support:cardview-v7:' + SUPPORT_VERSION
     compile 'com.android.support:recyclerview-v7:' + SUPPORT_VERSION
     compile 'com.android.support:support-annotations:' + SUPPORT_VERSION
-    compile 'com.jakewharton:butterknife:8.2.1'
-    apt 'com.jakewharton:butterknife-compiler:8.2.1'
-    compile 'org.greenrobot:eventbus:3.0.0'
 
-    compile 'in.srain.cube:ultra-ptr:1.0.11'
-    compile 'com.github.bumptech.glide:glide:3.6.1'
-
-
-    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
-    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
-    apt 'com.google.auto.value:auto-value:1.2'
-    compile 'com.google.auto.value:auto-value:1.2'
-    apt 'com.ryanharter.auto.value:auto-value-parcel:0.2.3-rc2'
-    apt 'com.ryanharter.auto.value:auto-value-gson:0.3.2-rc1'
-    compile 'com.squareup.sqlbrite:sqlbrite:0.7.0'
-
-    compile 'top.zibin:Luban:1.0.9'
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:' + BaseRecyclerViewAdapterHelper_VERSION
 
-
-    provided 'org.glassfish:javax.annotation:10.0-b28'
-    apt 'com.google.dagger:dagger-compiler:2.6'
+    compile 'com.jakewharton:butterknife:8.2.1'
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'in.srain.cube:ultra-ptr:1.0.11'
+    compile 'com.github.bumptech.glide:glide:3.6.1'
+    compile 'com.google.auto.value:auto-value:1.2'
+    compile 'com.squareup.sqlbrite:sqlbrite:0.7.0'
     compile 'com.google.dagger:dagger:2.6'
-
     compile 'com.facebook.network.connectionclass:connectionclass:1.0.1'
+    testCompile 'junit:junit:4.12'
+    apt 'com.jakewharton:butterknife-compiler:8.2.1'
+    apt 'com.google.auto.value:auto-value:1.2'
+    apt 'com.ryanharter.auto.value:auto-value-parcel:0.2.3-rc2'
+    apt 'com.ryanharter.auto.value:auto-value-gson:0.3.2-rc1'
+    apt 'com.google.dagger:dagger-compiler:2.6'
+    debugCompile 'com.squareup.leakcanary:leakcanary-android:1.3.1'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.3.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
 }
 

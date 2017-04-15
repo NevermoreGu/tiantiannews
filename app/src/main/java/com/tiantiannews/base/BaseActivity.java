@@ -7,15 +7,16 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.base.ui.interf.BaseViewInterface;
+import com.base.ui.widget.AppBar;
 import com.tiantiannews.DaysApplication;
 import com.tiantiannews.R;
 import com.tiantiannews.di.component.AppComponent;
-import com.tiantiannews.ui.interf.BaseViewInterface;
-import com.tiantiannews.ui.widget.AppBar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,13 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
 
     protected void initAppBar() {
         appBar = (AppBar) findViewById(R.id.app_bar);
+        appBar.setAppBarLeftDefault();
+        appBar.setOnClickListenerAppBarLeft(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
     }
 
     protected DaysApplication mApplication;
@@ -65,7 +73,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
             setContentView(getLayoutId());
         }
         ButterKnife.bind(this);
-        mApplication = (DaysApplication)getApplication();
+        mApplication = (DaysApplication) getApplication();
 //        setupActivityComponent(mApplication.getAppComponent());
         mContext = this;
         mInflater = getLayoutInflater();
@@ -80,11 +88,11 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mFragmentManager = getSupportFragmentManager();
     }
 
-    protected AppComponent getAppComponent(){
-       return mApplication.getAppComponent();
+    protected AppComponent getAppComponent() {
+        return mApplication.getAppComponent();
     }
 
-    protected void setupActivityComponent(AppComponent appComponent){
+    protected void setupActivityComponent(AppComponent appComponent) {
 
     }
 
@@ -113,6 +121,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         if (imageView != null) {
             imageViews.add(imageView);
         }
+
     }
 
     /**
@@ -141,5 +150,17 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
                 return fragment;
         }
         return null;
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            if (mFragmentManager != null && mFragmentManager.getBackStackEntryCount() >= 1) {
+                mFragmentManager.popBackStack();
+                return true;
+            }
+            return super.onKeyDown(keyCode, event);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

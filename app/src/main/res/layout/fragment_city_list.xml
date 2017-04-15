@@ -1,37 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_city_list"
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <FrameLayout
+    <ListView
+        android:id="@+id/lv_city_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:divider="@null"></ListView>
 
-        <ListView
-            android:id="@+id/lv_city_list"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:divider="@null"></ListView>
+    <com.tiantiannews.ui.widget.LetterView
+        android:id="@+id/lv_location_letter"
+        android:layout_width="@dimen/offset_24"
+        android:layout_height="match_parent"
+        android:layout_gravity="right|center"
+        android:background="#00ffffff" />
 
-        <com.tiantiannews.ui.widget.LetterView
-            android:id="@+id/lv_location_letter"
-            android:layout_width="@dimen/offset_24"
-            android:layout_height="match_parent"
-            android:layout_gravity="right|center"
-            android:background="#00ffffff" />
+    <TextView
+        android:id="@+id/tv_location_overlay"
+        android:layout_width="80dip"
+        android:layout_height="80dip"
+        android:layout_gravity="center"
+        android:background="#900A0A0A"
+        android:gravity="center"
+        android:textColor="#FCFCFC"
+        android:textSize="50sp"
+        android:visibility="invisible" />
+</FrameLayout>
 
-        <TextView
-            android:id="@+id/tv_location_overlay"
-            android:layout_width="80dip"
-            android:layout_height="80dip"
-            android:layout_gravity="center"
-            android:background="#900A0A0A"
-            android:gravity="center"
-            android:textColor="#FCFCFC"
-            android:textSize="50sp"
-            android:visibility="invisible" />
-    </FrameLayout>
-</LinearLayout>

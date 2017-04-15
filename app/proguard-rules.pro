@@ -27,3 +27,8 @@
     <init>(java.lang.Throwable);
 }
 #EventBus end
+
+#Bugly start
+-dontwarn com.tencent.bugly.**
+-keep public class com.tencent.bugly.**{*;}
+#Bugly end

@@ -10,9 +10,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.base.ui.interf.BaseViewInterface;
+import com.base.ui.widget.AppBar;
 import com.tiantiannews.R;
-import com.tiantiannews.ui.interf.BaseViewInterface;
-import com.tiantiannews.ui.widget.AppBar;
 
 import java.util.ArrayList;
 import java.util.List;

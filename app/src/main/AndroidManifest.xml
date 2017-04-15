@@ -26,6 +26,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
         android:name=".DaysApplication"
@@ -53,20 +54,39 @@
         <activity android:name=".ui.activity.MainActivity" />
         <activity android:name=".ui.activity.LoginActivity" />
         <activity android:name=".ui.activity.PicturesBrowseActivity" />
-        <activity android:name=".ui.activity.SelectPicturesActivity" />
+        <activity
+            android:name=".ui.activity.SelectPicturesActivity"
+            android:process=":img" />
         <activity android:name=".ui.activity.ForgetPasswordActivity" />
         <activity android:name=".ui.activity.ScanActivity" />
 
         <provider
             android:name=".data.contentprovider.CitiesDBProvider"
-            android:authorities="com.guqian.database.cities" />
+            android:authorities="com.guqian.database.cities"
+            android:exported="false" />
 
         <activity
             android:name=".ui.activity.CitiesActivity"
             android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".ui.activity.TestActivity">
+        <activity android:name=".ui.activity.TestActivity" />
+        <activity android:name=".ui.activity.StudentMessageDetailsActivity" />
+        <activity android:name=".ui.activity.ImageViewActivity" />
 
-        </activity>
+        <receiver android:name=".broadcastreceiver.ActionBootCompletedBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".broadcastreceiver.AlarmNotificationBroadcastReceiver" />
+
+        <activity android:name=".ui.activity.TestProgressActivity" />
+        <activity android:name=".ui.activity.TestStatusBarActivity" />
+
+        <service
+            android:name=".service.ImageService"
+            android:process=":img"
+            android:enabled="true"
+            android:exported="true"></service>
     </application>
 
 </manifest>

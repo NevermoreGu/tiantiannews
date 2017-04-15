@@ -16,13 +16,13 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.base.ui.widget.LetterView;
 import com.tiantiannews.R;
 import com.tiantiannews.base.BaseFragment;
 import com.tiantiannews.base.Constants;
 import com.tiantiannews.data.bean.City;
 import com.tiantiannews.data.event.CityChangeEvent;
 import com.tiantiannews.ui.adapter.CityListAdapter;
-import com.tiantiannews.ui.widget.LetterView;
 import com.tiantiannews.utils.StringUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -53,7 +53,6 @@ public class CityListFragment extends BaseFragment {
     private AsyncQueryHandler asyncQueryHandler;
 
     private MyHandler myHandler;
-    private MyHandler1 myHandler1;
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
@@ -144,7 +143,6 @@ public class CityListFragment extends BaseFragment {
             }
         });
         myHandler = new MyHandler(getActivity());
-        myHandler1 = new MyHandler1();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -154,7 +152,6 @@ public class CityListFragment extends BaseFragment {
                     e.printStackTrace();
                 }
                 myHandler.sendEmptyMessage(0);
-                myHandler1.sendEmptyMessage(0);
             }
         }).start();
 
@@ -200,22 +197,6 @@ public class CityListFragment extends BaseFragment {
                     c.add(city);
                 }
             }
-        }
-    }
-
-    class MyHandler1 extends Handler {
-
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-
-            if (msg.what == 0) {
-
-                List<City> c = new ArrayList<>();
-                City city = new City();
-                c.add(city);
-            }
-
         }
     }
 

@@ -1,6 +1,7 @@
 package com.tiantiannews.ui.activity;
 
 import android.content.Intent;
+import android.os.MemoryFile;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.Toast;
@@ -58,6 +59,7 @@ public class ScanActivity extends BaseActivity implements QRCodeView.Delegate {
         super.onStart();
         mQRCodeView.startCamera();
         mQRCodeView.startSpot();
+
 //        mQRCodeView.startCamera(Camera.CameraInfo.CAMERA_FACING_FRONT);
     }
 

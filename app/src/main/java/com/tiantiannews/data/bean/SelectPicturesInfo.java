@@ -2,6 +2,7 @@ package com.tiantiannews.data.bean;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SelectPicturesInfo implements Serializable {
 
@@ -15,7 +16,7 @@ public class SelectPicturesInfo implements Serializable {
     public static final int TAKE_PICTURE_PREVIEW = 300;
 
     private boolean show_camera = true;        //是否显示相机，默认显示
-    private ArrayList<String> image_list;        //已经选择的图片集
+    private List<String> image_list;        //已经选择的图片集
 
     public boolean isShow_camera() {
         return show_camera;
@@ -25,14 +26,14 @@ public class SelectPicturesInfo implements Serializable {
         this.show_camera = show_camera;
     }
 
-    public ArrayList<String> getImage_list() {
+    public List<String> getImage_list() {
         if (image_list == null) {
-            image_list = new ArrayList<String>();
+            image_list = new ArrayList<>();
         }
         return image_list;
     }
 
-    public void setImage_list(ArrayList<String> image_list) {
+    public void setImage_list(List<String> image_list) {
         this.image_list = image_list;
     }
 

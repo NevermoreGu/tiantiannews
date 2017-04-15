@@ -1,0 +1,54 @@
+<resources>
+    <string name="app_name">base</string>
+
+    <!--登录-->
+    <string name="hint_username">输入账号/邮箱</string>
+    <string name="hint_password">密码</string>
+    <string name="login">登录</string>
+    <string name="other_login">还可以选择以下方式登录</string>
+    <string name="no_account_go_register">没有账号?赶紧注册</string>
+    <string name="image">image</string>
+    <string name="freget_pass_word">忘记密码?</string>
+    <string name="wei_xing_login">微信登录</string>
+    <string name="sina_login">微博登录</string>
+    <string name="qq_login">QQ登录</string>
+
+
+    <!--选择相片-->
+    <string name="select_picture_album_all">相机胶卷</string>
+    <string name="select_picture_album">选择相册</string>
+    <string name="select_picture_album_button">相册</string>
+    <string name="select_picture_cancel">取消</string>
+    <string name="select_picture_back">返回</string>
+    <string name="select_picture_delete">删除</string>
+    <string name="select_picture_take">拍摄照片</string>
+    <string name="select_picture_preview_image">图片预览</string>
+    <string name="select_picture_msg_no_camera">没有系统相机</string>
+    <string name="select_picture_msg_amount_limit">已经达到最高选择数量</string>
+    <string name="select_picture_images_building">处理图片</string>
+    <string name="facebook_app_id">1444817025830662</string>
+
+    <!--找回密码-->
+    <string name="get_pass">找回密码</string>
+    <string name="next_step">下一步</string>
+
+    <!--选择城市-->
+    <string name="select_city">选择城市</string>
+    <!--扫一扫-->
+    <string name="scan">扫一扫</string>
+
+    <string name="loading">正在加载中...</string>
+    <string name="load_failed">加载失败，请点我重试</string>
+    <string name="head_icon">头像</string>
+    <string name="background">背景图</string>
+    <string name="name">姓名</string>
+    <string name="sex">性别</string>
+    <string name="class_name">年级班级</string>
+    <string name="home_adress">家庭住址</string>
+    <string name="father_name">父亲</string>
+    <string name="father_phone">父亲手机</string>
+    <string name="mother_name">母亲</string>
+    <string name="mother_phone">母亲手机</string>
+    <string name="home_mobile">家庭电话</string>
+</resources>
+

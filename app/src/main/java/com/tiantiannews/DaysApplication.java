@@ -2,6 +2,7 @@ package com.tiantiannews;
 
 import com.network.http.HttpHandler;
 import com.rxhandler.handler.listener.ResponseErrorListener;
+import com.tencent.bugly.crashreport.CrashReport;
 import com.tiantiannews.base.BaseApplication;
 import com.tiantiannews.di.component.AppComponent;
 import com.tiantiannews.di.component.DaggerAppComponent;
@@ -24,6 +25,7 @@ public class DaysApplication extends BaseApplication {
                 .remoteDataSourceModule(new RemoteDataSourceModule())
                 .clientModule(getClientModule())
                 .build();
+        CrashReport.initCrashReport(getApplicationContext(), "730d427925", true);
     }
 
     public AppComponent getAppComponent() {

@@ -23,7 +23,12 @@ public class SplashActivity extends BaseActivity {
 
     @Override
     public void loadData() {
-        ActivityUtils.openActivity(mContext, MainActivity.class);
+
+//        Intent intentReceiver = new Intent(mContext, ActionBootCompletedBroadcastReceiver.class);
+//        intentReceiver.setAction(ActionBootCompletedBroadcastReceiver.ACTION_NOTIFICATION);
+//        sendBroadcast(intentReceiver);
+
+        ActivityUtils.openActivity(mContext, LoginActivity.class);
         finish();
     }
 }

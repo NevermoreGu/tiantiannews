@@ -33,22 +33,29 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.tiantiannews.R;
+import com.tiantiannews.aidl.ImageInfo;
 import com.tiantiannews.base.BaseActivity;
 import com.tiantiannews.base.Constants;
 import com.tiantiannews.data.bean.FolderInfo;
-import com.tiantiannews.data.bean.ImageInfo;
 import com.tiantiannews.data.bean.SelectPicturesInfo;
+import com.tiantiannews.service.ImageService;
 import com.tiantiannews.ui.adapter.FolderAdapter;
 import com.tiantiannews.ui.adapter.ImageGridAdapter;
 import com.tiantiannews.utils.ActivityUtils;
 import com.tiantiannews.utils.FileUtils;
 import com.tiantiannews.utils.ToastUtils;
+import com.utils.img.Luban.Luban;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 public class SelectPicturesActivity extends BaseActivity {
 
@@ -56,8 +63,8 @@ public class SelectPicturesActivity extends BaseActivity {
     GridView mGridView;
 
     private SelectPicturesInfo mSelectPicturesInfo = new SelectPicturesInfo();
-    private ArrayList<String> resultList = new ArrayList<>();// 结果数据
-    private ArrayList<FolderInfo> mResultFolder = new ArrayList<>();// 文件夹数据
+    private List<String> resultList = new ArrayList<>();// 结果数据
+    private List<FolderInfo> mResultFolder = new ArrayList<>();// 文件夹数据
 
     // 不同loader定义
     private static final int LOADER_ALL = 0;
@@ -137,15 +144,15 @@ public class SelectPicturesActivity extends BaseActivity {
 //                showPopupFolder(view);
 //            }
 //        });
-//        tvToolBarRight.setOnClickListener(new OnClickListener() {
-//
-//            @Override
-//            public void onClick(View v) {
-//                if (resultList.size() > 0) {
-//                    selectComplate();
-//                }
-//            }
-//        });
+        appBar.setOnClickListenerAppBarRight(new OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (resultList.size() > 0) {
+                    selectComplate();
+                }
+            }
+        });
         mGridView.setOnScrollListener(new AbsListView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(AbsListView absListView, int state) {
@@ -234,7 +241,6 @@ public class SelectPicturesActivity extends BaseActivity {
         bundle.putInt("position", position);
         bundle.putParcelableArrayList("pictures", mImageAdapter.getData());
         ActivityUtils.openActivity(this, PicturesBrowseActivity.class, bundle);
-
     }
 
     @Override
@@ -244,8 +250,35 @@ public class SelectPicturesActivity extends BaseActivity {
         if (requestCode == SelectPicturesInfo.TAKE_PICTURE_FROM_CAMERA) {
             if (resultCode == Activity.RESULT_OK) {
                 if (mTmpFile != null) {
-                    resultList.add(mTmpFile.getPath());
-                    selectComplate();
+                    Luban.get(this)
+                            .setFile(FileUtils.createTmpFile(this, "camera"))
+                            .load(mTmpFile)
+                            .putGear(Luban.THIRD_GEAR)
+                            .asObservable()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnError(new Action1<Throwable>() {
+                                @Override
+                                public void call(Throwable throwable) {
+                                    throwable.printStackTrace();
+                                }
+                            })
+                            .onErrorResumeNext(new Func1<Throwable, Observable<? extends File>>() {
+                                @Override
+                                public Observable<? extends File> call(Throwable throwable) {
+                                    return Observable.empty();
+                                }
+                            })
+                            .subscribe(new Action1<File>() {
+                                @Override
+                                public void call(File file) {
+                                    String path = file.getAbsolutePath();
+                                }
+                            });
+
+
+//                    resultList.add(mTmpFile.getPath());
+//                    selectComplate();
                 }
             } else {
                 if (mTmpFile != null && mTmpFile.exists()) {
@@ -274,13 +307,13 @@ public class SelectPicturesActivity extends BaseActivity {
                 resultList.add(imageInfo.path);
 
             }
-//            if (resultList.size() > 0) {
-//                tvToolBarRight.setText("完成(" + resultList.size() + "/" + Constants.MAXSELECTPICTURES + ")");
+            if (resultList.size() > 0) {
+                appBar.setAppBarRightText("完成(" + resultList.size() + "/" + Constants.MAXSELECTPICTURES + ")");
 //                tvToolBarRight.setBackgroundResource(R.drawable.bg_select_compete);
-//            } else {
-//                tvToolBarRight.setText("完成(0/" + Constants.MAXSELECTPICTURES + ")");
+            } else {
+                appBar.setAppBarRightText("完成(0/" + Constants.MAXSELECTPICTURES + ")");
 //                tvToolBarRight.setBackgroundResource(R.drawable.bg_select_uncompete);
-//            }
+            }
             mImageAdapter.select(imageInfo);
         }
     }
@@ -446,8 +479,13 @@ public class SelectPicturesActivity extends BaseActivity {
     private void selectComplate() {
 
         mSelectPicturesInfo.setImage_list(resultList);
+
         Bundle b = new Bundle();
         b.putSerializable(SelectPicturesInfo.EXTRA_PARAMETER, mSelectPicturesInfo);
+
+        Intent intentService = new Intent(this, ImageService.class);
+        intentService.putExtras(b);
+        startService(intentService);
 
         Intent intent = new Intent();
         intent.putExtras(b);

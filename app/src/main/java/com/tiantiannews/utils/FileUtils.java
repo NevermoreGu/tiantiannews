@@ -42,6 +42,26 @@ public class FileUtils {
 
     }
 
+    public static File createTmpFile(Context context, String fileName) {
+
+        String state = Environment.getExternalStorageState();
+        if (state.equals(Environment.MEDIA_MOUNTED)) {
+            // 已挂载
+            File pic = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA).format(new Date());
+//            String fileName = "multi_image_" + timeStamp + "";
+            File tmpFile = new File(pic, timeStamp + fileName + ".jpg");
+            return tmpFile;
+        } else {
+            File cacheDir = context.getCacheDir();
+            String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss", Locale.CHINA).format(new Date());
+//            String fileName = "multi_image_" + timeStamp + "";
+            File tmpFile = new File(cacheDir, fileName + ".jpg");
+            return tmpFile;
+        }
+
+    }
+
     /**
      * 写文本文件 文件保存在 /data/data/PACKAGE_NAME/files 目录下
      *

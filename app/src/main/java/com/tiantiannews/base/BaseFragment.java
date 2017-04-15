@@ -8,13 +8,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.tiantiannews.ui.interf.BaseViewInterface;
+import com.base.ui.interf.BaseViewInterface;
+import com.base.ui.widget.AppBar;
+import com.tiantiannews.R;
 
 import butterknife.ButterKnife;
 
 public abstract class BaseFragment extends Fragment implements BaseViewInterface {
 
     protected Activity mContext;
+
+    protected View viewRoot;
+
+    protected AppBar appBar;
 
     protected LayoutInflater mInflater;
 
@@ -33,22 +39,33 @@ public abstract class BaseFragment extends Fragment implements BaseViewInterface
     protected void handlerIntent() {
     }
 
+    protected void initAppBar() {
+        appBar = (AppBar) viewRoot.findViewById(R.id.app_bar);
+        appBar.setAppBarLeftDefault();
+        appBar.setOnClickListenerAppBarLeft(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               getActivity().onBackPressed();
+            }
+        });
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mContext = getActivity();
         mInflater = mContext.getLayoutInflater();
-        initVariables();
         handlerIntent();
+        initVariables();
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.bind(this, view);
+        viewRoot  = inflater.inflate(getLayoutId(), container, false);
+        ButterKnife.bind(this, viewRoot);
         initViews();
-        return view;
+        return viewRoot;
     }
 
     @Override

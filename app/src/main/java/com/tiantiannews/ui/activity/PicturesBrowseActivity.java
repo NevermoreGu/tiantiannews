@@ -5,8 +5,8 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
 import com.tiantiannews.R;
+import com.tiantiannews.aidl.ImageInfo;
 import com.tiantiannews.base.BaseActivity;
-import com.tiantiannews.data.bean.ImageInfo;
 
 import java.util.ArrayList;
 
@@ -43,5 +43,6 @@ public class PicturesBrowseActivity extends BaseActivity {
         Bundle bundle = intent.getExtras();
         position = bundle.getInt("position");
         imageInfos = bundle.getParcelableArrayList("pictures");
+
     }
 }

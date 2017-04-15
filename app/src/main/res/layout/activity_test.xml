@@ -1,27 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
     tools:context="com.tiantiannews.ui.activity.TestActivity">
 
-    <EditText
-        android:id="@+id/et"
-        android:gravity="center"
-        android:inputType="numberPassword"
-        android:layout_alignParentBottom="true"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/transparent"
+        app:cardCornerRadius="@dimen/offset_4"
+        app:cardElevation="@dimen/offset_4">
 
-    <EditText
-        android:layout_above="@+id/et"
-        android:gravity="center"
-        android:inputType="numberPassword"
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scaleType="centerCrop"
+            android:src="@drawable/home_nav_bg" />
+    </android.support.v7.widget.CardView>
+
+    <RelativeLayout
+        android:id="@+id/view_need_offset"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <com.base.ui.widget.AppBar
+                android:id="@+id/app_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/app_bar_height"
+                android:background="@color/transparent"
+                android:elevation="@dimen/offset_2"></com.base.ui.widget.AppBar>
+
+        </LinearLayout>
+
+        <SeekBar
+            android:id="@+id/sb_change_alpha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="-64dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp" />
+    </RelativeLayout>
+
 
 </RelativeLayout>

@@ -1,5 +1,7 @@
 package com.tiantiannews.data.bean;
 
+import com.tiantiannews.aidl.ImageInfo;
+
 import java.util.List;
 
 public class FolderInfo {

@@ -7,12 +7,12 @@
     android:orientation="vertical"
     tools:context="com.tiantiannews.ui.activity.CitiesActivity">
 
-    <com.tiantiannews.ui.widget.AppBar
+    <com.base.ui.widget.AppBar
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
         android:background="@color/white"
-        android:elevation="@dimen/offset_2"></com.tiantiannews.ui.widget.AppBar>
+        android:elevation="@dimen/offset_2"></com.base.ui.widget.AppBar>
 
     <View
         android:layout_width="match_parent"

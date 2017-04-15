@@ -10,6 +10,7 @@ import com.tiantiannews.di.module.LoginRepositoryModule;
 import com.tiantiannews.mvp.presenter.LoginPresenter;
 import com.tiantiannews.ui.fragment.LoginFragment;
 import com.tiantiannews.utils.ActivityUtils;
+import com.tiantiannews.utils.TDevice;
 
 import javax.inject.Inject;
 
@@ -32,6 +33,8 @@ public class LoginActivity extends BaseActivity {
             ActivityUtils.addFragmentToActivity(mFragmentManager, loginFragment, R.id.fl_content_login);
         }
 
+        int s = TDevice.dip2pix(mContext,10);
+        int ss = TDevice.dip2px(mContext,10);
         DaggerLoginComponent.builder().appComponent(getAppComponent())
                 .loginRepositoryModule(new LoginRepositoryModule())
                 .loginPresenterModule(new LoginPresenterModule(loginFragment))

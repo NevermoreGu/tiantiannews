@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.tiantiannews.R;
-import com.tiantiannews.data.bean.ImageInfo;
+import com.tiantiannews.aidl.ImageInfo;
 import com.tiantiannews.utils.image.ImageLoader;
 import com.tiantiannews.utils.image.ImageLoaderUtil;
 
@@ -112,7 +112,7 @@ public class ImageGridAdapter extends BaseAdapter {
      *
      * @param resultList
      */
-    public void setSelectedList(ArrayList<String> resultList) {
+    public void setSelectedList(List<String> resultList) {
         for (String path : resultList) {
             ImageInfo imageInfo = getImageByPath(path);
             if (imageInfo != null) {

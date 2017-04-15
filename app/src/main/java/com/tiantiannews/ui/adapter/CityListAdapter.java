@@ -9,10 +9,9 @@ import android.widget.BaseAdapter;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
-
+import com.base.ui.widget.BaseGridView;
 import com.tiantiannews.R;
 import com.tiantiannews.data.bean.City;
-import com.tiantiannews.ui.widget.BaseGridView;
 
 import java.util.ArrayList;
 import java.util.List;

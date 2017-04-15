@@ -4,11 +4,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.tiantiannews.ui.widget.AppBar
+    <com.base.ui.widget.AppBar
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="@dimen/app_bar_height"
-        android:elevation="@dimen/offset_2"></com.tiantiannews.ui.widget.AppBar>
+        android:elevation="@dimen/offset_2"></com.base.ui.widget.AppBar>
 
     <com.tiantiannews.ui.widget.ZXingView
         android:id="@+id/zxingview"

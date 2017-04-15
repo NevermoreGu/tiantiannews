@@ -2,6 +2,8 @@ package com.tiantiannews.base;
 
 public class Constants {
 
+    public static final String ACTION_BOOT_COMPLETED="android.intent.action.BOOT_COMPLETED";
+
     public static final int PAGE_SIZE = 20;// 默认分页大小
     // token数据
     public static String APPTOKEN = "8e523cf73be561731c69ee923ee7d0f0";
@@ -46,4 +48,6 @@ public class Constants {
     public static final String CITIES_CONTENT_ITEM_TYPE = "vnd.android.cursor.item/vnd.database";
     public static final String CITIES_AUTHORITY = "com.guqian.database.cities";
 
+
+    public static final String PICS = "pics";
 }
