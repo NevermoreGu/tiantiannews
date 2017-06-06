@@ -1,11 +1,16 @@
 package com.base.ui.widget.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.text.TextUtils;
+import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.base.R;
 
@@ -64,15 +69,19 @@ public class CircularLoadingDialog extends Dialog {
                                 FrameLayout.LayoutParams.WRAP_CONTENT,
                                 FrameLayout.LayoutParams.WRAP_CONTENT));
             }
+            if (!TextUtils.isEmpty(message)) {
+                ((TextView) layout.findViewById(R.id.tv_loading_dialog_message)).setText(message);
+
+            }
 
             dialog.setCancelable(false);
             dialog.setCanceledOnTouchOutside(true);
             dialog.setContentView(layout);
-//            WindowManager m = ((Activity) context).getWindowManager();
-//            Display d = m.getDefaultDisplay();
-//            android.view.WindowManager.LayoutParams p = dialog.getWindow().getAttributes();
-//            p.width = (int) (d.getWidth() * 0.7);
-//            dialog.getWindow().setAttributes(p);
+            WindowManager m = ((Activity) context).getWindowManager();
+            Display d = m.getDefaultDisplay();
+            android.view.WindowManager.LayoutParams p = dialog.getWindow().getAttributes();
+            p.width = (int) (d.getWidth() * 0.7);
+            dialog.getWindow().setAttributes(p);
             return dialog;
         }
     }

@@ -9,7 +9,6 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.tiantiannews.R;
-import com.tiantiannews.utils.StatusBarUtil;
 
 /**
  * Created by Jaeger on 16/7/12.
@@ -65,7 +64,7 @@ public class ImageViewActivity extends BaseTestActivity {
     @Override
     protected void setStatusBar() {
         mViewNeedOffset = findViewById(R.id.view_need_offset);
-        StatusBarUtil.setTranslucentForImageView(this,50, mViewNeedOffset);
+//        StatusBarUtil.setTranslucentForImageView(this,50, mViewNeedOffset);
     }
 
     @Override

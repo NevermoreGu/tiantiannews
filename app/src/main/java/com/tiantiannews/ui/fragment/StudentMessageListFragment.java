@@ -12,7 +12,7 @@ import com.tiantiannews.base.adapter.recycleview.BaseViewHolder;
 import com.tiantiannews.base.adapter.recycleview.listener.OnItemClickListener;
 import com.tiantiannews.data.bean.Student;
 import com.tiantiannews.ui.activity.StudentMessageDetailsActivity;
-import com.tiantiannews.utils.ActivityUtils;
+import com.utils.ActivityUtils;
 
 import java.util.ArrayList;
 import java.util.List;

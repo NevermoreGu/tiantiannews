@@ -11,22 +11,12 @@ import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
 import android.support.v4.database.DatabaseUtilsCompat;
 
-
-import com.google.gson.Gson;
 import com.tiantiannews.base.Constants;
-import com.tiantiannews.data.bean.Cities;
 import com.tiantiannews.data.bean.CityInfo;
 import com.tiantiannews.data.database.DatabaseHelper;
 import com.tiantiannews.data.database.SearchDB;
-import com.tiantiannews.utils.FileUtils;
-import com.tiantiannews.utils.StringUtils;
-import com.tiantiannews.utils.ToastUtils;
 
 import java.io.IOException;
-import java.util.List;
-
-import rx.Observable;
-import rx.functions.Action1;
 
 public class CitiesDBProvider extends ContentProvider {
 

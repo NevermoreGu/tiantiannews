@@ -25,8 +25,9 @@ import com.tiantiannews.service.ImageService;
 import com.tiantiannews.ui.activity.ForgetPasswordActivity;
 import com.tiantiannews.ui.activity.SelectPicturesActivity;
 import com.tiantiannews.ui.widget.progressbar.CircularRingPercentageView;
-import com.tiantiannews.utils.ActivityUtils;
-import com.tiantiannews.utils.ViewUtils;
+import com.tiantiannews.utils.TestCode;
+import com.utils.ActivityUtils;
+import com.utils.ViewUtils;
 
 import java.util.List;
 
@@ -83,13 +84,13 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
 
         imgPassVisible.setPassVisible(etLoginPass);
 
-        ViewUtils.addTouchColor(btnLogin, R.color.colorPrimaryDark, R.color.colorPrimary);
+        ViewUtils.addTouchColor(btnLogin, R.color.colorPrimaryDark, R.color.colorPrimary, getActivity());
         btnLogin.setEnabled(false);
         btnLogin.setTextScaleX(1.2f);
 
-        ViewUtils.addTouchDrawable(tvLoginQQ, R.drawable.ic_login_way_qq_pressed, R.drawable.ic_login_way_qq_normal, 1);
-        ViewUtils.addTouchDrawable(tvLoginBlog, R.drawable.ic_login_way_blog_pressed, R.drawable.ic_login_way_blog_normal, 1);
-        ViewUtils.addTouchDrawable(tvLoginChat, R.drawable.ic_login_way_wx_pressed, R.drawable.ic_login_way_wx_normal, 1);
+        ViewUtils.addTouchDrawable(tvLoginQQ, R.drawable.ic_login_way_qq_pressed, R.drawable.ic_login_way_qq_normal, 1, getActivity());
+        ViewUtils.addTouchDrawable(tvLoginBlog, R.drawable.ic_login_way_blog_pressed, R.drawable.ic_login_way_blog_normal, 1, getActivity());
+        ViewUtils.addTouchDrawable(tvLoginChat, R.drawable.ic_login_way_wx_pressed, R.drawable.ic_login_way_wx_normal, 1, getActivity());
         pbView.setMaxColorNumber(20);
         pbView.setRoundBackgroundColor(getResources().getColor(R.color.colorPrimary));
         pbView.setLineWidth(20f);
@@ -187,6 +188,7 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
             case R.id.tv_login_blog:
                 break;
             case R.id.tv_login_qq:
+                TestCode.testGetApiFile(getActivity());
                 break;
             case R.id.clp:
 //                circularLoadingProgressBar.startAnim();

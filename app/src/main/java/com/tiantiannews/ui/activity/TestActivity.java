@@ -6,7 +6,6 @@ import android.widget.SeekBar;
 import com.base.ui.widget.AppBar;
 import com.tiantiannews.R;
 import com.tiantiannews.base.BaseActivity;
-import com.tiantiannews.utils.StatusBarUtil;
 
 import butterknife.BindView;
 
@@ -19,7 +18,7 @@ public class TestActivity extends BaseActivity {
     @BindView(R.id.view_need_offset)
     RelativeLayout viewNeedOffset;
 
-    private int mAlpha = StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA;
+//    private int mAlpha = StatusBarUtil.DEFAULT_STATUS_BAR_ALPHA;
 
     @Override
     protected int getLayoutId() {
@@ -59,7 +58,7 @@ public class TestActivity extends BaseActivity {
     @Override
     public void initVariables() {
         super.initVariables();
-        StatusBarUtil.setTranslucentForImageView(TestActivity.this, 0, viewNeedOffset);
+//        StatusBarUtil.setTranslucentForImageView(TestActivity.this, 0, viewNeedOffset);
     }
 
 }

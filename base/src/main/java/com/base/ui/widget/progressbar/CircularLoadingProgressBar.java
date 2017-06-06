@@ -14,12 +14,14 @@ import android.view.animation.LinearInterpolator;
 
 import com.base.ui.widget.dialog.DialogAinm;
 
+import static com.tencent.bugly.crashreport.crash.c.f;
+
 
 public class CircularLoadingProgressBar extends View implements DialogAinm {
 
     private Paint mPaint;
 
-    private float mWidth = 0f;
+    private float mWidth = 120f;
     private float mPadding = 0f;
     private float startAngle = 0f;
     RectF rectF;
@@ -39,12 +41,13 @@ public class CircularLoadingProgressBar extends View implements DialogAinm {
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-
-        if (getMeasuredWidth() > getHeight())
-            mWidth = getMeasuredHeight();
-        else
-            mWidth = getMeasuredWidth();
+        setMeasuredDimension(120,120);
+//        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+//
+//        if (getMeasuredWidth() > getHeight())
+//            mWidth = getMeasuredHeight();
+//        else
+//            mWidth = getMeasuredWidth();
         mPadding = 5;
     }
 

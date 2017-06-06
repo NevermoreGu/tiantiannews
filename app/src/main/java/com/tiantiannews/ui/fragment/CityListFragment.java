@@ -23,7 +23,7 @@ import com.tiantiannews.base.Constants;
 import com.tiantiannews.data.bean.City;
 import com.tiantiannews.data.event.CityChangeEvent;
 import com.tiantiannews.ui.adapter.CityListAdapter;
-import com.tiantiannews.utils.StringUtils;
+import com.utils.StringUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

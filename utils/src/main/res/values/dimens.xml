@@ -1,0 +1,37 @@
+<resources>
+    <!-- font-size-->
+    <dimen name="font_size_24">24sp</dimen>
+    <dimen name="font_size_22">22sp</dimen>
+    <dimen name="font_size_20">20sp</dimen>
+    <dimen name="font_size_18">18sp</dimen>
+    <dimen name="font_size_16">16sp</dimen>
+    <dimen name="font_size_14">14sp</dimen>
+    <dimen name="font_size_12">12sp</dimen>
+
+    <!-- offset-size-->
+    <dimen name="offset_256">256.0dp</dimen>
+    <dimen name="offset_120">120.0dp</dimen>
+    <dimen name="offset_96">96.0dp</dimen>
+    <dimen name="offset_80">80.0dp</dimen>
+    <dimen name="offset_72">72.0dp</dimen>
+    <dimen name="offset_64">64.0dp</dimen>
+    <dimen name="offset_56">56.0dp</dimen>
+    <dimen name="offset_48">48.0dp</dimen>
+    <dimen name="offset_40">40.0dp</dimen>
+    <dimen name="offset_32">32.0dp</dimen>
+    <dimen name="offset_24">24.0dp</dimen>
+    <dimen name="offset_16">16.0dp</dimen>
+    <dimen name="offset_12">12.0dp</dimen>
+    <dimen name="offset_8">8.0dp</dimen>
+    <dimen name="offset_4">4.0dp</dimen>
+    <dimen name="offset_2">2.0dp</dimen>
+    <dimen name="offset_1">1.0dp</dimen>
+    <dimen name="offset_0">0dp</dimen>
+    <dimen name="offset_1_px">1px</dimen>
+
+    <dimen name="app_bar_height">48.0dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
+</resources>

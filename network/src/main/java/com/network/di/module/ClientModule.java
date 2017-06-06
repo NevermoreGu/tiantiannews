@@ -4,6 +4,7 @@ import android.app.Application;
 import android.os.Environment;
 import android.text.TextUtils;
 
+import com.network.BuildConfig;
 import com.network.http.HttpHandler;
 import com.network.http.RequestIntercept;
 import com.rxhandler.core.RxErrorHandler;
@@ -20,6 +21,7 @@ import okhttp3.Cache;
 import okhttp3.HttpUrl;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -173,6 +175,15 @@ public class ClientModule {
      */
     private OkHttpClient configureClient(OkHttpClient.Builder okHttpClient, Cache cache, Interceptor intercept) {
 
+        // log用拦截器
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+
+        // 开发模式记录整个body，否则只记录基本信息如返回200，http协议版本等
+        if (BuildConfig.LOG_DEBUG) {
+            logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        } else {
+            logging.setLevel(HttpLoggingInterceptor.Level.BASIC);
+        }
 
         OkHttpClient.Builder builder = okHttpClient
                 .connectTimeout(TOME_OUT, TimeUnit.SECONDS)

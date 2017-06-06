@@ -5,7 +5,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.tiantiannews.R;
-import com.tiantiannews.utils.StatusBarUtil;
 
 public class TestStatusBarActivity extends AppCompatActivity {
 
@@ -16,6 +15,6 @@ public class TestStatusBarActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test_status_bar);
         mViewNeedOffset = findViewById(R.id.view_need_offset);
-        StatusBarUtil.setTranslucentForImageView(this,0, mViewNeedOffset);
+//        StatusBarUtil.setTranslucentForImageView(this,0, mViewNeedOffset);
     }
 }

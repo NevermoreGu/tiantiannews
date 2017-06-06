@@ -2,9 +2,6 @@ package com.tiantiannews.ui.activity;
 
 import android.support.v7.app.AppCompatActivity;
 
-import com.tiantiannews.R;
-import com.tiantiannews.utils.StatusBarUtil;
-
 /**
  * Created by Jaeger on 16/2/14.
  *
@@ -20,6 +17,6 @@ public class BaseTestActivity extends AppCompatActivity {
     }
 
     protected void setStatusBar() {
-        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
+//        StatusBarUtil.setColor(this, getResources().getColor(R.color.colorPrimary));
     }
 }

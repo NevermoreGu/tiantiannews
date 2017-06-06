@@ -1,7 +1,7 @@
 package com.tiantiannews.utils.net;
 
 
-import com.tiantiannews.utils.StringUtils;
+import android.text.TextUtils;
 
 public class NetBuilder {
 
@@ -32,7 +32,7 @@ public class NetBuilder {
         }
 
         public Builder callback(NetCallBack callBack) {
-            if (StringUtils.isEmpty(url)) {
+            if (TextUtils.isEmpty(url)) {
                 this.url = "";
             }
             this.callBack = callBack;

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.base.ui.widget.AppBar
+        android:id="@+id/app_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/app_bar_height"
+        android:background="@color/white"></com.base.ui.widget.AppBar>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/offset_16"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_person_info_head_icon"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/offset_72"
+                android:background="@drawable/bg_item_select"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingLeft="@dimen/offset_16"
+                android:paddingRight="@dimen/offset_16">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/head_icon"
+                    android:textColor="@color/black_text"
+                    android:textSize="@dimen/font_size_16" />
+
+                <LinearLayout
+                    android:layout_width="@dimen/offset_0"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/offset_16"
+                    android:layout_marginRight="@dimen/offset_16"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical|right">
+
+                    <com.base.ui.widget.CircleImageView
+                        android:id="@+id/c_img_person_info_head_icon"
+                        android:layout_width="@dimen/offset_48"
+                        android:layout_height="@dimen/offset_48"
+                        android:src="@drawable/ic_man" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_arrow_right" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/offset_1_px"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="@dimen/offset_16"
+                android:background="@color/black_divers"></View>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

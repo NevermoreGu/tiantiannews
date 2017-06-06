@@ -7,9 +7,9 @@ import com.amap.api.location.AMapLocation;
 import com.amap.api.location.AMapLocationClient;
 import com.amap.api.location.AMapLocationClientOption;
 import com.amap.api.location.AMapLocationListener;
-import com.tiantiannews.ui.interf.BaseViewInterface;
+import com.amaplibrary.ui.interf.BaseViewInterface;
 
-public abstract class AMapLocationActivity extends AppCompatActivity implements BaseViewInterface {
+abstract class AMapLocationActivity extends AppCompatActivity implements BaseViewInterface {
 
     private AMapLocationClient locationClient = null;
     private AMapLocationClientOption aMapLocationClientOption;

@@ -1,4 +1,4 @@
-package com.tiantiannews.ui.interf;
+package com.amaplibrary.ui.interf;
 
 public interface BaseViewInterface {
 

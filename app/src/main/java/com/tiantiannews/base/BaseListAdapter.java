@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.tiantiannews.R;
 import com.tiantiannews.data.modle.ListPageInfo;
-import com.tiantiannews.utils.StringUtils;
 import com.tiantiannews.utils.image.ImageLoader;
 import com.tiantiannews.utils.image.ImageLoaderUtil;
+import com.utils.StringUtils;
 
 public class BaseListAdapter<T> extends BaseAdapter {
 

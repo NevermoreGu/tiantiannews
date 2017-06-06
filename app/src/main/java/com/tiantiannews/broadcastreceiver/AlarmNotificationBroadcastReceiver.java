@@ -17,7 +17,7 @@ public class AlarmNotificationBroadcastReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         Log.d(getClass().getName(), "notification_up_alarm_sssssssss");
 //        ToastUtils.makeLongText(context,"哈哈哈");
-        int notificationId = 001;
+        int notificationId = 1;
 // Build intent for notification content
         Intent viewIntent = new Intent(context, SplashActivity.class);
         PendingIntent viewPendingIntent =

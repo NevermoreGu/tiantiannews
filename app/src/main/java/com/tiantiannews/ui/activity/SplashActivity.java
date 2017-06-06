@@ -2,7 +2,7 @@ package com.tiantiannews.ui.activity;
 
 import com.tiantiannews.R;
 import com.tiantiannews.base.BaseActivity;
-import com.tiantiannews.utils.ActivityUtils;
+import com.utils.ActivityUtils;
 
 public class SplashActivity extends BaseActivity {
 
@@ -28,7 +28,7 @@ public class SplashActivity extends BaseActivity {
 //        intentReceiver.setAction(ActionBootCompletedBroadcastReceiver.ACTION_NOTIFICATION);
 //        sendBroadcast(intentReceiver);
 
-        ActivityUtils.openActivity(mContext, LoginActivity.class);
+        ActivityUtils.openActivity(mContext, PersonInfoActivity.class);
         finish();
     }
 }

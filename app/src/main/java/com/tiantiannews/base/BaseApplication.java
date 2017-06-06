@@ -1,12 +1,13 @@
 package com.tiantiannews.base;
 
-import android.app.Application;
 import android.content.ComponentCallbacks2;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.support.multidex.MultiDexApplication;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
+import com.facebook.stetho.Stetho;
 import com.network.di.module.ClientModule;
 import com.network.http.HttpHandler;
 import com.rxhandler.handler.listener.ResponseErrorListener;
@@ -17,7 +18,7 @@ import com.tiantiannews.BuildConfig;
 import okhttp3.Interceptor;
 import timber.log.Timber;
 
-public abstract class BaseApplication extends Application {
+public abstract class BaseApplication extends MultiDexApplication {
 
     private static BaseApplication instance;
 
@@ -64,6 +65,7 @@ public abstract class BaseApplication extends Application {
             Timber.plant(new Timber.DebugTree());
         }
         installLeakCanary();
+        installStetho();
     }
 
 
@@ -87,6 +89,12 @@ public abstract class BaseApplication extends Application {
     public static RefWatcher getRefWatcher(Context context) {
         BaseApplication application = (BaseApplication) context.getApplicationContext();
         return application.mRefWatcher;
+    }
+
+    protected void installStetho(){
+        if (BuildConfig.USE_STETHO) {
+            Stetho.initializeWithDefaults(this);
+        }
     }
 
     protected abstract String getBaseUrl();

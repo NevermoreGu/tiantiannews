@@ -1,7 +1,6 @@
 package com.tiantiannews.data.modle;
 
 import com.tiantiannews.base.BaseModel;
-import com.tiantiannews.utils.TDevice;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -88,7 +87,8 @@ public abstract class PageListDataModel<T> {
      * @return
      */
     protected boolean isReadCacheData() {
-        return !TDevice.hasInternet();
+//        return !TDevice.hasInternet();
+        return false;
     }
 
 //    protected Response.Listener<String> listener = new Response.Listener<String>() {

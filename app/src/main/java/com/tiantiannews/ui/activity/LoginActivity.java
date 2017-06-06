@@ -1,6 +1,7 @@
 package com.tiantiannews.ui.activity;
 
 import android.os.Bundle;
+import android.util.Log;
 
 import com.tiantiannews.R;
 import com.tiantiannews.base.BaseActivity;
@@ -9,8 +10,8 @@ import com.tiantiannews.di.module.LoginPresenterModule;
 import com.tiantiannews.di.module.LoginRepositoryModule;
 import com.tiantiannews.mvp.presenter.LoginPresenter;
 import com.tiantiannews.ui.fragment.LoginFragment;
-import com.tiantiannews.utils.ActivityUtils;
-import com.tiantiannews.utils.TDevice;
+import com.utils.ActivityUtils;
+import com.utils.TDevice;
 
 import javax.inject.Inject;
 
@@ -32,9 +33,9 @@ public class LoginActivity extends BaseActivity {
             loginFragment = new LoginFragment();
             ActivityUtils.addFragmentToActivity(mFragmentManager, loginFragment, R.id.fl_content_login);
         }
-
-        int s = TDevice.dip2pix(mContext,10);
-        int ss = TDevice.dip2px(mContext,10);
+        Log.d("loginActivity", "test root is " + ActivityUtils.isRootAvailable());
+        int s = TDevice.dip2pix(mContext, 10);
+        int ss = TDevice.dip2px(mContext, 10);
         DaggerLoginComponent.builder().appComponent(getAppComponent())
                 .loginRepositoryModule(new LoginRepositoryModule())
                 .loginPresenterModule(new LoginPresenterModule(loginFragment))

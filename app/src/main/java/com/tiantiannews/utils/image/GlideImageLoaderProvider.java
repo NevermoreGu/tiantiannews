@@ -11,7 +11,7 @@ import com.bumptech.glide.load.model.stream.StreamModelLoader;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.tiantiannews.base.BaseApplication;
-import com.tiantiannews.utils.TDevice;
+import com.utils.TDevice;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -25,7 +25,7 @@ public class GlideImageLoaderProvider implements BaseImageLoaderProvider {
          * 检查 wifi下下载图片是否开启，如果开启检查是否wifi状态下
          */
         boolean flag;
-        flag = isFlag();
+        flag = isFlag(ctx);
         if (flag) {
             loadNormal(ctx, img);
         } else {
@@ -33,7 +33,7 @@ public class GlideImageLoaderProvider implements BaseImageLoaderProvider {
         }
     }
 
-    private boolean isFlag() {
+    private boolean isFlag(Context ctx) {
         boolean flag;
         if (BaseApplication.CheckWifi) {
             flag = TDevice.isWifiOpen();
@@ -47,7 +47,6 @@ public class GlideImageLoaderProvider implements BaseImageLoaderProvider {
     public void clearMemoryCache() {
 
     }
-
 
     /**
      * load image with Glide

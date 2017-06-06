@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 import com.tiantiannews.R;
 import com.tiantiannews.data.bean.City;
-import com.tiantiannews.utils.StringUtils;
+import com.utils.StringUtils;
 
 import java.util.List;
 

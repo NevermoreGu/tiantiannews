@@ -12,9 +12,9 @@ import com.tiantiannews.data.bean.CityInfo;
 import com.tiantiannews.data.database.SearchDB;
 import com.tiantiannews.data.event.CitiesSearchInputEvent;
 import com.tiantiannews.ui.adapter.SearchCitiesListAdapter;
-import com.tiantiannews.utils.CharacterParser;
 import com.tiantiannews.utils.PinyinComparator;
-import com.tiantiannews.utils.StringUtils;
+import com.utils.CharacterParser;
+import com.utils.StringUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;

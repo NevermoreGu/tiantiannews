@@ -11,6 +11,7 @@ import android.graphics.Shader;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.widget.ProgressBar;
 
 /**
  * Created by hao on 2016/8/11.

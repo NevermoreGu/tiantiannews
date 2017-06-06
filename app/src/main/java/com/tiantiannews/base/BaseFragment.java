@@ -1,9 +1,9 @@
 package com.tiantiannews.base;
 
 import android.app.Activity;
+import android.arch.lifecycle.LifecycleFragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +14,7 @@ import com.tiantiannews.R;
 
 import butterknife.ButterKnife;
 
-public abstract class BaseFragment extends Fragment implements BaseViewInterface {
+public abstract class BaseFragment extends LifecycleFragment implements BaseViewInterface {
 
     protected Activity mContext;
 

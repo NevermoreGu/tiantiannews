@@ -7,6 +7,7 @@ import android.support.v4.view.ViewPager;
 import com.tiantiannews.R;
 import com.tiantiannews.aidl.ImageInfo;
 import com.tiantiannews.base.BaseActivity;
+import com.tiantiannews.ui.adapter.PictureBrowsePagerAdapter;
 
 import java.util.ArrayList;
 
@@ -32,9 +33,7 @@ public class PicturesBrowseActivity extends BaseActivity {
 
     @Override
     public void initViews() {
-//        vpBrowse.setAdapter(new PictureBrowsePagerAdapter(imageInfos, this));
-//        vpBrowse.startAutoScroll(0);
-//        vpBrowse.setCurrentItem(position - 1);
+
     }
 
     @Override
@@ -43,6 +42,8 @@ public class PicturesBrowseActivity extends BaseActivity {
         Bundle bundle = intent.getExtras();
         position = bundle.getInt("position");
         imageInfos = bundle.getParcelableArrayList("pictures");
+        vpBrowse.setAdapter(new PictureBrowsePagerAdapter(imageInfos, this));
+        vpBrowse.setCurrentItem(position - 1);
 
     }
 }
