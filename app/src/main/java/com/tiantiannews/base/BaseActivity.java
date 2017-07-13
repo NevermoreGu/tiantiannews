@@ -88,7 +88,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseView
         mFragmentManager = getSupportFragmentManager();
     }
 
-    protected AppComponent getAppComponent() {
+    public AppComponent getAppComponent() {
         return mApplication.getAppComponent();
     }
 

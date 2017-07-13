@@ -1,5 +1,6 @@
 package com.tiantiannews.mvp.contract;
 
+import com.network.AppExecutors;
 import com.tiantiannews.mvp.BasePresenter;
 import com.tiantiannews.mvp.BaseView;
 
@@ -22,6 +23,6 @@ public interface LoginContract {
 
         void loadTasks(boolean forceUpdate);
 
-        void login(String userName,String password);
+        void login(String userName, String password, AppExecutors executors);
     }
 }

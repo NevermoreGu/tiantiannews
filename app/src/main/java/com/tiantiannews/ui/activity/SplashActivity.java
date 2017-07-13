@@ -28,7 +28,7 @@ public class SplashActivity extends BaseActivity {
 //        intentReceiver.setAction(ActionBootCompletedBroadcastReceiver.ACTION_NOTIFICATION);
 //        sendBroadcast(intentReceiver);
 
-        ActivityUtils.openActivity(mContext, PersonInfoActivity.class);
+        ActivityUtils.openActivity(mContext, LoginActivity.class);
         finish();
     }
 }

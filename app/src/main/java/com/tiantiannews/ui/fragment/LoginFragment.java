@@ -16,8 +16,10 @@ import android.widget.TextView;
 import com.base.ui.widget.DeleteEditText;
 import com.base.ui.widget.PassVisibleCheckBox;
 import com.base.ui.widget.progressbar.CircularLoadingProgressBar;
+import com.network.AppExecutors;
 import com.tiantiannews.R;
 import com.tiantiannews.aidl.IImageAidlInterface;
+import com.tiantiannews.base.BaseActivity;
 import com.tiantiannews.base.BaseFragment;
 import com.tiantiannews.data.bean.SelectPicturesInfo;
 import com.tiantiannews.mvp.contract.LoginContract;
@@ -30,6 +32,8 @@ import com.utils.ActivityUtils;
 import com.utils.ViewUtils;
 
 import java.util.List;
+
+import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -66,6 +70,9 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
     private IImageAidlInterface iImageAidlInterface;
     private boolean canBind = false;
     private SelectPicturesInfo mSelectPicturesInfo;
+
+    @Inject
+    AppExecutors appExecutors;
 
     @Override
     protected int getLayoutId() {
@@ -168,7 +175,7 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
                 ActivityUtils.openActivity(getActivity(), ForgetPasswordActivity.class);
                 break;
             case R.id.btn_login:
-                mPresenter.login(etLoginName.getText().toString().trim(), etLoginPass.getText().toString().trim());
+                mPresenter.login(etLoginName.getText().toString().trim(), etLoginPass.getText().toString().trim(), ((BaseActivity) getActivity()).getAppComponent().getExecutorsModule());
                 break;
 
             case R.id.tv_login_register:
