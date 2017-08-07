@@ -1,15 +1,14 @@
 package com.network;
 
+import android.arch.lifecycle.LiveData;
+import android.arch.lifecycle.MediatorLiveData;
+import android.arch.lifecycle.Observer;
 import android.support.annotation.MainThread;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
 import com.rxhandler.core.RxErrorHandler;
-import com.rxhandler.handler.ErrorHandleSubscriber;
-
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * A generic class that can provide a resource backed by both the sqlite database and the network.
@@ -22,53 +21,80 @@ public abstract class NetworkBoundResource<ResultType> {
     private final RxErrorHandler mRxErrorHandler;
 
     //被观察对象
-    private Observable<ApiResponse<ResultType>> result;
+    private final MediatorLiveData<Resource<ResultType>> result = new MediatorLiveData<>();
 
     @MainThread
-    public NetworkBoundResource(AppExecutors appExecutors,RxErrorHandler rxErrorHandler) {
+    public NetworkBoundResource(AppExecutors appExecutors, RxErrorHandler rxErrorHandler) {
         this.mAppExecutors = appExecutors;
         this.mRxErrorHandler = rxErrorHandler;
-        final Observable<ApiResponse<ResultType>> dbSource = loadFromDb();
-        if (shouldFetch(dbSource)) {
-            fetchFromNetwork(dbSource);
-        } else {
-            result = dbSource;
-        }
+//        result.setValue((Resource<ResultType>) Resource.loading(null));
+        final LiveData<ResultType> dbSource = loadFromDb();
+        fetchFromNetwork(dbSource);
+//        result.addSource(dbSource, new Observer<ResultType>() {
+//            @Override
+//            public void onChanged(@Nullable ResultType newData) {
+//                result.removeSource(dbSource);
+//                if (shouldFetch(newData)) {
+//                    fetchFromNetwork(dbSource);
+//                } else {
+//                    result.addSource(dbSource, new Observer<ResultType>() {
+//                        @Override
+//                        public void onChanged(@Nullable ResultType newData) {
+//                            result.setValue(Resource.success(newData));
+//                        }
+//                    });
+//                }
+//            }
+//        });
     }
 
-    private void fetchFromNetwork(final Observable<ApiResponse<ResultType>> dbSource) {
-        Observable<ApiResponse<ResultType>> apiResponse = createCall();
-        apiResponse
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new ErrorHandleSubscriber<ApiResponse<ResultType>>(mRxErrorHandler) {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onNext(final ApiResponse<ResultType> response) {
-                        if (response.isSuccessful()) {
-                            mAppExecutors.diskIO().execute(new Runnable() {
+    private void fetchFromNetwork(final LiveData<ResultType> dbSource) {
+        final LiveData<ApiResponse<ResultType>> apiResponse = createCall();
+//        result.addSource(dbSource, new Observer<ResultType>() {
+//            @Override
+//            public void onChanged(@Nullable ResultType newData) {
+//                result.setValue(Resource.loading(newData));
+//            }
+//        });
+        result.addSource(apiResponse, new Observer<ApiResponse<ResultType>>() {
+            @Override
+            public void onChanged(@Nullable final ApiResponse<ResultType> response) {
+                result.removeSource(apiResponse);
+//                result.removeSource(dbSource);
+                if (response.isSuccessful()) {
+                    mAppExecutors.diskIO().execute(new Runnable() {
+                        @Override
+                        public void run() {
+                            saveCallResult(processResponse(response));
+                            mAppExecutors.mainThread().execute(new Runnable() {
                                 @Override
                                 public void run() {
-                                    saveCallResult(processResponse(response));
-                                    mAppExecutors.mainThread().execute(new Runnable() {
-                                        @Override
-                                        public void run() {
-////                                    result.addSource(loadFromDb(),
-////                                        newData -> result.setValue(Resource.success(newData)))
-                                        }
-                                    });
+
+//                                    result.addSource(loadFromDb(), new Observer<ResultType>() {
+//                                        @Override
+//                                        public void onChanged(@Nullable ResultType newData) {
+//                                            result.setValue(Resource.success(newData));
+//                                        }
+//                                    });
                                 }
                             });
-                        } else {
-                            onFetchFailed();
-////                    result.addSource(dbSource,
-////                            newData -> result.setValue(Resource.error(response.errorMessage, newData)));
                         }
-                    }
-                });
+                    });
+                } else {
+                    onFetchFailed();
+//                    result.addSource(dbSource, new Observer<ResultType>() {
+//                        @Override
+//                        public void onChanged(@Nullable ResultType newData) {
+//                            result.setValue(Resource.error(response.errorMessage, newData));
+//                        }
+//                    });
+                }
+            }
+        });
+    }
+
+    public LiveData<Resource<ResultType>> asLiveData() {
+        return result;
     }
 
     protected void onFetchFailed() {
@@ -95,7 +121,7 @@ public abstract class NetworkBoundResource<ResultType> {
 
 
     @MainThread
-    protected boolean shouldFetch(@Nullable Observable<ApiResponse<ResultType>> data) {
+    protected boolean shouldFetch(@Nullable ResultType data) {
         return true;
     }
 
@@ -106,7 +132,7 @@ public abstract class NetworkBoundResource<ResultType> {
      */
     @NonNull
     @MainThread
-    protected abstract Observable<ApiResponse<ResultType>> loadFromDb();
+    protected abstract LiveData<ResultType> loadFromDb();
 
     /**
      * 调取api获取数据
@@ -115,5 +141,6 @@ public abstract class NetworkBoundResource<ResultType> {
      */
     @NonNull
     @MainThread
-    protected abstract Observable<ApiResponse<ResultType>> createCall();
+    protected abstract LiveData<ApiResponse<ResultType>> createCall();
+
 }

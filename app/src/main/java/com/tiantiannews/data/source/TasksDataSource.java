@@ -1,14 +1,14 @@
 package com.tiantiannews.data.source;
 
+import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.network.ApiResponse;
-
-import rx.Observable;
+import com.network.Resource;
 
 public interface TasksDataSource<T> {
 
-    Observable<ApiResponse<T>> getTasks(String content);
+    LiveData<Resource<T>> getTasks(String content);
 
     void saveTasks(@NonNull ApiResponse<T> task);
 

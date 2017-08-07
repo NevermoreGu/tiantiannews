@@ -1,16 +1,16 @@
 package com.tiantiannews.data.source;
 
+import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.network.ApiResponse;
 import com.network.AppExecutors;
 import com.network.NetworkBoundResource;
+import com.network.Resource;
 import com.rxhandler.core.RxErrorHandler;
 import com.tiantiannews.data.bean.result.UserResult;
 
 import javax.inject.Inject;
-
-import rx.Observable;
 
 
 public class LoginRepository implements TasksDataSource {
@@ -33,7 +33,7 @@ public class LoginRepository implements TasksDataSource {
 
 
     @Override
-    public Observable<ApiResponse> getTasks(final String content) {
+    public LiveData<Resource<UserResult>> getTasks(final String content) {
         NetworkBoundResource<UserResult> networkBoundResource = new NetworkBoundResource<UserResult>(mAppExecutors, mRxErrorHandler) {
             @Override
             protected void saveCallResult(@NonNull UserResult item) {
@@ -42,17 +42,17 @@ public class LoginRepository implements TasksDataSource {
 
             @NonNull
             @Override
-            protected Observable<ApiResponse<UserResult>> loadFromDb() {
+            protected LiveData<UserResult> loadFromDb() {
                 return null;
             }
 
             @NonNull
             @Override
-            protected Observable<ApiResponse<UserResult>> createCall() {
+            protected LiveData<ApiResponse<UserResult>> createCall() {
                 return mTasksRemoteDataSource.getTasks(content);
             }
         };
-        return mTasksRemoteDataSource.getTasks(content);
+        return networkBoundResource.asLiveData();
     }
 
     @Override

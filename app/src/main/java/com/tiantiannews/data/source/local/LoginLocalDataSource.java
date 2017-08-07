@@ -1,11 +1,12 @@
 package com.tiantiannews.data.source.local;
 
+import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.network.ApiResponse;
+import com.network.Resource;
+import com.tiantiannews.data.bean.result.UserResult;
 import com.tiantiannews.data.source.TasksDataSource;
-
-import rx.Observable;
 
 public class LoginLocalDataSource implements TasksDataSource {
 
@@ -29,7 +30,7 @@ public class LoginLocalDataSource implements TasksDataSource {
     }
 
     @Override
-    public Observable<ApiResponse> getTasks(String content) {
+    public LiveData<Resource<UserResult>> getTasks(String content) {
         return null;
     }
 

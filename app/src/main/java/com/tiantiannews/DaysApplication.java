@@ -36,7 +36,7 @@ public class DaysApplication extends BaseApplication {
 
     @Override
     protected String getBaseUrl() {
-        return "http://test61.cpsdna.net/";
+        return "https://test.cpsdna.com/";
     }
 
     @Override

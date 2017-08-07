@@ -1,5 +1,6 @@
 package com.tiantiannews.data.source.remote;
 
+import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
 
 import com.network.ApiResponse;
@@ -9,7 +10,6 @@ import com.tiantiannews.di.module.RemoteDataSourceManager;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
-import rx.Observable;
 
 public class LoginRemoteDataSource implements TasksDataSource {
 
@@ -20,10 +20,10 @@ public class LoginRemoteDataSource implements TasksDataSource {
     }
 
     @Override
-    public Observable<ApiResponse> getTasks(String content) {
+    public LiveData<ApiResponse> getTasks(String content) {
         ApiService apiService = mRemoteDataSourceManager.getApiService();
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"),content);
-        Observable observable = apiService.login(requestBody);
+        LiveData observable = apiService.login(requestBody);
         return observable;
     }
 

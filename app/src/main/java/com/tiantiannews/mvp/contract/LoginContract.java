@@ -24,5 +24,7 @@ public interface LoginContract {
         void loadTasks(boolean forceUpdate);
 
         void login(String userName, String password, AppExecutors executors);
+
+        void addObserve();
     }
 }

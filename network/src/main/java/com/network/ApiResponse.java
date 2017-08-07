@@ -20,8 +20,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.util.ArrayMap;
 
-import com.google.gson.annotations.SerializedName;
-
 import java.io.IOException;
 import java.util.Collections;
 import java.util.Map;
@@ -40,10 +38,8 @@ public class ApiResponse<T> {
             .compile("<([^>]*)>[\\s]*;[\\s]*rel=\"([a-zA-Z0-9]+)\"");
     private static final Pattern PAGE_PATTERN = Pattern.compile("page=(\\d)+");
     private static final String NEXT_LINK = "next";
-    @SerializedName("result")
     public final int code;
     @Nullable
-    @SerializedName("detail")
     public final T body;
     @Nullable
     public final String errorMessage;
@@ -95,7 +91,7 @@ public class ApiResponse<T> {
     }
 
     public boolean isSuccessful() {
-        return code == 0;
+        return code >= 200 && code < 300;
     }
 
     public Integer getNextPage() {
