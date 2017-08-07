@@ -238,4 +238,9 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
         super.onDestroy();
 
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+    }
 }

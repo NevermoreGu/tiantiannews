@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.network.ApiResponse;
 import com.tiantiannews.R;
 import com.tiantiannews.data.modle.ListPageInfo;
 import com.tiantiannews.utils.image.ImageLoader;
@@ -27,14 +28,14 @@ public class BaseListAdapter<T> extends BaseAdapter {
 
     private LayoutInflater mInflater;
 
-    protected ListPageInfo<BaseModel<T>> mListPageInfo;
+    protected ListPageInfo<ApiResponse<T>> mListPageInfo;
 
     //adapter数据源
-    public void setListPageInfo(ListPageInfo<BaseModel<T>> listPageInfo) {
+    public void setListPageInfo(ListPageInfo<ApiResponse<T>> listPageInfo) {
         mListPageInfo = listPageInfo;
     }
 
-    public ListPageInfo<BaseModel<T>> getListPageInfo() {
+    public ListPageInfo<ApiResponse<T>> getListPageInfo() {
         return mListPageInfo;
     }
 
@@ -63,7 +64,7 @@ public class BaseListAdapter<T> extends BaseAdapter {
     }
 
     @Override
-    public BaseModel<T> getItem(int position) {
+    public ApiResponse<T> getItem(int position) {
         if (mListPageInfo == null) {
             return null;
         }

@@ -1,6 +1,6 @@
 package com.tiantiannews.utils.net;
 
-import com.network.Exception.NetException;
+import com.network.Exception.NetworkException;
 
 public abstract class NetCallBack<T> {
 
@@ -8,7 +8,7 @@ public abstract class NetCallBack<T> {
 
     public abstract void onResponse(T response);
 
-    public abstract void onErrorResponse(NetException netException);
+    public abstract void onErrorResponse(NetworkException netException);
 
     public void onFinish() {}
 }

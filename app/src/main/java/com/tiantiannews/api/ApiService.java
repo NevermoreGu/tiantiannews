@@ -1,6 +1,6 @@
 package com.tiantiannews.api;
 
-import com.tiantiannews.base.BaseModel;
+import com.network.ApiResponse;
 import com.tiantiannews.data.bean.result.UserResult;
 
 import okhttp3.RequestBody;
@@ -13,5 +13,5 @@ public interface ApiService {
 
     @Headers({"Content-Type: application/json", "Accept: application/json"})
     @POST("saasapi/saasapi")
-    Observable<BaseModel<UserResult>> login(@Body RequestBody request);
+    Observable<ApiResponse<UserResult>> login(@Body RequestBody request);
 }

@@ -2,15 +2,14 @@ package com.tiantiannews.data.source.remote;
 
 import android.support.annotation.NonNull;
 
+import com.network.ApiResponse;
 import com.tiantiannews.api.ApiService;
-import com.tiantiannews.base.BaseModel;
 import com.tiantiannews.data.source.TasksDataSource;
 import com.tiantiannews.di.module.RemoteDataSourceManager;
 
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import rx.Observable;
-
 
 public class LoginRemoteDataSource implements TasksDataSource {
 
@@ -21,7 +20,7 @@ public class LoginRemoteDataSource implements TasksDataSource {
     }
 
     @Override
-    public Observable<BaseModel> getTasks(String content) {
+    public Observable<ApiResponse> getTasks(String content) {
         ApiService apiService = mRemoteDataSourceManager.getApiService();
         RequestBody requestBody = RequestBody.create(MediaType.parse("application/json;charset=UTF-8"),content);
         Observable observable = apiService.login(requestBody);
@@ -29,7 +28,7 @@ public class LoginRemoteDataSource implements TasksDataSource {
     }
 
     @Override
-    public void saveTasks(@NonNull BaseModel task) {
+    public void saveTasks(@NonNull ApiResponse task) {
 
     }
 

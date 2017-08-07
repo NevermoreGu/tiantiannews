@@ -5,7 +5,7 @@
 //
 //import com.squareup.sqlbrite.BriteDatabase;
 //import com.squareup.sqlbrite.SqlBrite;
-//import com.tiantiannews.base.BaseModel;
+//import com.tiantiannews.base.ApiResponse;
 //
 //import java.util.Collection;
 //import java.util.List;
@@ -35,15 +35,15 @@
 //        return mDb;
 //    }
 //
-//    public Observable<BaseModel<T>> setFriends(final Collection<BaseModel<T>> newFriends) {
-//        return Observable.create(new Observable.OnSubscribe<BaseModel<T>>() {
+//    public Observable<ApiResponse<T>> setFriends(final Collection<ApiResponse<T>> newFriends) {
+//        return Observable.create(new Observable.OnSubscribe<ApiResponse<T>>() {
 //            @Override
-//            public void call(Subscriber<? super BaseModel<T>> subscriber) {
+//            public void call(Subscriber<? super ApiResponse<T>> subscriber) {
 //                if (subscriber.isUnsubscribed()) return;
 //                BriteDatabase.Transaction transaction = mDb.newTransaction();
 //                try {
 //                    mDb.delete(DbInterface., null);
-//                    for (BaseModel<T> friends : newFriends) {
+//                    for (ApiResponse<T> friends : newFriends) {
 //                        long result = mDb.insert(Db.FriendsProfileTable.TABLE_NAME,
 //                                Db.FriendsProfileTable.toContentValues(friends.profile),
 //                                SQLiteDatabase.CONFLICT_REPLACE);
@@ -58,13 +58,13 @@
 //        });
 //    }
 //
-//    public Observable<List<BaseModel<T>>> getFriends() {
+//    public Observable<List<ApiResponse<T>>> getFriends() {
 //        return mDb.createQuery(Db.FriendsProfileTable.TABLE_NAME,
 //                "SELECT * FROM " + Db.FriendsProfileTable.TABLE_NAME)
-//                .mapToList(new Func1<Cursor, BaseModel<T>>() {
+//                .mapToList(new Func1<Cursor, ApiResponse<T>>() {
 //                    @Override
-//                    public BaseModel<T> call(Cursor cursor) {
-////                        return new BaseModel<>(Db.FriendsProfileTable.parseCursor(cursor));
+//                    public ApiResponse<T> call(Cursor cursor) {
+////                        return new ApiResponse<>(Db.FriendsProfileTable.parseCursor(cursor));
 //                        return  null;
 //                    }
 //                });

@@ -13,11 +13,6 @@ public abstract class ErrorHandleSubscriber<T> extends Subscriber<T> {
     }
 
     @Override
-    public void onCompleted() {
-
-    }
-
-    @Override
     public void onError(Throwable e) {
         e.printStackTrace();
         mHandlerFactory.handleError(e);

@@ -38,7 +38,6 @@ import com.tiantiannews.base.BaseActivity;
 import com.tiantiannews.base.Constants;
 import com.tiantiannews.data.bean.FolderInfo;
 import com.tiantiannews.data.bean.SelectPicturesInfo;
-import com.tiantiannews.service.ImageService;
 import com.tiantiannews.ui.adapter.FolderAdapter;
 import com.tiantiannews.ui.adapter.ImageGridAdapter;
 import com.utils.ActivityUtils;
@@ -482,10 +481,6 @@ public class SelectPicturesActivity extends BaseActivity {
 
         Bundle b = new Bundle();
         b.putSerializable(SelectPicturesInfo.EXTRA_PARAMETER, mSelectPicturesInfo);
-
-        Intent intentService = new Intent(this, ImageService.class);
-        intentService.putExtras(b);
-        startService(intentService);
 
         Intent intent = new Intent();
         intent.putExtras(b);

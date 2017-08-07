@@ -520,6 +520,7 @@ public abstract class BaseQuickAdapter<T, K extends BaseViewHolder> extends Recy
     public void onAttachedToRecyclerView(final RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         RecyclerView.LayoutManager manager = recyclerView.getLayoutManager();
+
         if (manager instanceof GridLayoutManager) {
             final GridLayoutManager gridManager = ((GridLayoutManager) manager);
             gridManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {

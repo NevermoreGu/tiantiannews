@@ -6,4 +6,9 @@
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
+
+    <!--CircularPageIndicator-->
+    <declare-styleable name="CircularPageIndicator">
+        <attr name="stroke_color" format="color" />
+    </declare-styleable>
 </resources>

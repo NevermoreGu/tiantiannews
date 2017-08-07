@@ -90,8 +90,14 @@
             android:name=".service.ImageService"
             android:process=":img"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true">
+
+        </service>
+
         <activity android:name=".ui.activity.ContinuousCaptureActivity"></activity>
+        <activity android:name=".ui.activity.TesPagerAdaptertActivity">
+
+        </activity>
     </application>
 
 </manifest>

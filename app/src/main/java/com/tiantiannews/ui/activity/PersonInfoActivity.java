@@ -16,6 +16,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.tiantiannews.R;
 import com.tiantiannews.base.CheckPermissionsActivity;
 import com.tiantiannews.data.bean.MaterialSimpleListItem;
+import com.tiantiannews.data.bean.SelectPicturesInfo;
 import com.tiantiannews.utils.image.ImageLoader;
 import com.tiantiannews.utils.image.ImageLoaderUtil;
 import com.utils.ActivityUtils;
@@ -62,6 +63,11 @@ public class PersonInfoActivity extends CheckPermissionsActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+    }
+
+    @Override
     protected int getLayoutId() {
         return R.layout.activity_person_info;
     }
@@ -90,7 +96,7 @@ public class PersonInfoActivity extends CheckPermissionsActivity {
                         } else if (position == 1) {
                             cameraTask();
                         } else if (position == 2) {
-
+                            selectFromPicture();
                         }
                     }
                 });
@@ -139,6 +145,10 @@ public class PersonInfoActivity extends CheckPermissionsActivity {
             EasyPermissions.requestPermissions(this, "",
                     CameraUtils.RC_CAMERA_PERM, Manifest.permission.CAMERA);
         }
+    }
+
+    private void selectFromPicture() {
+        ActivityUtils.openActivityForResult(this, SelectPicturesActivity.class, CameraUtils.TAKE_PICTURE_FROM_GALLERY);
     }
 
     @Override
@@ -197,6 +207,56 @@ public class PersonInfoActivity extends CheckPermissionsActivity {
                             }
                         });
             }
+        } else if (requestCode == CameraUtils.TAKE_PICTURE_FROM_GALLERY &&
+                resultCode == RESULT_OK) {
+            SelectPicturesInfo selectPicturesInfo = (SelectPicturesInfo) data.getSerializableExtra(SelectPicturesInfo.EXTRA_PARAMETER);
+            if (selectPicturesInfo != null && selectPicturesInfo.getImage_list() != null) {
+                List<String> imgUrls = selectPicturesInfo.getImage_list();
+                if (imgUrls != null && imgUrls.size() > 0) {
+
+                    final CircularLoadingProgressBar progressBar = new CircularLoadingProgressBar(mContext);
+                    CircularLoadingDialog.Builder builder = new CircularLoadingDialog.Builder(mContext)
+                            .setMessage("正在加载").setContentView(progressBar);
+                    final CircularLoadingDialog dialog = builder.build();
+                    dialog.show();
+                    progressBar.startAnim();
+                    Luban.get(PersonInfoActivity.this)
+                            .setFile(FileUtils.getDiskCachePicture(mContext))
+                            .load(imgUrls.get(0))
+                            .putGear(Luban.THIRD_GEAR)
+                            .asObservable()
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doOnError(new Action1<Throwable>() {
+                                @Override
+                                public void call(Throwable throwable) {
+                                    throwable.printStackTrace();
+                                }
+                            })
+                            .onErrorResumeNext(new Func1<Throwable, Observable<? extends File>>() {
+                                @Override
+                                public Observable<? extends File> call(Throwable throwable) {
+                                    return Observable.empty();
+                                }
+                            })
+                            .subscribe(new Action1<File>() {
+                                @Override
+                                public void call(File file) {
+                                    if (file != null) {
+                                        if (dialog != null && dialog.isShowing()) {
+                                            progressBar.stopAnim();
+                                            dialog.dismiss();
+                                        }
+                                        mIconPath = file.getAbsolutePath();
+                                        ImageLoaderUtil imageLoaderUtil = ImageLoaderUtil.getInstance();
+                                        ImageLoader imageLoader = ImageLoader.builder().url(mIconPath).imgView(cImgPersonInfoHeadIcon).placeHolder(R.drawable.ic_man).type(1).build();
+                                        imageLoaderUtil.loadImage(mContext, imageLoader);
+                                    }
+                                }
+                            });
+                }
+            }
         }
     }
+
 }

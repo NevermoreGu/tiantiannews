@@ -14,8 +14,6 @@ import android.view.animation.LinearInterpolator;
 
 import com.base.ui.widget.dialog.DialogAinm;
 
-import static com.tencent.bugly.crashreport.crash.c.f;
-
 
 public class CircularLoadingProgressBar extends View implements DialogAinm {
 

@@ -2,15 +2,15 @@ package com.tiantiannews.data.source;
 
 import android.support.annotation.NonNull;
 
-import com.tiantiannews.base.BaseModel;
+import com.network.ApiResponse;
 
 import rx.Observable;
 
 public interface TasksDataSource<T> {
 
-    Observable<BaseModel<T>> getTasks(String content);
+    Observable<ApiResponse<T>> getTasks(String content);
 
-    void saveTasks(@NonNull BaseModel<T> task);
+    void saveTasks(@NonNull ApiResponse<T> task);
 
     void deleteAllTasks();
 

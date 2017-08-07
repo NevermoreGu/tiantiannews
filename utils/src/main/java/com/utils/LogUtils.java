@@ -2,14 +2,16 @@ package com.utils;
 
 import android.util.Log;
 
+import timber.log.Timber;
 
-public class HLog {
+
+public class LogUtils {
 
     public static boolean DEBUG = true;
 
     public static void v(String tag, String msg) {
         if (DEBUG) {
-            Log.v(tag, msg);
+            Timber.v(tag, msg);
         }
     }
 
@@ -21,19 +23,19 @@ public class HLog {
 
     public static void i(String tag, String msg) {
         if (DEBUG) {
-            Log.i(tag, msg);
+            Timber.i(tag, msg);
         }
     }
 
     public static void w(String tag, String msg) {
         if (DEBUG) {
-            Log.w(tag, msg);
+            Timber.w(tag, msg);
         }
     }
 
     public static void e(String tag, String msg) {
         if (DEBUG) {
-            Log.e(tag, msg);
+            Timber.e(tag, msg);
         }
     }
 

@@ -5,29 +5,30 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.WorkerThread;
 
+import com.rxhandler.core.RxErrorHandler;
+import com.rxhandler.handler.ErrorHandleSubscriber;
+
 import rx.Observable;
-import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
 
 /**
  * A generic class that can provide a resource backed by both the sqlite database and the network.
- * <p>
- * You can read more about it in the <a href="https://developer.android.com/arch">Architecture
- * Guide</a>.
  *
  * @param <ResultType>
  */
 public abstract class NetworkBoundResource<ResultType> {
 
-    private final AppExecutors appExecutors;
+    private final AppExecutors mAppExecutors;
+    private final RxErrorHandler mRxErrorHandler;
 
     //被观察对象
-    private Observable<ResultType> result;
+    private Observable<ApiResponse<ResultType>> result;
 
     @MainThread
-    public NetworkBoundResource(AppExecutors appExecutors) {
-        this.appExecutors = appExecutors;
-//        result.setValue(Resource.loading(null));
-        final Observable<ResultType> dbSource = loadFromDb();
+    public NetworkBoundResource(AppExecutors appExecutors,RxErrorHandler rxErrorHandler) {
+        this.mAppExecutors = appExecutors;
+        this.mRxErrorHandler = rxErrorHandler;
+        final Observable<ApiResponse<ResultType>> dbSource = loadFromDb();
         if (shouldFetch(dbSource)) {
             fetchFromNetwork(dbSource);
         } else {
@@ -35,42 +36,39 @@ public abstract class NetworkBoundResource<ResultType> {
         }
     }
 
-    private void fetchFromNetwork(final Observable<ResultType> dbSource) {
+    private void fetchFromNetwork(final Observable<ApiResponse<ResultType>> dbSource) {
         Observable<ApiResponse<ResultType>> apiResponse = createCall();
-        apiResponse.subscribe(new Subscriber<ApiResponse<ResultType>>() {
-            @Override
-            public void onCompleted() {
+        apiResponse
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new ErrorHandleSubscriber<ApiResponse<ResultType>>(mRxErrorHandler) {
+                    @Override
+                    public void onCompleted() {
 
-            }
+                    }
 
-            @Override
-            public void onError(Throwable e) {
-
-            }
-
-            @Override
-            public void onNext(final ApiResponse<ResultType> response) {
-                if (response.isSuccessful()) {
-                    appExecutors.diskIO().execute(new Runnable() {
-                        @Override
-                        public void run() {
-                            saveCallResult(processResponse(response));
-                            appExecutors.mainThread().execute(new Runnable() {
+                    @Override
+                    public void onNext(final ApiResponse<ResultType> response) {
+                        if (response.isSuccessful()) {
+                            mAppExecutors.diskIO().execute(new Runnable() {
                                 @Override
                                 public void run() {
-//                                    result.addSource(loadFromDb(),
-//                                        newData -> result.setValue(Resource.success(newData)))
+                                    saveCallResult(processResponse(response));
+                                    mAppExecutors.mainThread().execute(new Runnable() {
+                                        @Override
+                                        public void run() {
+////                                    result.addSource(loadFromDb(),
+////                                        newData -> result.setValue(Resource.success(newData)))
+                                        }
+                                    });
                                 }
                             });
+                        } else {
+                            onFetchFailed();
+////                    result.addSource(dbSource,
+////                            newData -> result.setValue(Resource.error(response.errorMessage, newData)));
                         }
-                    });
-                } else {
-                    onFetchFailed();
-//                    result.addSource(dbSource,
-//                            newData -> result.setValue(Resource.error(response.errorMessage, newData)));
-                }
-            }
-        });
+                    }
+                });
     }
 
     protected void onFetchFailed() {
@@ -97,7 +95,7 @@ public abstract class NetworkBoundResource<ResultType> {
 
 
     @MainThread
-    protected boolean shouldFetch(@Nullable Observable<ResultType> data) {
+    protected boolean shouldFetch(@Nullable Observable<ApiResponse<ResultType>> data) {
         return true;
     }
 
@@ -108,7 +106,7 @@ public abstract class NetworkBoundResource<ResultType> {
      */
     @NonNull
     @MainThread
-    protected abstract Observable<ResultType> loadFromDb();
+    protected abstract Observable<ApiResponse<ResultType>> loadFromDb();
 
     /**
      * 调取api获取数据

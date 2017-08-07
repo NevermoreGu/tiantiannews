@@ -2,7 +2,7 @@ package com.tiantiannews.data.source.local;
 
 import android.support.annotation.NonNull;
 
-import com.tiantiannews.base.BaseModel;
+import com.network.ApiResponse;
 import com.tiantiannews.data.source.TasksDataSource;
 
 import rx.Observable;
@@ -29,12 +29,12 @@ public class LoginLocalDataSource implements TasksDataSource {
     }
 
     @Override
-    public Observable<BaseModel> getTasks(String content) {
+    public Observable<ApiResponse> getTasks(String content) {
         return null;
     }
 
     @Override
-    public void saveTasks(@NonNull BaseModel task) {
+    public void saveTasks(@NonNull ApiResponse task) {
 
     }
 

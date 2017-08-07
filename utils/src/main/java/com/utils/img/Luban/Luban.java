@@ -8,6 +8,8 @@ import android.media.ExifInterface;
 import android.text.TextUtils;
 import android.util.Log;
 
+import com.utils.LogUtils;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -165,6 +167,11 @@ public class Luban {
         return this;
     }
 
+    public Luban load(String filePath) {
+        mFile = new File(filePath);
+        return this;
+    }
+
     public Luban setCompressListener(OnCompressListener listener) {
         compressListener = listener;
         return this;
@@ -201,6 +208,7 @@ public class Luban {
         else return Observable.empty();
     }
 
+    //获取需要缩放的图片的大小算法
     private File thirdCompress(File file) {
         String thumb = mCacheDir.getAbsolutePath() + File.separator +
                 (TextUtils.isEmpty(filename) ? System.currentTimeMillis() : filename) + ".jpg";
@@ -406,11 +414,13 @@ public class Luban {
      * @param size           the file size of image
      */
     private File compress(String largeImagePath, String thumbFilePath, int width, int height, int angle, long size) {
+        LogUtils.d("luban", "luban " + System.currentTimeMillis());
         Bitmap thbBitmap = compress(largeImagePath, width, height);
-
+        LogUtils.d("luban", "luban compress " + System.currentTimeMillis());
         thbBitmap = rotatingImage(angle, thbBitmap);
-
+        LogUtils.d("luban", "luban rotatingImage " + System.currentTimeMillis());
         return saveImage(thumbFilePath, thbBitmap, size);
+
     }
 
     /**
@@ -445,14 +455,15 @@ public class Luban {
         if (!result.exists() && !result.mkdirs()) return null;
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        int options = 100;
+        int options = 30;
         bitmap.compress(Bitmap.CompressFormat.JPEG, options, stream);
 
-        while (stream.toByteArray().length / 1024 > size && options > 6) {
-            stream.reset();
-            options -= 6;
-            bitmap.compress(Bitmap.CompressFormat.JPEG, options, stream);
-        }
+//        while (stream.toByteArray().length / 1024 > size && options > 6) {
+//            stream.reset();
+//            options -= 6;
+//            bitmap.compress(Bitmap.CompressFormat.JPEG, options, stream);
+//        }
+        bitmap.compress(Bitmap.CompressFormat.JPEG, options, stream);
 
         try {
             FileOutputStream fos = new FileOutputStream(filePath);
@@ -465,7 +476,7 @@ public class Luban {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        LogUtils.d("luban", "luban saveImage " + System.currentTimeMillis());
         return new File(filePath);
     }
 }

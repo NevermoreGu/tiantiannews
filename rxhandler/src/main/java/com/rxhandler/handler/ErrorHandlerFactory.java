@@ -20,5 +20,6 @@ public class ErrorHandlerFactory {
      */
     public void handleError(Throwable throwable) {
         mResponseErrorListener.handleResponseError(mContext, (Exception) throwable);
+
     }
 }
