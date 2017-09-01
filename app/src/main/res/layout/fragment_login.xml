@@ -180,13 +180,4 @@
             android:textSize="@dimen/font_size_14" />
     </LinearLayout>
 
-    <com.base.ui.widget.progressbar.CircularLoadingProgressBar
-        android:id="@+id/clp"
-        android:layout_width="@dimen/offset_48"
-        android:layout_height="@dimen/offset_48" />
-
-    <com.tiantiannews.ui.widget.progressbar.CircularRingPercentageView
-        android:id="@+id/pb_view"
-        android:layout_width="200dp"
-        android:layout_height="200dp" />
 </LinearLayout>

@@ -11,7 +11,7 @@ import com.network.Resource;
 import com.tiantiannews.api.ApiParams;
 import com.tiantiannews.data.bean.request.UserRequest;
 import com.tiantiannews.data.bean.result.UserResult;
-import com.tiantiannews.data.source.LoginRepository;
+import com.tiantiannews.data.repository.LoginRepository;
 import com.tiantiannews.di.scope.ActivityScope;
 import com.tiantiannews.mvp.contract.LoginContract;
 
@@ -63,7 +63,7 @@ public class LoginPresenter implements LoginContract.Presenter {
         user.observe((LifecycleOwner) mLoginView, new Observer<Resource<UserResult>>() {
             @Override
             public void onChanged(@Nullable Resource<UserResult> userResultResource) {
-
+                UserResult userResult = userResultResource.data;
             }
         });
     }

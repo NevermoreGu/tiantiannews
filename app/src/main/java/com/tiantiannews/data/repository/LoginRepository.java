@@ -1,4 +1,4 @@
-package com.tiantiannews.data.source;
+package com.tiantiannews.data.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.support.annotation.NonNull;
@@ -9,11 +9,16 @@ import com.network.NetworkBoundResource;
 import com.network.Resource;
 import com.rxhandler.core.RxErrorHandler;
 import com.tiantiannews.data.bean.result.UserResult;
+import com.tiantiannews.data.source.Local;
+import com.tiantiannews.data.source.Remote;
+import com.tiantiannews.data.source.TasksDataSource;
 
 import javax.inject.Inject;
 
+import rx.Observable;
 
-public class LoginRepository implements TasksDataSource {
+
+public class LoginRepository {
 
     private final TasksDataSource mTasksRemoteDataSource;
 
@@ -31,8 +36,6 @@ public class LoginRepository implements TasksDataSource {
         mRxErrorHandler = rxErrorHandler;
     }
 
-
-    @Override
     public LiveData<Resource<UserResult>> getTasks(final String content) {
         NetworkBoundResource<UserResult> networkBoundResource = new NetworkBoundResource<UserResult>(mAppExecutors, mRxErrorHandler) {
             @Override
@@ -42,31 +45,21 @@ public class LoginRepository implements TasksDataSource {
 
             @NonNull
             @Override
-            protected LiveData<UserResult> loadFromDb() {
+            protected Observable<UserResult> loadFromDb() {
                 return null;
             }
 
             @NonNull
             @Override
-            protected LiveData<ApiResponse<UserResult>> createCall() {
+            protected Observable<ApiResponse<UserResult>> createCall() {
                 return mTasksRemoteDataSource.getTasks(content);
             }
         };
         return networkBoundResource.asLiveData();
     }
 
-    @Override
     public void saveTasks(@NonNull ApiResponse task) {
 
     }
 
-    @Override
-    public void deleteAllTasks() {
-
-    }
-
-    @Override
-    public void deleteTask(@NonNull String key) {
-
-    }
 }

@@ -36,14 +36,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- 高德地图 -->
-        <!-- 设置key -->
-        <meta-data
-            android:name="com.amap.api.v2.apikey"
-            android:value="dc7b88c62279b506a52e8cf60b09e1f3" />
-        <!-- 定位需要的服务 -->
-        <service android:name="com.amap.api.location.APSService" />
-        <!-- 高德地图 -->
         <activity android:name=".ui.activity.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -51,53 +43,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.MainActivity" />
+
         <activity android:name=".ui.activity.LoginActivity" />
-        <activity android:name=".ui.activity.PicturesBrowseActivity"
-            android:process=":img"/>
-        <activity
-            android:name=".ui.activity.SelectPicturesActivity"
-            android:process=":img" />
-        <activity android:name=".ui.activity.ForgetPasswordActivity" />
-        <activity android:name=".ui.activity.ScanActivity" />
 
-        <provider
-            android:name=".data.contentprovider.CitiesDBProvider"
-            android:authorities="com.guqian.database.cities"
-            android:exported="false" />
-
-        <activity
-            android:name=".ui.activity.CitiesActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
-        <activity android:name=".ui.activity.TestActivity" />
-        <activity android:name=".ui.activity.StudentMessageDetailsActivity" />
-        <activity android:name=".ui.activity.ImageViewActivity" />
-
-        <receiver android:name=".broadcastreceiver.ActionBootCompletedBroadcastReceiver">
-            <intent-filter>
-                <action android:name="android.intent.action.BOOT_COMPLETED" />
-            </intent-filter>
-        </receiver>
-        <receiver android:name=".broadcastreceiver.AlarmNotificationBroadcastReceiver" />
-
-        <activity android:name=".ui.activity.TestProgressActivity" />
-        <activity android:name=".ui.activity.TestStatusBarActivity" />
-        <activity android:name=".ui.activity.TestHandlerActivity" />
-        <activity android:name=".ui.activity.PersonInfoActivity" />
-        <activity android:name=".ui.activity.HeadIconActivity" />
 
         <service
             android:name=".service.ImageService"
-            android:process=":img"
             android:enabled="true"
-            android:exported="true">
+            android:exported="true"
+            android:process=":img">
 
         </service>
 
-        <activity android:name=".ui.activity.ContinuousCaptureActivity"></activity>
-        <activity android:name=".ui.activity.TesPagerAdaptertActivity">
-
-        </activity>
     </application>
 
 </manifest>

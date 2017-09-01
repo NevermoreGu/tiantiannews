@@ -1,7 +1,7 @@
 package com.tiantiannews.di.component;
 
 
-import com.tiantiannews.data.source.LoginRepository;
+import com.tiantiannews.data.repository.LoginRepository;
 import com.tiantiannews.di.module.LoginPresenterModule;
 import com.tiantiannews.di.module.LoginRepositoryModule;
 import com.tiantiannews.di.scope.ActivityScope;
