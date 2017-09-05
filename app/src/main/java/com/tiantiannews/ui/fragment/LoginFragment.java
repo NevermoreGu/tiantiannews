@@ -1,10 +1,6 @@
 package com.tiantiannews.ui.fragment;
 
-import android.content.ComponentName;
 import android.content.Intent;
-import android.content.ServiceConnection;
-import android.os.IBinder;
-import android.os.RemoteException;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -16,23 +12,16 @@ import com.base.ui.widget.DeleteEditText;
 import com.base.ui.widget.PassVisibleCheckBox;
 import com.network.AppExecutors;
 import com.tiantiannews.R;
-import com.tiantiannews.aidl.IImageAidlInterface;
 import com.tiantiannews.base.BaseActivity;
 import com.tiantiannews.base.BaseFragment;
-import com.tiantiannews.data.bean.SelectPicturesInfo;
 import com.tiantiannews.mvp.contract.LoginContract;
-import com.tiantiannews.service.ImageService;
 import com.utils.ToastUtils;
 import com.utils.ViewUtils;
-
-import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-
-import static android.content.Context.BIND_AUTO_CREATE;
 
 public class LoginFragment extends BaseFragment implements TextWatcher, LoginContract.View {
 
@@ -56,9 +45,6 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
     TextView tvLoginChat;
 
     private LoginContract.Presenter mPresenter;
-    private IImageAidlInterface iImageAidlInterface;
-    private boolean canBind = false;
-    private SelectPicturesInfo mSelectPicturesInfo;
 
     @Inject
     AppExecutors appExecutors;
@@ -70,7 +56,6 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
 
     @Override
     public void initVariables() {
-        mSelectPicturesInfo = new SelectPicturesInfo();
     }
 
     @Override
@@ -98,27 +83,6 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
     @Override
     public void onResume() {
         super.onResume();
-        if (canBind) {
-            Intent intentService = new Intent(getActivity(), ImageService.class);
-            getActivity().bindService(intentService, new ServiceConnection() {
-                @Override
-                public void onServiceConnected(ComponentName name, IBinder service) {
-                    iImageAidlInterface = IImageAidlInterface.Stub.asInterface(service);
-                    try {
-                        List<String> imageInfo = iImageAidlInterface.getImages();
-                        mSelectPicturesInfo.setImage_list(imageInfo);
-                    } catch (RemoteException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onServiceDisconnected(ComponentName name) {
-
-                }
-            }, BIND_AUTO_CREATE);
-            canBind = false;
-        }
 //        mPresenter.subscribe();
     }
 
