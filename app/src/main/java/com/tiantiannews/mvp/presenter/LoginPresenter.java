@@ -8,7 +8,10 @@ import android.support.annotation.Nullable;
 import com.google.gson.Gson;
 import com.network.AppExecutors;
 import com.network.Resource;
+import com.network.Status;
+import com.tiantiannews.R;
 import com.tiantiannews.api.ApiParams;
+import com.tiantiannews.base.BaseApplication;
 import com.tiantiannews.data.bean.request.UserRequest;
 import com.tiantiannews.data.bean.result.UserResult;
 import com.tiantiannews.data.repository.LoginRepository;
@@ -63,7 +66,15 @@ public class LoginPresenter implements LoginContract.Presenter {
         user.observe((LifecycleOwner) mLoginView, new Observer<Resource<UserResult>>() {
             @Override
             public void onChanged(@Nullable Resource<UserResult> userResultResource) {
-                UserResult userResult = userResultResource.data;
+                if (userResultResource.status.equals(Status.SUCCESS)) {
+                    mLoginView.setLoginError(BaseApplication.getInstance().getResources().getString(R.string.login_success));
+                } else if (userResultResource.status.equals(Status.ERROR)) {
+                    mLoginView.setLoginError(userResultResource.message);
+                } else {
+
+                }
+
+
             }
         });
     }

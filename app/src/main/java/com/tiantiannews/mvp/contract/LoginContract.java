@@ -14,7 +14,7 @@ public interface LoginContract {
 
         void hideProgress();
 
-        void setLoginError();
+        void setLoginError(String error);
 
         void navigateToHome();
     }

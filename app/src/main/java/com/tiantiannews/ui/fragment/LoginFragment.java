@@ -22,6 +22,7 @@ import com.tiantiannews.base.BaseFragment;
 import com.tiantiannews.data.bean.SelectPicturesInfo;
 import com.tiantiannews.mvp.contract.LoginContract;
 import com.tiantiannews.service.ImageService;
+import com.utils.ToastUtils;
 import com.utils.ViewUtils;
 
 import java.util.List;
@@ -195,8 +196,8 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
     }
 
     @Override
-    public void setLoginError() {
-
+    public void setLoginError(String error) {
+        ToastUtils.makeLongText(getActivity(), error);
     }
 
     @Override
@@ -219,4 +220,5 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
     }
+
 }
