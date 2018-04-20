@@ -10,7 +10,7 @@ import org.json.JSONException;
 
 import java.net.ConnectException;
 
-import retrofit2.adapter.rxjava.HttpException;
+import retrofit2.HttpException;
 
 
 public class NetworkException {

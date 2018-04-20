@@ -2,10 +2,11 @@ package com.rxhandler.handler;
 
 import com.rxhandler.core.RxErrorHandler;
 
-import rx.Subscriber;
+import io.reactivex.Observer;
 
 
-public abstract class ErrorHandleSubscriber<T> extends Subscriber<T> {
+public abstract class ErrorHandleSubscriber<T> implements Observer<T> {
+
     private ErrorHandlerFactory mHandlerFactory;
 
     public ErrorHandleSubscriber(RxErrorHandler rxErrorHandler){

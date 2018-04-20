@@ -15,11 +15,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.functions.Function;
+import io.reactivex.functions.Predicate;
+import io.reactivex.schedulers.Schedulers;
 
 import static com.utils.img.Luban.Preconditions.checkNotNull;
 
@@ -86,7 +87,9 @@ public class Luban {
     }
 
     public static Luban get(Context context) {
-        if (INSTANCE == null) INSTANCE = new Luban(Luban.getPhotoCacheDir(context));
+        if (INSTANCE == null) {
+            INSTANCE = new Luban(Luban.getPhotoCacheDir(context));
+        }
         return INSTANCE;
     }
 
@@ -98,67 +101,81 @@ public class Luban {
     public Luban launch() {
         checkNotNull(mFile, "the image file cannot be null, please call .load() before this method!");
 
-        if (compressListener != null) compressListener.onStart();
+        if (compressListener != null) {
+            compressListener.onStart();
+        }
+        ;
 
-        if (gear == Luban.FIRST_GEAR)
+        if (gear == Luban.FIRST_GEAR) {
             Observable.just(mFile)
-                    .map(new Func1<File, File>() {
+                    .map(new Function<File, File>() {
                         @Override
-                        public File call(File file) {
+                        public File apply(File file) throws Exception {
                             return firstCompress(file);
                         }
                     })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnError(new Action1<Throwable>() {
+                    .doOnError(new Consumer<Throwable>() {
                         @Override
-                        public void call(Throwable throwable) {
-                            if (compressListener != null) compressListener.onError(throwable);
+                        public void accept(Throwable throwable) throws Exception {
+                            if (compressListener != null) {
+                                compressListener.onError(throwable);
+                            }
                         }
                     })
                     .onErrorResumeNext(Observable.<File>empty())
-                    .filter(new Func1<File, Boolean>() {
+                    .filter(new Predicate<File>() {
                         @Override
-                        public Boolean call(File file) {
+                        public boolean test(File file) throws Exception {
                             return file != null;
                         }
+
                     })
-                    .subscribe(new Action1<File>() {
+                    .subscribe(new Consumer<File>() {
                         @Override
-                        public void call(File file) {
-                            if (compressListener != null) compressListener.onSuccess(file);
+                        public void accept(File file) throws Exception {
+                            if (compressListener != null) {
+                                compressListener.onSuccess(file);
+                            }
                         }
+
                     });
-        else if (gear == Luban.THIRD_GEAR)
+        } else if (gear == Luban.THIRD_GEAR) {
             Observable.just(mFile)
-                    .map(new Func1<File, File>() {
+                    .map(new Function<File, File>() {
                         @Override
-                        public File call(File file) {
+                        public File apply(File file) throws Exception {
                             return thirdCompress(file);
                         }
                     })
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .doOnError(new Action1<Throwable>() {
+                    .doOnError(new Consumer<Throwable>() {
                         @Override
-                        public void call(Throwable throwable) {
-                            if (compressListener != null) compressListener.onError(throwable);
+                        public void accept(Throwable throwable) throws Exception {
+                            if (compressListener != null) {
+                                compressListener.onError(throwable);
+                            }
                         }
                     })
                     .onErrorResumeNext(Observable.<File>empty())
-                    .filter(new Func1<File, Boolean>() {
+                    .filter(new Predicate<File>() {
                         @Override
-                        public Boolean call(File file) {
+                        public boolean test(File file) throws Exception {
                             return file != null;
                         }
+
                     })
-                    .subscribe(new Action1<File>() {
+                    .subscribe(new Consumer<File>() {
                         @Override
-                        public void call(File file) {
-                            if (compressListener != null) compressListener.onSuccess(file);
+                        public void accept(File file) throws Exception {
+                            if (compressListener != null) {
+                                compressListener.onSuccess(file);
+                            }
                         }
                     });
-
+        }
         return this;
     }
 
@@ -191,21 +208,25 @@ public class Luban {
     }
 
     public Observable<File> asObservable() {
-        if (gear == FIRST_GEAR)
-            return Observable.just(mFile).map(new Func1<File, File>() {
+        if (gear == FIRST_GEAR) {
+            return Observable.just(mFile).map(new Function<File, File>() {
                 @Override
-                public File call(File file) {
+                public File apply(File file) throws Exception {
                     return firstCompress(file);
                 }
+
             });
-        else if (gear == THIRD_GEAR)
-            return Observable.just(mFile).map(new Func1<File, File>() {
+        } else if (gear == THIRD_GEAR) {
+            return Observable.just(mFile).map(new Function<File, File>() {
                 @Override
-                public File call(File file) {
+                public File apply(File file) throws Exception {
                     return thirdCompress(file);
                 }
+
             });
-        else return Observable.empty();
+        } else {
+            return Observable.empty();
+        }
     }
 
     //获取需要缩放的图片的大小算法
@@ -229,7 +250,7 @@ public class Luban {
 
         if (scale <= 1 && scale > 0.5625) {
             if (height < 1664) {
-                if (file.length() / 1024 < 150) return file;
+                if (file.length() / 1024 < 150) {return file;}
 
                 size = (width * height) / Math.pow(1664, 2) * 150;
                 size = size < 60 ? 60 : size;
@@ -251,7 +272,7 @@ public class Luban {
                 size = size < 100 ? 100 : size;
             }
         } else if (scale <= 0.5625 && scale > 0.5) {
-            if (height < 1280 && file.length() / 1024 < 200) return file;
+            if (height < 1280 && file.length() / 1024 < 200) {return file;}
 
             int multiple = height / 1280 == 0 ? 1 : height / 1280;
             thumbW = width / multiple;
@@ -452,7 +473,7 @@ public class Luban {
 
         File result = new File(filePath.substring(0, filePath.lastIndexOf("/")));
 
-        if (!result.exists() && !result.mkdirs()) return null;
+        if (!result.exists() && !result.mkdirs()) {return null;}
 
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         int options = 30;

@@ -34,9 +34,10 @@ public class RequestIntercept implements Interceptor {
         } else {
             Timber.tag("Request").w("request.body() == null");
         }
-
-        if (mHttpHandler != null)//在请求服务器之前可以拿到request,做一些操作比如给request添加header,如果不做操作则返回参数中的request
-            request = mHttpHandler.onHttpRequestBefore(chain,request);
+        //在请求服务器之前可以拿到request,做一些操作比如给request添加header,如果不做操作则返回参数中的request
+        if (mHttpHandler != null) {
+            request = mHttpHandler.onHttpRequestBefore(chain, request);
+        }
 
         //打印url信息
         Timber.tag("Request").w("Sending Request %s on %n Params --->  %s%n Connection ---> %s%n Headers ---> %s", request.url()
@@ -87,10 +88,10 @@ public class RequestIntercept implements Interceptor {
         }
 
         Timber.tag("Result").w(JsonUtils.jsonFormat(bodyString));
-
-        if (mHttpHandler != null)//这里可以比客户端提前一步拿到服务器返回的结果,可以做一些操作,比如token超时,重新获取
-           return mHttpHandler.onHttpResultResponse(bodyString,chain,originalResponse);
-
+        //这里可以比客户端提前一步拿到服务器返回的结果,可以做一些操作,比如token超时,重新获取
+        if (mHttpHandler != null) {
+            return mHttpHandler.onHttpResultResponse(bodyString, chain, originalResponse);
+        }
         return originalResponse;
     }
 

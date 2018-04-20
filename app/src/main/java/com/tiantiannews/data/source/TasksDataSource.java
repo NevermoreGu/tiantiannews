@@ -4,7 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.network.ApiResponse;
 
-import rx.Observable;
+import io.reactivex.Observable;
+
 
 public interface TasksDataSource<T> {
 

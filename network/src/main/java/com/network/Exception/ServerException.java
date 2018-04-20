@@ -1,9 +1,5 @@
 package com.network.Exception;
 
-/**
- * Created by Tamic on 2016-11-04.
- */
-
 public class ServerException extends RuntimeException {
 
     public int code;

@@ -15,7 +15,7 @@ public class RemoteDataSourceManager {
         this.mApiService = apiService;
     }
 
-    public ApiService getApiService() {
+    public ApiService   getApiService() {
         return mApiService;
     }
 }

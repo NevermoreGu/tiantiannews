@@ -16,6 +16,13 @@ import com.utils.TDevice;
 
 import javax.inject.Inject;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+
 public class LoginActivity extends BaseActivity {
 
     @Inject
@@ -42,6 +49,23 @@ public class LoginActivity extends BaseActivity {
                 .loginPresenterModule(new LoginPresenterModule(loginFragment))
                 .build().inject(this);
 
+        Observable observable = Observable.create(new ObservableOnSubscribe<String>() {
+            @Override
+            public void subscribe(ObservableEmitter<String> emitter) throws Exception {
+
+            }
+        });
+        // 指定 subscribe() 发生在 IO 线程
+        observable.subscribeOn(Schedulers.io())
+                // 指定 Subscriber 的回调发生在主线程
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Consumer() {
+                    @Override
+                    public void accept(Object o) throws Exception {
+
+                    }
+                });
+
     }
 //
 //    @Override
@@ -62,10 +86,21 @@ public class LoginActivity extends BaseActivity {
 
     @Override
     public void loadData() {
+
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+    }
+
+    @Override
+    protected void onResumeFragments() {
+        super.onResumeFragments();
     }
 }

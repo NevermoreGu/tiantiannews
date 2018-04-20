@@ -9,6 +9,7 @@ import com.tiantiannews.di.component.AppComponent;
 import com.tiantiannews.di.component.DaggerAppComponent;
 import com.tiantiannews.di.module.AppModule;
 import com.tiantiannews.di.module.RemoteDataSourceModule;
+import com.utils.AppUncaughtExceptionHandler;
 
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -28,6 +29,8 @@ public class DaysApplication extends BaseApplication {
                 .executorsModule(new ExecutorsModule())
                 .build();
         CrashReport.initCrashReport(getApplicationContext(), "730d427925", true);
+        AppUncaughtExceptionHandler crashHandler = AppUncaughtExceptionHandler.getInstance();
+        crashHandler.init(this);
     }
 
     public AppComponent getAppComponent() {

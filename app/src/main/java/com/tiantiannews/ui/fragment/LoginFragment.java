@@ -112,6 +112,7 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
             btnLogin.setTextColor(getResources().getColor(R.color.gray));
             btnLogin.setEnabled(false);
         }
+
     }
 
     @Override
@@ -134,13 +135,14 @@ public class LoginFragment extends BaseFragment implements TextWatcher, LoginCon
             case R.id.img_pass_visible:
                 break;
             case R.id.tv_login_chat:
-
-                break;
+                throw new NullPointerException();
             case R.id.tv_login_blog:
                 break;
             case R.id.tv_login_qq:
 
                 break;
+
+            default:
         }
     }
 

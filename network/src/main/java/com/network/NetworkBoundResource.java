@@ -11,9 +11,11 @@ import android.support.annotation.WorkerThread;
 import com.rxhandler.core.RxErrorHandler;
 import com.rxhandler.handler.ErrorHandleSubscriber;
 
-import rx.Observable;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+
 
 /**
  * A generic class that can provide a resource backed by both the sqlite database and the network.
@@ -59,8 +61,9 @@ public abstract class NetworkBoundResource<ResultType> {
         apiResponse.observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribe(new ErrorHandleSubscriber<ApiResponse<ResultType>>(mRxErrorHandler) {
+
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Disposable d) {
 
                     }
 
@@ -106,6 +109,11 @@ public abstract class NetworkBoundResource<ResultType> {
                             });
                         }
                     }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
                 });
     }
 
@@ -117,7 +125,7 @@ public abstract class NetworkBoundResource<ResultType> {
     }
 
     /**
-     * 处理api获取的数据
+     * 处理网络请求获取的数据
      *
      * @param response
      * @return
@@ -128,7 +136,7 @@ public abstract class NetworkBoundResource<ResultType> {
     }
 
     /**
-     * 保存api获取的数据到数据库
+     * 保存网络请求获取的数据到数据库
      *
      * @param item
      */
@@ -151,7 +159,7 @@ public abstract class NetworkBoundResource<ResultType> {
     protected abstract Observable<ResultType> loadFromDb();
 
     /**
-     * 调取api获取数据
+     * 调取网络请求获取数据
      *
      * @return
      */

@@ -10,15 +10,16 @@ import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import rx.Observable;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 public class RetrofitNet<T> {
 
@@ -45,7 +46,7 @@ public class RetrofitNet<T> {
         retrofit = new Retrofit.Builder()
                 .baseUrl(netBuilder.url)
                 .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(httpClient)
                 .build();
         this.netBuilder = netBuilder;
@@ -87,11 +88,7 @@ public class RetrofitNet<T> {
 
         observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ApiResponse<T>>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
+                .subscribe(new Observer<ApiResponse<T>>() {
 
                     @Override
                     public void onError(Throwable t) {
@@ -111,6 +108,16 @@ public class RetrofitNet<T> {
                             error = "未知错误";
                         }
 //                        netCallBack.onErrorResponse(error);
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
                     }
 
                     @Override

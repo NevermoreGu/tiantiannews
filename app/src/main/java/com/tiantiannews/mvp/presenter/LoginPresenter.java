@@ -20,7 +20,8 @@ import com.tiantiannews.mvp.contract.LoginContract;
 
 import javax.inject.Inject;
 
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
+
 
 @ActivityScope
 public class LoginPresenter implements LoginContract.Presenter {
@@ -29,7 +30,7 @@ public class LoginPresenter implements LoginContract.Presenter {
 
     private final LoginContract.View mLoginView;
 
-    private CompositeSubscription mSubscriptions;
+    private CompositeDisposable mSubscriptions;
 
     private LiveData<Resource<UserResult>> user;
 
@@ -37,7 +38,7 @@ public class LoginPresenter implements LoginContract.Presenter {
     public LoginPresenter(LoginRepository loginRepository, LoginContract.View loginView) {
         mLoginRepository = loginRepository;
         mLoginView = loginView;
-        mSubscriptions = new CompositeSubscription();
+        mSubscriptions = new CompositeDisposable();
         mLoginView.setPresenter(this);
     }
 
@@ -73,8 +74,6 @@ public class LoginPresenter implements LoginContract.Presenter {
                 } else {
 
                 }
-
-
             }
         });
     }
